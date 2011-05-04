@@ -80,7 +80,10 @@
 			<?php endif;?>
 			</div>
 		</div>
-		<div class="right-down cursor"></div>
+		<div>
+			<div class="right-up cursor"></div>
+			<div class="right-down cursor"></div>
+		</div>
 		<div class="right-bottom"></div>
 	</div>
 	<div class="clear"></div>
