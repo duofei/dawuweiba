@@ -7,6 +7,7 @@
 body{ margin:0; padding:0px;}
 .M_mc{ text-align:center;}
 .M_m30{ margin:30px 0;}
+img {border: 0px;}
 </style>
 </head>
 

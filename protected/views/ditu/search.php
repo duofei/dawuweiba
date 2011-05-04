@@ -26,8 +26,8 @@
 .right-down{height:28px; width:28px; background:url("<?php echo resBu('images/newindex/up_down_btn.jpg');?>") 0 -30px no-repeat; float:left; margin-left:10px;}
 .right-up-show{background-position: 0 -60px;}
 .right-down-show{background-position: 0 -91px;}
-.right-up-show-select {background-postion: 0 -120px;}
-.right-down-show-select {background-postion: 0 -150px;}
+div.right-up-show-select {background-postion: 0 -120px;}
+div.right-down-show-select {background-postion: 0 -150px;}
 
 .right-title{background:#E6E6E6; border-bottom:1px solid #A7A7A7}
 .right-content{position:absolute; z-index:0;}
@@ -289,12 +289,6 @@ function initialize() {
 				$(".right-down").addClass('right-down-show');
 			});
 		}
-	});
-	$('.right-up-show').live('mouseover', function(){
-		$(this).addClass('right-up-show-select');
-	});
-	$('.right-up-show').live('mouseout', function(){
-		$(this).removeClass('right-up-show-select');
 	});
 }
 
