@@ -21,10 +21,12 @@
 .right{width:160px;}
 .right-top{background:url("<?php echo resBu('images/newindex/search_left_top_bg.jpg');?>"); height:9px; font-size:0px;}
 .right-bottom{background:url("<?php echo resBu('images/newindex/search_left_bottom_bg.jpg');?>"); height:9px; font-size:0px;}
-.right-up{height:11px; background:#E6E6E6;}
-.right-up-show{background:url("<?php echo resBu('images/newindex/search-address-up.jpg');?>"); height:11px; font-size:0px;}
-.right-down{background:#E6E6E6; height:11px;}
-.right-down-show{background:url("<?php echo resBu('images/newindex/search-address-down.jpg');?>"); height:11px; font-size:0px;}
+
+.right-up{height:28px; width:28px; background:url("<?php echo resBu('images/newindex/up_down_btn.jpg');?>") 0 0 no-repeat; float:left; margin-left:48px;}
+.right-down{height:28px; width:28px; background:url("<?php echo resBu('images/newindex/up_down_btn.jpg');?>") 0 -30px no-repeat; float:left; margin-left:10px;}
+.right-up-show{}
+.right-down-show{}
+
 .right-title{background:#E6E6E6; border-bottom:1px solid #A7A7A7}
 .right-content{position:absolute; z-index:0;}
 </style>
@@ -55,9 +57,9 @@
 	<div class="fl right ma-l10px">
 		<div class="right-top"></div>
 		<div class="fb right-title f14px pa-l10px pa-b5px"><?php if($k):?>地址列表<?php else:?>使用帮助<?php endif;?></div>
-		<div style="height:431px; overflow-y:hidden; position:relative; background:#E6E6E6; border-top:1px solid #ffffff;" id="right_bContent">
+		<div style="height:425px; overflow-y:hidden; position:relative; background:#E6E6E6; border-top:1px solid #ffffff;" id="right_bContent">
 			<div class="right-content">
-			<?php if($k):?>
+			<?php if($kw):?>
 				<?php if($data):?>
 				<?php foreach ($data as $k=>$v):?>
 				<div class="ma-t5px lh20px ma-l10px cursor address-list" lang="<?php echo $k;?>">
@@ -80,9 +82,11 @@
 			<?php endif;?>
 			</div>
 		</div>
-		<div>
+		<div style="height:28px; background:#E6E6E6;">
+		<?php if($kw):?>
 			<div class="right-up cursor"></div>
 			<div class="right-down cursor"></div>
+		<?php endif;?>
 		</div>
 		<div class="right-bottom"></div>
 	</div>
