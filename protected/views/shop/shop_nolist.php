@@ -1,0 +1,1 @@
+<div class="f14px ma-t10px ma-b10px ac">很抱歉！ 您的地址未搜索到商铺。 <?php echo l('我要推荐商铺', url('suggest/shop'));?>。</div>

@@ -1,0 +1,4 @@
+<iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://www.connect.renren.com/like?url=http://www.52wm.com/" style="width: 200px;height: 70px;"></iframe>
+<br />
+
+<iframe scrolling="no" frameborder="0" src="http://widget.renren.com/fanBoxWidget?appId=115207&pageImg=true&pageName=true&pageFriend=true&characterColor=%23333333&linkColor=%23005EAC&borderColor=%23D3D5D6&mainBackground=%23F0F5F8&subBackground=%23F0F5F8&desc=%E6%88%90%E4%B8%BA%E5%85%B3%E6%B3%A8%E8%80%85%EF%BC%8C%E8%8E%B7%E5%BE%97%E6%9C%80%E6%96%B0%E5%8A%A8%E6%80%81%E3%80%82" style="width: 390px;height: 270px;"></iframe>

@@ -1,0 +1,95 @@
+@charset "utf-8";
+/* body */
+body { text-align: left; font-family:"宋体", Arial; margin:0; padding:0; background: #FFF; font-size:12px; color:#333; }
+div, form, img, ul, ol, li, dl, dt, dd, p { margin:0; padding:0; border:0; }
+li { list-style:none; }
+h1, h2, h3, h4, h5, h6, input { margin:0; padding:0; }
+table, td, tr, th { font-size:12px; }
+
+a:link { color: #333; text-decoration:none; }
+a:visited { color: #333; text-decoration:none; }
+a:hover { color: #ff0000; text-decoration:underline; }
+a:active { color: #333; text-decoration:none; }
+
+/* global */
+.spaceline { clear:both; line-height:5px; height:5px; }
+.clear { clear: both; font-size:1px; width:1px; visibility: hidden;}
+.fl{ float:left;}
+.fr{ float:right;}
+
+.lh24{ line-height:24px;}
+.lh30{ line-height:30px;}
+.lh20{ line-height:20px;}
+.lh40{ line-height:40px;}
+
+/* line */
+.line01 { border-top:1px dotted #c6c6c6; margin:2px 0 0 0 }
+
+/* font-size */
+.f12px { font-size:12px; }
+.f14px { font-size:14px; }
+.f20px { font-size:20px; }
+
+/* list */
+.list01 { text-align:right; padding-top:30px; }
+.list01 ul { list-style:none;}
+.list01 ul li { float:right;line-height:23px; padding-right:10px; font-weight:bold; font-size:14px;}
+.shu{ background:url(../images/newindex/navbg.jpg) no-repeat; width:2px; height:23px; padding:0}
+
+.list02 {margin:0 auto; background:url(../images/newindex/bg03.jpg) repeat; width:380px;  }
+.list02 ul { list-style:none; }
+.list02 ul li { text-align:left; line-height:30px; font-size:12px;height:30px; color:#666666; width:185px; float:left; overflow:hidden}
+
+
+ 
+
+ 
+/* color */
+.cfff, .cfff a:link, .cfff a:visited { color: #fff; text-decoration:none; }
+.cfff a:hover { color:#FFFF00; text-decoration:underline; }
+
+.c333, .c333 a:link, .c333 a:visited { color: #333; text-decoration:none; }
+.c333 a:hover { color:#c00; text-decoration:underline; }
+
+.c666, .c666 a:link, .c666 a:visited { color: #666; text-decoration:none; }
+.c666 a:hover { color:#c00; text-decoration:underline; }
+
+.c999, .c999 a:link, .c999 a:visited { color: #999; text-decoration:none; }
+.c999 a:hover { color:#c00; text-decoration:underline; }
+
+.cff0000, .cff0000 a:link, .cff0000 a:visited { color: #ff0000; text-decoration:none; }
+.cff0000 a:hover { color:#c00; text-decoration:underline; }
+
+.cd60a01, .cd60a01 a:link, .cd60a01 a:visited { color: #d60a01; text-decoration:none; }
+.cd60a01 a:hover { color:#FFFF00; text-decoration:underline; }
+
+/* pagediv */
+.header{ width:970px; margin:0 auto; height:108px; overflow:hidden; }
+.logo{ background:url(../images/newindex/logo.jpg) no-repeat; width:266px; height:108px;}
+
+.login {width:450px; text-align:right; padding-right:10px;}
+.denglu{padding-right:10px; padding-top:21px;}
+
+.main{width:970px; margin:0 auto;}
+  
+ 
+.cdtit{ background:url(../images/newindex/tit05.jpg) no-repeat; width:380px; height:25px; text-align:center; color:#FFFFFF; line-height:25px; font-size:14px; font-weight:bold;}
+
+ 
+ 
+.bigbanner{width:970px; margin:0 auto; height:172px; background:url(../images/newindex/banner.jpg) no-repeat; padding-top:150px;}
+.bannertime{font-family:"黑体"; font-size:18px; color:#FFFFFF; font-weight:normal; padding-left:80px;}
+
+/* copyright */
+.footer{ background:url(../images/newindex/bg05.jpg) repeat-x top #ffffff; height:200px;}
+.footercont{ width:970px; margin:0 auto;}
+.sixiaokuai{ background:url(../images/newindex/bg06.jpg) no-repeat; width:970px; height:97px; padding-top:30px; }
+
+.dangao:hover { background:url(../images/newindex/dangao.jpg);}
+
+.guan{ display:none}
+
+.cake-bg {background:url(../images/newindex/cake-bg.jpg);}
+.cake-bg  .ui-dialog-content{padding:0px; margin:0px;}
+
+.meishi-show .ui-dialog-content{overflow:hidden;}
