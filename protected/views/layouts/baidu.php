@@ -19,6 +19,7 @@
     </div>
 </div>
 <script src="http://app.baidu.com/static/appstore/scripts/bdjs_client-1.0.js"></script>
+<script src="http://app.baidu.com/static/appstore/monitor.st"></script>
 </body>
 </html>
 
