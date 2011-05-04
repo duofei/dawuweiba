@@ -200,38 +200,6 @@ class BevinController extends Controller
 		print_r($_POST);
 	}
 	
-	public function actionXml()
-	{
-	    $dom = new DOMDocument('1.0', 'utf-8');
-	    $root = $dom->createElement('items');
-	    $dom->appendChild($root);
-	    
-	    $data = array(
-	        array(
-	        	'name'=>'chris',
-	        	'age'=>30,
-	            'link' => 'http://www.baidu.com',
-	            'goods' => array(
-	                array('name'=>'排骨1', 'price' => '30元'),
-	                array('name'=>'排骨2', 'price' => '20元')
-    	        )
-	        ),
-	        array(
-	        	'name'=>'范子',
-	        	'age'=>40,
-	            'link' => '<a href="#">http://www.google.com</a>',
-	            'good' => array(
-	                'name'=>'大确认',
-	                'price' => '50元'
-	            )
-	        ),
-	    );
-	    
-	    //$data = array('name'=>'chris', 'age'=>30);
-	    
-        $dom = ApiBase::array2xml($dom, $root, $data, array('link'));
-        echo $dom->saveXml();
-	}
 	
 		
 	/**
