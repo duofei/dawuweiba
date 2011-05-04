@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+@import 'base.inc.css';
+
+.radius-bottom {-moz-border-radius-bottomleft:3px; -moz-border-radius-bottomright:3px;}
+.radius-top {-moz-border-radius-topleft:3px; -moz-border-radius-topright:3px;}
+
+/* prompt */
+.prompt {text-indent:10px; line-height:22px;  font-weight:bold; margin:2px 3px;}
+.ul-li, .ul-li li {text-indent:10px; list-style:disc inside;}
+.ul-note {padding:20px;}
+
+/* top */
+.win-top {background:#EFEFEF; border:1px solid #CFCFCF;}
+.top-logo {width:150px; height:35px; line-height:35px;}
+ul.top-menu, ul.top-menu li {list-style:none; height:35px;}
+ul.top-menu li {list-style:none; float:left; margin-left:15px;}
+ul.top-menu {line-height:45px; margin-left:10px;}
+
+/* left */
+.win-left {width:140px;}
+.win-left ul {border:1px solid #CFCFCF; margin:0px 2px 0px 1px;}
+.win-left li {background:#FFFFFF; font-size:14px;}
+.win-left li.title {background:#EFEFEF; height:30px; line-height:26px; text-indent:8px;}
+.win-left li a {display:block; height:30px; line-height:26px; text-indent:30px; background:transparent url(../images/bg_repno.gif) no-repeat scroll 15px -40px;}
+.win-left li a:hover, .win-left li .clicked {background-color:#E0F0F0; background-position:120px -40px;}
+li.separation-line {height:1px; font-size:0px; background:#DFDFDF; clear:both; overflow:hidden; margin:0px; padding:0px; display:block;}
+
+/* admin/post/list */
+.list-tbl {background:#e1e1e1; }
+.list-tbl td {padding:6px 5px; overflow:hidden; background:#fff;}
+.list-tbl tr.bg-dark {background:#EFEFEF;}
+.list-tbl td.bg-dark {background:#D8D8D8;}
+.list-tbl td.bg-checkbox {background:#EFEFEF;}
+.list-tbl td.bg-checked {background:#EEEEEE;}
+.list-tbl td.state {cursor:pointer; padding:0px;}
+.list-tbl td.state a {display:block;}
+.list-tbl th {height:30px; line-height:30px; background:#EFEFEF; overflow:hidden; padding:0px 5px;}
+.pages {margin:5px; line-height:20px;}
+.pages ul.yiiPager { font-size:12px;}
+
+/*login */
+#admin-login {width:600px; margin:120px auto 0px auto;}
+#admin-login table {width:100%;}
+#admin-login .info {width:310px;}
+#admin-login .info {background:url(../images/bg_login.gif) no-repeat right center; padding-right:30px; height:150px;}
+#admin-login .info h1 {height:40px; text-indent:-9999px; background:url(../images/login_title.gif) no-repeat;}
+#admin-login .info p {line-height:20px; height:70px;}
+#admin-login .theform p {margin:5px 0px;}
+#admin-login .txt {width:180px;}
+#admin-login .validate {width:50px;}
+#admin-login .btn-submit {margin-left:56px;}
+.copyright {margin-top:100px;}
+
+/* default/start */
+#start-page h3 {margin:10px; color:#0099CC;}
+#start-page table {margin-left:10px;}
+#start-page table td {vertical-align:top; height:30px; line-height:30px;}
+.sysinfo-title {width:150px;}
+
+.divbg1 {background:none repeat scroll 0 0 #f5f5f5;}
+
+.ajax-note {position:absolute; top:0px; right:0px; height:26px; padding:0px 5px; line-height:26px; background-color:#FFF5C3; filter:Alpha(opacity=50); -moz-opacity:0.5; opacity:0.5;}
+.ajax-loading {padding-left:20px; background:#FFF5C3 url(../images/loading.gif) no-repeat center left;}
+
+.border-black {border:1px solid #888888;}
+
+/* super */
+.order-title td {background:#F5F5F5;}
+
+/* friendlink/list */
+input.txt-url {width:180px;}
+input.txt-order {width:30px;}
+
+/* gift */
+.gift-pic {width:70px;}
+/* gift exchange log */
+.exchange-state0 {}
+.exchange-state1 {}
+.exchange-state2 {text-decoration:line-through;}
+
+/* Select Building */
+#ShowBuildingDialog .district {height:21px; border-bottom:1px #EB5D03 solid;}
+#ShowBuildingDialog .district a {float:left; width:65px; height:17px; line-height:17px; font-weight:bold; text-align:center; cursor:pointer; display:block;}
+#ShowBuildingDialog .district a:hover{background:#EB5D03; color:#fff;}
+#ShowBuildingDialog .district a.selected {background:#EB5D03; color:#fff;}
+
+#ShowBuildingDialog .search {margin-top:1px; height:25px; background:#EDF1F3;}
+#ShowBuildingDialog .search input.txt{height:20px; line-height:20px;}
+#ShowBuildingDialog .search label {height:25px; line-height:25px; margin-left:10px; color:#999999;}
+
+#ShowBuildingDialog .letter {margin-top:5px;}
+#ShowBuildingDialog .letter a {float:left; width:25px; height:17px; line-height:17px; font-weight:bold; text-align:center; cursor:pointer; margin-left:3px;}
+#ShowBuildingDialog .letter a:hover {background:#EB5D03; color:#fff;}
+#ShowBuildingDialog .letter a.selected {background:#EB5D03; color:#fff;}
+
+#ShowBuildingDialog .buildlist a {float:left; width:260px; height:20px; line-height:20px; padding:2px; margin-left:8px; margin-top:8px; border:1px solid #A6D0E7; background:#EDF1F3; cursor:pointer; overflow:hidden;}
+#ShowBuildingDialog .buildlist a span{float:right; color:#ccc;}
+#ShowBuildingDialog .buildlist a:hover {border:1px solid #FDD000; background:#FAFFDF; color:#000;}
+#ShowBuildingDialog .buildlist a.selected {border:1px solid #FDD000; background:#FAFFDF;}
+#ShowBuildingDialog .loading { margin:10px auto; background: #FAFFDF url(../images/loading.gif) 5px 5px no-repeat; height:25px; line-height:25px; width:145px; border:1px solid #FDD000; color:#EB5D03; padding-left:28px;}
+

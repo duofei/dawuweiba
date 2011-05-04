@@ -1,0 +1,1 @@
+<h4>当前页面发生了错误：<?php echo $error['message'];?></h4>

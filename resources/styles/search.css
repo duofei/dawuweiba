@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+#header {margin-top:25px;}
+*html #header {margin-top:0px;}
+#header .logo img {vertical-align:text-bottom;}
+#footer li {margin-right:10px;}
+
+.user-toolbar {background:#fcfcfc; height:25px; border-bottom:1px solid #e1e1e1; line-height:25px; position:fixed; z-index:1000; top:0px; left:0px; width:100%;}
+.user-toolbar li {margin:0px 5px;}
+#header .search-box {margin-top:40px; margin-left:40px;}
+#header .search-box .txt {width:420px; height:30px; line-height:30px;}
+.topnav {height:30px; background:#c8181b;}
+.topnav .task-title {margin-top:3px; height:27px; line-height:27px; background:#fff; padding:0 10px; -moz-border-radius-topleft:3px; -moz-border-radius-topright:3px; border-top-left-radius:3px; border-top-right-radius:3px;}
+
+.search-location-list {width:750px;} 
+.search-location-list li {height:45px; background-position:-263px -525px; padding-left:60px;}
+.search-no-icon {width:105px; height:105px; background-position:0 -292px; margin-right:50px; margin-bottom:80px;}
+.search-no-text {}
+
+
+.location-switch div.bg-icon {background-position:-12px -886px; padding-left:15px; line-height:20px;}
+.location-switch a:hover{color:#c8181b;}
+.location-switch p.bg-icon {background-position:-6px -826px; padding-left:23px; }

@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>关键字搜索</title>
+<script src="jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="http://app.mapabc.com/apis?&t=flashmap&v=2.3.4&key=87bd9850fba7f687d0d2bfb94ea3e43cb3fbc504fb10e8621c7b7049a0092b46186d27acda494552" type="text/javascript"></script>
+<script type="text/javascript">
+var pagenum = 1;
+var mapObj=null;
+var mapObj=null;
+
+// 地图范围坐标
+var minX = 116.88;
+var minY = 36.58;
+var maxY = 36.73;
+var maxX = 117.19;
+
+function mapInit() {
+    var mapoption = new MMapOptions();
+    mapoption.toolbar = ROUND; //设置地图初始化工具条，ROUND:新版圆工具条
+    mapoption.toolbarPos=new MPoint(20,20); //设置工具条在地图上的显示位置
+    mapoption.overviewMap = SHOW; //设置鹰眼地图的状态，SHOW:显示，HIDE:隐藏（默认）
+    mapoption.scale = SHOW; //设置地图初始化比例尺状态，SHOW:显示（默认），HIDE:隐藏。
+    mapoption.zoom = 15;//要加载的地图的缩放级别
+    mapoption.center = new MLngLat(116.996155,36.661809);//要加载的地图的中心点经纬度坐标
+    mapoption.language = MAP_CN;//设置地图类型，MAP_CN:中文地图（默认），MAP_EN:英文地图
+    mapoption.fullScreenButton = SHOW;//设置是否显示全屏按钮，SHOW:显示（默认），HIDE:隐藏
+    mapoption.centerCross = SHOW;//设置是否在地图上显示中心十字,SHOW:显示（默认），HIDE:隐藏
+    mapoption.mapComButton = 0;//设置地图右上角的组件是否显示，SHOW:显示（默认），HIDE:隐藏。
+    mapoption.requestNum=100;//设置地图切片请求并发数。默认100。
+    mapObj = new MMap("map", mapoption); //地图初始化
+    mapObj.addEventListener(mapObj,MOUSE_CLICK,MclickMouse);//鼠标点击事件
+    document.getElementById('lngX').value = minX;
+	document.getElementById('latY').value = minY;
+}
+
+function keywordSearch(){
+	var lngX = document.getElementById('lngX').value;
+	var latY = document.getElementById('latY').value;
+    var poiXY = new MLngLat(lngX,latY);//中心点坐标 
+    var keywords = document.getElementById("keyword").value;//关键字   
+    var city = document.getElementById("city").value;//城市   
+    var MSearch = new MPoiSearch();   
+    var opt = new MPoiSearchOptions();   
+    opt.recordsPerPage = 20;//每页返回数据量，默认为10 
+    opt.pageNum = pagenum;//当前页数。   
+    opt.dataType = "";//数据类别，该处为分词查询，只需要相关行业关键字即可   
+    opt.dataSources = DS_BASE_ENPOI;//数据源，基础+企业地标数据库（默认）   
+    opt.range = 1500;//查询范围，单位为米，默认值为3000   
+    opt.naviFlag = 0;//周边查询返回结果是否按导航距离排序,0，不按导航距离排序（默认）1，按导航距离排序。   
+    MSearch.setCallbackFunction(keywordSearch_CallBack);   
+    MSearch.poiSearchByCenPoi(poiXY,keywords,city,opt);
+}
+
+function MclickMouse(param){   
+    document.getElementById("mapX").value=param.eventX;   
+    document.getElementById("mapY").value=param.eventY;   
+}
+
+var resultCount=10;
+function keywordSearch_CallBack(data)
+{
+    var resultStr="";
+    if(data.error_message != null){
+        resultStr="查询异常！"+data.error_message;
+    } else {
+		var postdata = '';
+		switch(data.message){
+        case 'ok':
+            if(data.poilist.length==0){
+				document.getElementById('result').innerHTML = '';
+				addXY();
+				keywordSearch();
+            }else{
+				resultCount=data.poilist.length;
+				document.getElementById('result').innerHTML += '<br /><br /> 分页：'+pagenum;
+				var line;
+				for (i=0; i<data.poilist.length; i++) {
+                	line = data.poilist[i].name + ':' + data.poilist[i].x + ',' + data.poilist[i].y + ':' + data.poilist[i].address + ':' + data.poilist[i].type + '||';
+					document.getElementById('result').innerHTML += data.poilist[i].name + ',';
+					postdata += line;
+				}
+				
+				// 保存数据
+				save(postdata);
+				
+            }
+        break;
+        case 'error':
+            resultStr= data.message;
+        break;
+        default:
+            resultStr= data.message;
+        }
+    }
+}
+
+// 保存数据
+function save(data) {
+	var k = document.getElementById("keyword").value;
+	$.post('abcmap.php','data='+data+'&k='+k,function(data){
+		if(data=='1') {
+			if (pagenum == 20) {
+				
+				//alert('20页了。');
+				addXY();
+				keywordSearch();
+			} else {
+				pagenum++;
+				keywordSearch();
+			}
+		} else {
+			alert('Save出现异常！');
+		}
+	});
+}
+
+// 循环坐标
+function addXY() {
+	var lngX = parseFloat(document.getElementById('lngX').value);
+	var latY = parseFloat(document.getElementById('latY').value);
+	if(lngX>=maxX) {
+		lngX = minX;
+		latY = latY + 0.02;
+	} else {
+		lngX = lngX + 0.02;
+	}
+	if(latY > maxY) {
+		alert('采集完毕！');
+		exit;
+	}
+	pagenum = 1;
+	document.getElementById('lngX').value = lngX;
+	document.getElementById('latY').value = latY;
+}
+</script>
+</head>
+<body onload="mapInit();">
+<div id="map" style="height:50px; width:100px; float:right; border:1px solid #ccc;"></div>
+<div style="height:500px;width:400px; float:left; border:1px solid #ccc;">
+	城　市：<input type="text" id="city" name="city" value="济南" /><br />
+	关键字：<input type="text" id="keyword" name="keyword" value="大厦"/><br />
+	lngX: <input type="text" id="lngX" name="lngX" value="116.9840238"/>  latY:<input type="text" id="latY" name="latY" value="36.7113719"/><br />
+	<input type="button" value="查询" onclick="keywordSearch()" style="margin-left:100px"/> 
+	<input type="button" value="计算坐标" onclick="addXY()" />
+	<div id="result" name="result" style="height:495px;padding-top:5px;"></div>
+</div>
+<div style="clear:both;"></div>
+<div style="text-align:right;">mapX<input type="text" id="mapX" value='' />  mapY<input type="text" id="mapY" value='' /></div>
+</body>
+</html>

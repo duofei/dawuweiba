@@ -1,0 +1,21 @@
+#
+# robots.txt for 52wm.com
+#
+
+User-agent: *
+Disallow: /renren/
+Disallow: /shopcp/
+Disallow: /admin/
+Disallow: /super/
+Disallow: /my/
+Disallow: /connect/
+Disallow: /oauth/
+Disallow: /test/
+Disallow: /alipay/
+Disallow: /bevin/
+Disallow: /cart/
+
+
+Sitemap: http://www.52wm.com/sitemap/shops.xml
+Sitemap: http://www.52wm.com/sitemap/tuan.xml
+Sitemap: http://www.52wm.com/sitemap/locations.xml

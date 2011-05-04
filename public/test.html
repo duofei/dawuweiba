@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+<html xmlns="http://www.w3.org/1999/xhtml">   
+<head>   
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />   
+<title>地理编码（地址匹配）</title>   
+<script type="text/javascript" src="http://app.mapabc.com/apis?&t=ajaxmap&v=2.1.2&key=87bd9850fba7f687d0d2bfb94ea3e43cb3fbc50408de1da54e3efa3a27cd9dab6338c753ecb0a88a"></script>   
+<script type="text/javascript">   
+var mapObj=null;   
+function mapInit() {   
+    var mapOptions = new MMapOptions();//构建地图辅助类   
+    mapOptions.zoom=14;//要加载的地图的缩放级别   
+    mapOptions.center=new MLngLat(117.0556938, 36.6778178);//要加载的地图的中心点经纬度坐标   
+    mapOptions.toolbar = DEFAULT;//设置地图初始化工具条   
+    mapOptions.toolbarPos = new MPoint(15,15); //设置工具条在地图上的显示位置   
+    mapOptions.overviewMap = SHOW; //设置鹰眼地图的状态，SHOW:显示，HIDE:隐藏（默认）   
+    mapOptions.scale = SHOW; //设置地图初始化比例尺状态，SHOW:显示（默认），HIDE:隐藏。   
+    mapOptions.returnCoordType = COORD_TYPE_OFFSET;//返回偏移明码坐标   
+    mapOptions.zoomBox = true;//鼠标滚轮缩放和双击放大时是否有红框动画效果。   
+    mapObj=new MMap("map",mapOptions); //地图初始化   
+}   
+function addMarker(){   
+  var tipOption=new MTipOptions();//添加信息窗口   
+  tipOption.title="信息窗口标题";//信息窗口标题   
+  tipOption.content="信息窗口内容";//信息窗口内容   
+  
+  var labelOption=new MLabelOptions();//添加标注   
+  labelOption.content="点";//标注的内容   
+  labelOption.hasBorder=true;//设置标注背景是否有边框，默认为false，即没有边框   
+  labelOption.hasBackground=true;//设置标注是否有背景，默认为false，即没有背景   
+  //标注左上角相对于图片中下部的锚点。Label左上角与图片中下部重合时，记为像素坐标原点(0,0)。   
+  labelOption.labelPosition=new MPoint(10,10);   
+  
+  //构建一个名为markerOption的点选项对象。   
+  var markerOption = new MMarkerOptions();   
+  //标注图片或SWF的url，默认为蓝色气球图片   
+  markerOption.imageUrl="http://code.mapabc.com/images/lan_1.png";   
+  //图片锚点BOTTOM_CENTER相对于标注位置的偏移位置   
+  markerOption.anchor=new MPoint(0,0);   
+  //设置图片相对于加点经纬度坐标的位置。九宫格位置。默认BOTTOM_CENTER代表正下方   
+  markerOption.imageAlign=BOTTOM_CENTER;   
+  //设置点的标注参数选项   
+  markerOption.labelOption=labelOption;   
+  //设置点是否为可编辑状态,rue，可以编辑；   false，不可编辑（默认）   
+  markerOption.isEditable=false;   
+  //设置点的信息窗口参数选项   
+  markerOption.tipOption = tipOption;   
+  //是否在地图中显示信息窗口，true，可以显示（默认）；false，不显示   
+  markerOption.canShowTip= true;   
+  //设置图标旋转的角度   
+  markerOption.rotation="0";   
+  //通过经纬度坐标及参数选项确定标注信息   
+  Mmarker1 = new MMarker(new MLngLat("117.04238462264","36.673137517771"),markerOption);
+  Mmarker2 = new MMarker(new MLngLat("117.05673681098","36.694308999649"),markerOption); 
+  Mmarker4 = new MMarker(new MLngLat("117.07062291909","36.66847339886"),markerOption);  
+  tipOption.content="xxxx";
+  markerOption.tipOption = tipOption;
+  Mmarker3 = new MMarker(new MLngLat("117.0556938","36.6778178"),markerOption); 
+  //对象编号，也是对象的唯一标识   
+  Mmarker1.id="mark101";
+  Mmarker2.id="mark102";
+  Mmarker3.id="mark103";
+  Mmarker4.id="mark104";
+  //向地图添加覆盖物   
+  mapObj.addOverlay(Mmarker1,true) ;   
+  mapObj.addOverlay(Mmarker2,true) ;
+  mapObj.addOverlay(Mmarker3,true) ;
+  alert(1);
+  mapObj.addOverlay(Mmarker4,true) ;
+}   
+</script>   
+</head>   
+<body onload="mapInit();">   
+<div id="map" style="width:800px;height:600px"></div>   
+<div>   
+<table>   
+<tr>   
+    <td><input type="button" onClick="javascript:addMarker();" value="添加点"/></td>   
+    <td><input type="button" onClick="javascript:mapObj.removeOverlaysByType(MOverlay.TYPE_MARKER);" value="删除点"/></td>   
+</tr>   
+</table>   
+<!-- mapObj.removeOverlaysByType(MOverlay.TYPE_MARKER) 删除地图上所有的MARKER对象-->   
+</div>   
+</body>   
+</html>
