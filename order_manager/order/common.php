@@ -139,12 +139,18 @@ function makeOrderFormat($order)
     $order['message'] = filterChar(trim($order['message']));
     $remark = '';
 //    if ($secodn_page) $remark .= makeSecondPage($order);
+    $deliverTime = BREAKSEPLINE . '要求时间：' . $order['deliver_time'];
+    $username = BREAKLINE . '姓名：' . $order['consignee'];
+    $address = BREAKLINE . '地址：' . $order['address'];
+    
     
     $data = sprintf('#%d*1*%d*', $order['shop_id'], $order['id']);
     $data .= $order['goods'];
-    $data .= sprintf('*%.1f;%.1f;%.1f %s;', $order['dispatching_amount'], 0, $order['amount'], $order['amountExtra']);
-    $data .= sprintf('%d;%s;%s;%s;%s;%d;%s;%s*', $order['customerType'], $order['consignee'], $order['address'], $order['deliver_time'], $order['prevOrderId'], $order['paymentStatus'], $cardno, $order['telphone']);
-    $data .= $order['message'];
+//    $data .= sprintf('*%.1f;%.1f;%.1f %s;', $order['dispatching_amount'], 0, $order['amount'], $order['amountExtra']);
+    $data .= sprintf('*%.1f;%.1f;%.1f %s %s;', $order['dispatching_amount'], 0, $order['amount'], $order['amountExtra'], $deliverTime . $username . $address);
+//    $data .= sprintf('%d;%s;%s;%s;%s;%d;%s;%s*', $order['customerType'], $order['consignee'], $order['address'], $order['deliver_time'], $order['prevOrderId'], $order['paymentStatus'], $cardno, $order['telphone']);
+    $data .= sprintf('%d;%s;%s;%s;%s;%d;%s;%s*', $order['customerType'], '', '', '', $order['prevOrderId'], $order['paymentStatus'], $cardno, $order['telphone']);
+    $data .= $order['message'] . ' ';// . BREAKLINE . BREAKLINE;
     if ($remark) $data .= BREAKLINE . $remark;
     $data = iconv('utf-8', 'gb2312', $data);
     $data .= '#' . chr(13) . chr(10);
