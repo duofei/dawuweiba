@@ -168,17 +168,17 @@ return array(
 
 	// 秒杀时间
 	'miaoshaStartTime' => mktime(0,0,0,4,27,2011),
-	'miaoshaEndTime' => mktime(23,59,59,5,6,2011),
+	'miaoshaEndTime' => mktime(23,59,59,5,18,2011),
 
 	/*
      * winic.org的账号 SMS
      */
-    'winic_userid' => 'test',
-    'winic_passwd' => 'test',
+    'winic_userid' => 'davidwu',
+    'winic_passwd' => '711226',
 
 	/*
 	 * http://yzt.136u.com
 	 */
-	'yzt_userid' => '10276',
-	'yzt_key' => "kHsXrgb4VRNggpK6KWKUc5zHZ4qi3u4d",
+	'yzt_userid' => '10279',
+	'yzt_key' => "uksGMJCfrt9ykVE8qmZGsVyTYFEeLiH8",
 );

@@ -177,7 +177,7 @@ class DefaultController extends Controller
 	}
 	
 	/**
-	 * 用户认证操作 
+	 * 用户认证操作
 	 */
 	public function actionApprove()
 	{
@@ -215,15 +215,32 @@ class DefaultController extends Controller
 	}
 	
 	/**
-	 * 用户手机验证码 
+	 * 用户手机验证码
 	 */
 	public function actionAjaxverifycode()
 	{
-		$phone = trim($_POST['phone']);
-		if(User::sendSmsVerifyCode(user()->id, $phone)) {
-			echo 1;
+		$phone = str_replace('-' , '',trim($_POST['phone']));
+		$t = intval($_POST['type']);
+		if($t==1) {
+			if(User::sendSmsVerifyCode(user()->id, $phone)) {
+				echo 1;
+			} else {
+				echo 0;
+			}
 		} else {
-			echo 0;
+			if(strlen($phone) <= 8) { // 没有区号是自动加上
+				$phone = $this->city['code'].$phone;
+			} else { // 如果有区号判断是否是本城市的
+				if($this->city['code'] != substr($phone, 0, strlen($this->city['code']))) {
+					echo 0;
+					exit;
+				}
+			}
+			if(User::sendVoiceVerifyCode(user()->id, $phone)) {
+				echo 1;
+			} else {
+				echo 0;
+			}
 		}
 	}
 	
