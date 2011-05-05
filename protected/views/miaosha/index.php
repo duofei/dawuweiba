@@ -7,7 +7,7 @@
 	    	<?php foreach ($miaosha as $m):?>
 	<?php if(!$temp[date("Y-m-d",$m->active_time)] || !in_array($m->shop_id, $temp[date("Y-m-d",$m->active_time)])):?>
 	    	<?php if ($m->active_time > mktime(0,0,0,date('m'),date('d'),date('Y'))):?>
-	    	<div class="xq<?php echo date('w',$m->active_time)?>">
+	    	<div class="xq<?php echo date('w',$m->active_time);?>">
 	    	<?php else:?>
 	    	<div class="xq8">
 	    	<?php $isComCount++;?>
@@ -95,7 +95,7 @@
                 	<div class="box">
                 		<?php if(user()->isGuest):?>
                 		<div class="f26px fb ac ma-t20px">您还未登陆</div>
-						<div class="f26px fb ac ma-t5px">请先<?php echo l('登陆', url('site/login'), array('class'=>'cred'));?>或<?php echo l('马上注册', url('site/signup'), array('class'=>'cred'));?></div>
+						<div class="f26px fb ac ma-t5px">请先<?php echo l('登陆', url('site/login', array('referer'=>aurl('miaosha/index'))), array('class'=>'cred'));?>或<?php echo l('马上注册', url('site/signup'), array('class'=>'cred'));?></div>
                 		<?php elseif($lastLatLng[1]):?>
                 		<div class="f26px ac ma-t20px" style="font-family:'雅黑', '黑体'; font-weight:100;"><span class="cred">您的位置</span>不在活动范围之内</div>
                 		<div class="box-btn" onclick="showLocationMap()">重新设置位置</div>
@@ -113,7 +113,7 @@
             </div>
         </div>
         <div class="spaceline"></div>
-        <div align="center"><img src="<?php echo resBu('miaosha/images/pic03.jpg');?>" /></div>
+        <div align="center"><a href="<?php echo url('intro/baichidian')?>" target="_blank"><img src="<?php echo resBu('miaosha/images/pic03.jpg');?>" /></a></div>
         <div class="spaceline"></div>
         <div class="clear"></div>
     </div>
