@@ -606,7 +606,7 @@ class User extends CActiveRecord
 			$key = 'smsVerifyCode' . $user_id;
 			if(SendVoice::filter_phone($phone)) {
 				$d = SendVoice::send_voice($phone);
-				if($d > 999 && $d<10000) {
+				if($d) {
 					$cache = app()->cache->set($key, $d);
 					return $d;
 				}

@@ -46,11 +46,12 @@
 			<li class="h40px f14px">收货人：&nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $address_default->consignee;?>" id="consignee" name="UserAddress[consignee]" tabindex="1" class="txt f16px"></li>
 			<li class="h40px f14px">详细地址：<input type="text" value="<?php echo $address_default->address;?>" id="address" name="UserAddress[address]" tabindex="2" class="txt f16px"></li>
 			<li class="h40px f14px">手机号码：<input type="text" value="<?php echo $address_default->telphone;?>" id="telphone" name="UserAddress[telphone]" tabindex="3" class="txt"></li>
-			<li class="lh20px cred" id="spanId">　　　　　　<?php if($_POST['vcode']):?>手机验证码填写错误<?php else:?>尽量填写手机号，以便收到订单提醒。<?php endif;?></li>
+			<li class="lh20px cred">　　　　　　尽量填写手机号，以便收到订单提醒。</li>
 			<?php if($user->approve_state != User::APPROVE_STATE_VERIFY):?>
 			<li class="h40px f14px">验证码：&nbsp;&nbsp;&nbsp;<input type="text" value="" id="vcode" name="vcode" tabindex="4" class="txt" style="width:60px;">
-				<?php echo CHtml::button(' 获取手机验证码 ', array('id'=>'btnId'))?>
+				<?php echo CHtml::button(' 获取验证码 ', array('id'=>'btnId'));?>
 			</li>
+			<li class="lh20px cred" id="spanId">　　　　　　<?php if($_POST['vcode']):?>手机验证码填写错误<?php else:?>首次下网络订单用户需要手机认证。<?php endif;?></li>
 			<?php else:?>
 			<li class="h40px f14px">备选电话：<input type="text" value="<?php echo $address_default->mobile;?>" id="mobile" name="UserAddress[mobile]" tabindex="4" class="txt"></li>
 			<?php endif;?>
@@ -111,25 +112,34 @@ $(function(){
 <?php if($user->approve_state == User::APPROVE_STATE_UNSETTLED):?>
 <script type="text/javascript">
 var interval;
-var time = 180;
+var time = 120;
+var type = 1;
+var phone_re = /^1(30|31|32|33|34|35|36|37|38|39|50|51|52|53|55|56|57|58|59|86|87|88|89)\d{8}$/;
+var telphone_re = /^(0[1-9][0-9]{1,2}-?)?[1-9][0-9]{6,7}$/;
 $(function(){
 	$("#btnId").click(function(){
 		var phone = $("#telphone").val();
-		var re = /^1(30|31|32|33|34|35|36|37|38|39|50|51|52|53|55|56|57|58|59|86|87|88|89)\d{8}$/;
-		if(!phone.match(re)) {
-			$('#spanId').html('　　　　　　请输入正确的手机号，如没有手机请与我们客服联系0531-55500071');
+		if(!phone.match(phone_re) && !phone.match(telphone_re)) {
+			$('#spanId').html('　　　　　　请输入正确的手机号或电话号码，电话格式：053155500071');
 			return ;
+		}
+		if(phone.match(telphone_re)) {
+			type = 2;
 		}
 		$("#btnId").attr('disabled', 'disabled');
 		$("#btnId").val(' 正在发送... ');
-		$.post('<?php echo url("my/default/ajaxverifycode")?>', {phone:phone}, function(data){
+		$.post('<?php echo url("my/default/ajaxverifycode")?>', {phone:phone, type:type}, function(data){
 			if(data == '1') {
-				$("#btnId").val(' 180秒后没收到，重新获取 ');
-				$('#spanId').html('　　　　　　如果长时间没有收到，请再次获取验证码。');
+				$("#btnId").val(' (120秒后) 使用语音获取 ');
+				if(type == 1) {
+					$('#spanId').html('　　　　　　如果2分钟后没有收到验证码，请使用语音获取验证码。');
+				} else {
+					$('#spanId').html('　　　　　　本站已向您的:' + phone + '拨打电话，并播报验证码。<br />　　　　　　如果2分钟内没有接到语音电话，请重新获取。');
+				}
 				interval = setInterval(timeout, 1000);
 			} else {
-				$('#spanId').html('　　　　　　发送失败，请重先获取');
-				$("#btnId").val(' 获取手机验证码 ');
+				$('#spanId').html('　　　　　　发送失败，有可能是您的号码有误，请重新填写并获取');
+				$("#btnId").val(' 获取验证码 ');
 				$("#btnId").attr('disabled', '');
 			}
 		});
@@ -145,12 +155,13 @@ $(function(){
 function timeout() {
 	time--;
 	if(time > 0) {
-		$("#btnId").val('  ' + time + '秒后没收到，重新获取 ');
+		$("#btnId").val(' (' + time + '秒后) 使用语音获取 ');
 	} else {
 		$("#btnId").attr('disabled', '');
-		$("#btnId").val(' 获取手机验证码 ');
-		$('#spanId').html('　　　　　　尽量填写手机号，以便收到订单提醒。');
-		time = 180;
+		type = 2;
+		$("#btnId").val(' 获取语音验证码 ');
+		$('#spanId').html('　　　　　　请重新获取语音验证码');
+		time = 120;
 		clearInterval(interval);
 	}
 }

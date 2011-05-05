@@ -264,6 +264,9 @@ class CdcBetaTools
          */
         if ($ipInfo)
             $cityModel = City::model()->findByAttributes(array('name'=>$ipInfo['city']));
+        else
+        	$ipInfo['code'] = '0531';
+        
         if (empty($cityModel))
             $cityModel = City::model()->findByPk(param('defaultCityId'));
         $city = array(

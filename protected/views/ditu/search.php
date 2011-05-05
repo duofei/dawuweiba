@@ -58,7 +58,7 @@ div.right-down-show-select {background-postion: 0 -150px;}
 	</div>
 	<div class="fl right ma-l10px">
 		<div class="right-top"></div>
-		<div class="fb right-title f14px pa-l10px pa-b5px"><?php if($k):?>地址列表<?php else:?>使用帮助<?php endif;?></div>
+		<div class="fb right-title f14px pa-l10px pa-b5px"><?php if($kw):?>地址列表<?php else:?>使用帮助<?php endif;?></div>
 		<div style="height:425px; overflow-y:hidden; position:relative; background:#E6E6E6; border-top:1px solid #ffffff;" id="right_bContent">
 			<div class="right-content">
 			<?php if($kw):?>

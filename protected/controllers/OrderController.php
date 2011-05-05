@@ -14,7 +14,7 @@ class OrderController extends Controller
 	    
 	    if ($location)
     	    $this->breadcrumbs = array(
-    			$location->name => url('shop/list', array('atid'=>$location->id, 'cid'=>$shop->category_id)),
+    			$location->name => url('shop/list', array('atid'=>$location->id, 'cid'=>$order->shop->category_id)),
     			$order->shop->shop_name => $order->shop->relativeUrl,
     			'订单处理完成'
     		);
