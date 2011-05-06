@@ -4,7 +4,7 @@
 	</ul>
 </div>
 <div id="invite" style="background:#fff;">
-	<div class="title"><a class="btn" href="<?php echo url('my/integral/bcintegral');?>"></a>邀请好友 <?php echo CHtml::image(resBu('images/invite_tip.png'));?></div>
+	<div class="title"><a class="btn" href="<?php echo url('intro/baichidian');?>" target="_blank"></a>邀请好友 <?php echo CHtml::image(resBu('images/invite_tip.png'));?></div>
 	<div class="firstlist">
 		<div class="box" title="分享到人人网" onclick="invite2Renren()">
 			<div class="icon_renren"></div>

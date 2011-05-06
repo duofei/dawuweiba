@@ -28,7 +28,7 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 </div>
 <!--header end-->
 <div class="bigbanner">
-	<div class="bannertime">4月18日-4月22日 每日50份一元午餐限时抢</div>
+	<div class="bannertime">5月9日-5月18日 每日50份一元午餐限时抢</div>
     <div><a class="guize" href="<?php echo url('miaosha/rules');?>" target="_blank">确定</a></div>
 </div>
 <!--main beigin-->

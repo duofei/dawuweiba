@@ -113,7 +113,7 @@
             </div>
         </div>
         <div class="spaceline"></div>
-        <div align="center"><a href="<?php echo url('intro/baichidian')?>" target="_blank"><img src="<?php echo resBu('miaosha/images/pic03.jpg');?>" /></a></div>
+        <div align="center"><a href="<?php echo url('my/default/inviteurl')?>" target="_blank"><img src="<?php echo resBu('miaosha/images/pic03.jpg');?>" /></a></div>
         <div class="spaceline"></div>
         <div class="clear"></div>
     </div>
