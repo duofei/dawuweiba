@@ -230,7 +230,7 @@ class DefaultController extends Controller
 		} else {
 			if(strlen($phone) <= 8) { // 没有区号是自动加上
 				$phone = $this->city['code'].$phone;
-			} else { // 如果有区号判断是否是本城市的
+			} elseif(substr($phone, 0, 1) === '0') { // 如果有区号判断是否是本城市的
 				if($this->city['code'] != substr($phone, 0, strlen($this->city['code']))) {
 					echo 0;
 					exit;

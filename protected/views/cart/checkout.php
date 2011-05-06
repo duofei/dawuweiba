@@ -29,11 +29,11 @@
 			<li class="h40px f14px">
 				您有<?php echo $user->bcnums;?>点白吃点，最多可以使用
 				<input type="text" value="<?php echo $allowUseBcnum;?>" name="bcnum" onblur="bcnumBlur(this,'<?php echo $allowUseBcnum;?>')" class="txt f16px ar" style="width:30px" />
-				点。<?php echo l('我要获取更多白吃点', '#')?>。
+				点。<?php echo l('我要获取更多白吃点', url('intro/baichidian'))?>。
 			</li>
 			<?php else:?>
 			<li class="h40px f14px">
-				这里允许使用<?php echo $usebcnum;?>点白吃点。您没有可用的白吃点，<?php echo l('怎样获取白吃点', '#')?>？
+				这里允许使用<?php echo $usebcnum;?>点白吃点。您没有可用的白吃点，<?php echo l('怎样获取白吃点', url('intro/baichidian'))?>？
 			</li>
 			<?php endif;?>
 		</ul>

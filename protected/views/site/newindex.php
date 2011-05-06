@@ -1,7 +1,7 @@
 <div style="background:url(<?php echo resBu('images/newindex/mainbg.gif');?>) repeat-x #d70a00">
 <div class="main">
 	<div align="center">
-	<div id=Layer1 style="Z-INDEX: 1; RIGHT: 0px;  position:absolute; display:none;">
+	<div id=Layer1 style="Z-INDEX: 1; RIGHT: 0px;  position:absolute;">
 		<DIV id=flash1></DIV>
 		<script type=text/javascript>
 		var so = new SWFObject("<?php echo resBu('images/newindex/shujiao.swf');?>", "mymovie", "250", "250", "7", "#336699");

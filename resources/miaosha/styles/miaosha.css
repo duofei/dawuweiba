@@ -38,7 +38,7 @@ a:active { color: #333; text-decoration:none; }
 
 .list02 {margin:0 auto; background:url(../images/bg03.jpg) repeat; width:380px;  }
 .list02 ul { list-style:none; }
-.list02 ul li { text-align:left; line-height:30px; font-size:12px;height:30px; color:#666666; width:185px; float:left; overflow:hidden}
+.list02 ul li {line-height:30px; font-size:12px;height:30px; color:#666666; width:370px; float:left; overflow:hidden}
 
 
  

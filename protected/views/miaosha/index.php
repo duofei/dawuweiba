@@ -71,7 +71,7 @@
                     <div class="list02">
                     	<ul>
                     		<?php foreach ($m->miaoshaGoods as $g):?>
-                        	<li><input type="radio" name="goodsid" value="<?php echo $g->goods_id;?>" mid="<?php echo $g->miaosha_id;?>" <?php echo $shopInArea[$m->shop->id];?> /> <?php echo $g->goods->name;?>(原价<?php echo $g->goods->wmPrice;?>元)</li>
+                        	<li title="<?php echo $g->goods->name;?>(原价<?php echo $g->goods->wmPrice;?>元)"><input type="radio" name="goodsid" value="<?php echo $g->goods_id;?>" mid="<?php echo $g->miaosha_id;?>" <?php echo $shopInArea[$m->shop->id];?> /> <?php echo $g->goods->name;?>(原价<?php echo $g->goods->wmPrice;?>元)</li>
                         	<?php endforeach;?>
                             <div class="clear"></div>
                         </ul>
@@ -96,6 +96,9 @@
                 		<?php if(user()->isGuest):?>
                 		<div class="f26px fb ac ma-t20px">您还未登陆</div>
 						<div class="f26px fb ac ma-t5px">请先<?php echo l('登陆', url('site/login', array('referer'=>aurl('miaosha/index'))), array('class'=>'cred'));?>或<?php echo l('马上注册', url('site/signup'), array('class'=>'cred'));?></div>
+                		<?php elseif ($myTodayMiaosha > 0):?>
+                		<div class="f26px fb ac ma-t20px">每位用户一天只能抢够一份</div>
+						<div class="f26px fb ac ma-t5px"><?php echo l('查看活动规则', url('miaosha/rules'), array('class'=>'cred')); ?></div>
                 		<?php elseif($lastLatLng[1]):?>
                 		<div class="f26px ac ma-t20px" style="font-family:'雅黑', '黑体'; font-weight:100;"><span class="cred">您的位置</span>不在活动范围之内</div>
                 		<div class="box-btn" onclick="showLocationMap()">重新设置位置</div>
@@ -175,6 +178,8 @@ $(function(){
 	$('#submit').click(function(){
 		if($(this).attr('class') == 'queding') {
 			$('#postform').submit();
+			$(this).removeClass('queding');
+			$(this).addClass('queding-wait');
 		}
 	});
 	

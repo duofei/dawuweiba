@@ -48,7 +48,7 @@ a{ color:#333; text-decoration:underline; font-size:14px;}
 <p>3.邀请好友同获白吃点</p>
 <div class="B_bcd">a、被邀请人必须是首次注册用户,并且手机与email都是首次注册<br />
 b、被邀请人必须完成一次有效购买（有效购买是指在网站上选择了在线购物的外卖店铺，下单成功，并货到付款成功）</div>
-<div class="B_1"><span class="B_fl"><a href="<?php echo url('my/default/inviteurl');?>"><img src="<?php echo resBu('images/bc/bcjs_r15_c7.jpg'); ?>" width="125" height="33" /></a></span><span class="B_2"><a href="#">查看我的白吃点</a></span></div>
+<div class="B_1"><span class="B_fl"><a href="<?php echo url('my/default/inviteurl');?>"><img src="<?php echo resBu('images/bc/bcjs_r15_c7.jpg'); ?>" width="125" height="33" /></a></span><span class="B_2"><a href="<?php echo url('my/'); ?>">查看我的白吃点</a></span></div>
 
 <?php if(0):?>
 <p style=" margin-top:10px;"><span class="B_fl"><a href="#"><img src="<?php echo resBu('images/bc/bcjs_r17_c8.jpg'); ?>" width="165" height="34" /></a></span><span class="B_3"><a href="#">查看我的白吃点</a></span></p>

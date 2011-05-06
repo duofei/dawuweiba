@@ -65,6 +65,19 @@ class MiaoshaController extends Controller
 			$error = true;
 		}
 		
+		/* 判断用户今天是否已参加秒杀 */
+		$myTodayMiaosha = 0;
+		if(user()->id) {
+			$criteria = new CDbCriteria();
+			$criteria->addColumnCondition(array('user_id'=>user()->id));
+			$criteria->addBetweenCondition('create_time', mktime(0,0,0,date('m'),date('d'),date('Y')), mktime(23,59,59,date('m'),date('d'),date('Y')));
+			$criteria->addCondition('order_id > 0');
+			$myTodayMiaosha = MiaoshaResult::model()->count($criteria);
+			if($myTodayMiaosha > 0) {
+				$error = true;
+			}
+		}
+		
 		$this->pageTitle = "秒杀活动";
 		$this->render('index', array(
 			'miaoshalist' => $miaoshalist,
@@ -75,7 +88,8 @@ class MiaoshaController extends Controller
 			'error' => $error,
 			'error_flash' => user()->getFlash('error'),
 			'notInArea' => $notInArea,
-			'shopInArea' => $shopInArea
+			'shopInArea' => $shopInArea,
+			'myTodayMiaosha' => $myTodayMiaosha
 		));
 	}
 	
@@ -122,12 +136,14 @@ class MiaoshaController extends Controller
 				$this->redirect(url('miaosha/index'));
 				exit;
 			}
-			/* 判断用户是否已参加当期秒杀 */
+			/* 判断用户是否已参加当天秒杀 */
 			$criteria = new CDbCriteria();
-			$criteria->addColumnCondition(array('user_id'=>$user_id, 'miaosha_id'=>$miaosha_id));
-			$miaosha_result = MiaoshaResult::model()->findAll($criteria);
-			if($miaosha_result === null) {
-				user()->setFlash('error', '您已参加当期秒杀，不要重复秒杀');
+			$criteria->addColumnCondition(array('user_id'=>$user_id));
+			$criteria->addBetweenCondition('create_time', mktime(0,0,0,date('m'),date('d'),date('Y')), mktime(23,59,59,date('m'),date('d'),date('Y')));
+			$criteria->addCondition('order_id > 0');
+			$myMiaosha = MiaoshaResult::model()->count($criteria);
+			if($myMiaosha > 0) {
+				user()->setFlash('error', '您已参加当天秒杀，请明天再来参加');
 				$this->redirect(url('miaosha/index'));
 				exit;
 			}

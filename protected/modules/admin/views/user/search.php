@@ -82,7 +82,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 		<td><?php echo $val->integral?></td>
 		<td><?php echo $val->credit?></td>
 		<td><?php echo $val->credit_nums?></td>
-		<td><?php echo $val->bcnums?></td>
+		<td><?php echo $val->bcnums?> <?php echo l('增加', url('admin/user/addbcnums', array('id'=>$val->id)))?></td>
 		<td><?php echo $val->stateText?></td>
 		<td><?php echo empty($val->shops) ? '个人' : '商家';?></td>
 		<td>

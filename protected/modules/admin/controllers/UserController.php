@@ -272,6 +272,25 @@ class UserController extends Controller
 		$this->redirect($referer);
 	}
 	
+	public function actionAddbcnums()
+	{
+		$user_id = intval($_GET['id']);
+		if(app()->request->isPostRequest && isset($_POST)) {
+			$bcnums = intval($_POST['bcnums']);
+			if($bcnums > 0) {
+				$model = new UserBcintegralLog();
+				$model->user_id = $user_id;
+				$model->source = UserBcintegralLog::SOURCE_ADMINADD;
+				$model->integral = $bcnums;
+				$model->save();
+			}
+		}
+		$user = User::model()->findByPk($user_id);
+		$this->render('addbcnums', array(
+			'user' => $user
+		));
+	}
+	
 	public function accessRules()
 	{
 	    return array(
