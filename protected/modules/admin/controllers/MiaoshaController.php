@@ -5,8 +5,8 @@ class MiaoshaController extends Controller
 	public function actionList()
 	{
 		$criteria = new CDbCriteria();
-		$criteria->order = 't.create_time desc';
-		$miaosha = Miaosha::model()->with('shop')->findAll($criteria);
+		$criteria->order = 't.active_time desc';
+		$miaosha = Miaosha::model()->with('shop,miaoshaGoods')->findAll($criteria);
 		$this->render('list', array(
 			'miaosha' => $miaosha
 		));
@@ -21,7 +21,8 @@ class MiaoshaController extends Controller
 		}
 		if(null === $miaosha) {
 			$miaosha = new Miaosha();
-			$miaosha->active_num = 10;
+			$miaosha->active_num = 5;
+			$miaosha->untrue_num = 3;
 			$miaosha->active_time = time();
 			$miaosha->state = STATE_ENABLED;
 		}

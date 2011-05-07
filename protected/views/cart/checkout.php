@@ -62,7 +62,7 @@
 			<?php endif;?>
 		</ul>
 		<p class="f16px ma-t10px fb lh24px pa-l20px">订单备注<span class="f14px color666" style="font-weight:normal">（选填）</span></p>
-		<div class="message-li ma-t5px pa-l20px"><ul><li>么零钱</li><li>不要葱姜蒜 </li><li>不吃辣</li><li>辣一点</li><li>多加米</li><li>囧</li><li>谢谢:)</li></ul></div>
+		<div class="message-li ma-t5px pa-l20px"><ul><li>么零钱</li><li>不要葱姜蒜 </li><li>不吃辣</li><li>辣一点</li><li>多加米</li><li>自取</li><li>谢谢:)</li></ul></div>
 		<div class="message-textarea pa-l20px"><textarea name="UserAddress[message]" id="message" class="txt f14px" tabindex="6"></textarea></div>
 	</form>
 	<?php endif;?>

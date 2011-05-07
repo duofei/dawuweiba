@@ -6,6 +6,7 @@
         <th width="50">状态1</th>
         <th width="50">状态2</th>
         <th width="200">绑定商家</th>
+        <th width="110">联系方式</th>
         <th width="50">操作</th>
         <th width="120">最后请求</th>
         <th>备注</th>
@@ -25,6 +26,7 @@
 		    '<a href="' . url('admin/printer/shop', array('pid'=>$v->id)) . '">关联店铺</a>';
 		?>
 		</td>
+		<td class="al"><?php echo $v->shop->telphone; ?></td>
 		<td class="ac">
 			<a href="<?php echo url('admin/printer/create', array('id'=>$v->id));?>">修改</a>
 		</td>
@@ -38,7 +40,7 @@
 <?php endforeach;?>
 <?php else:?>
 	<tr>
-		<td colspan="5" class="ac">暂无打印机信息</td>
+		<td colspan="11" class="ac">暂无打印机信息</td>
 	</tr>
 <?php endif;?>
 </table>

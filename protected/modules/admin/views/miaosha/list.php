@@ -1,7 +1,10 @@
+<style>
+.trbg td{background-color:#efefef;}
+</style>
 <?php if ($miaosha) :?>
-<table  class="tabcolor list-tbl ma-b5px" width="100%" cellspacing="1">
+<table class="tabcolor list-tbl ma-b5px" width="100%" cellspacing="1">
     <tr class="title f14px">
-        <th class="al">秒杀介绍</th>
+        <th class="al" width="180">秒杀介绍</th>
         <th class="al">商铺名称</th>
         <th width="120">秒杀时间</th>
         <th width="60">秒杀数量</th>
@@ -10,9 +13,19 @@
         <th width="60">操作</th>
     </tr>
 <?php foreach ($miaosha as $key=>$val) :?>
+	<?php if(date('d', $val->active_time)%2 == 1):?>
 	<tr>
+	<?php else:?>
+	<tr class="trbg">
+	<?php endif;?>
 		<td><?php echo $val->desc;?></td>
-		<td><?php echo $val->shop->getNameLinkHtml(0, '_blank');?></td>
+		<td><?php echo $val->shop->getNameLinkHtml(0, '_blank');?>
+		<?php if($val->miaoshaGoods):?>
+		<?php foreach ($val->miaoshaGoods as $g):?>
+		<?php echo $g->goods->name;?>:<?php echo $g->goods->goodsModel->wm_price;?>&nbsp;
+		<?php endforeach;?>
+		<?php endif;?>
+		</td>
 		<td><?php echo date(param('formatShortDateTime'), $val->active_time);?></td>
 		<td class="ac"><?php echo $val->active_num;?></td>
 		<td><?php echo $val->shortCreateDateTimeText;?></td>
