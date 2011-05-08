@@ -140,8 +140,8 @@ function makeOrderFormat($order)
     $remark = '';
 //    if ($secodn_page) $remark .= makeSecondPage($order);
     $deliverTime = BREAKSEPLINE . '要求时间：' . $order['deliver_time'];
-    $username = BREAKLINE . '姓名：' . $order['consignee'];
-    $address = BREAKLINE . '地址：' . $order['address'];
+    $username = BREAKLINE . $order['consignee'];
+    $address = BREAKLINE . $order['address'];
     
     
     $data = sprintf('#%d*1*%d*', $order['shop_id'], $order['id']);
