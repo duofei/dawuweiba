@@ -8,7 +8,7 @@
         <th class="al">商铺名称</th>
         <th width="120">秒杀时间</th>
         <th width="60">秒杀数量</th>
-        <th width="120">创建时间</th>
+        <th width="60">虚假数量</th>
         <th width="40">状态</th>
         <th width="60">操作</th>
     </tr>
@@ -28,7 +28,7 @@
 		</td>
 		<td><?php echo date(param('formatShortDateTime'), $val->active_time);?></td>
 		<td class="ac"><?php echo $val->active_num;?></td>
-		<td><?php echo $val->shortCreateDateTimeText;?></td>
+		<td class="ac"><?php echo $val->untrue_num;?></td>
 		<td class="ac"><?php echo $val->active_time < time() ? '已结束' : $val->stateText;?></td>
 		<td class="ac">
 			<?php //if($val->active_time > time()):?>

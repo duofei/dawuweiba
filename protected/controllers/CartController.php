@@ -244,7 +244,10 @@ class CartController extends Controller
             if($data['user']->approve_state == User::APPROVE_STATE_VERIFY || User::checkSmsVerifyCode($data['user']->id, $_POST['vcode'])) {
             	if($data['user']->approve_state == User::APPROVE_STATE_UNSETTLED) {
             		$data['user']->approve_state = User::APPROVE_STATE_VERIFY;
-            		$data['user']->save();
+            		if(!$data['user']->telphone) {
+            			$data['user']->telphone = $_POST['UserAddress']['telphone'];
+            		}
+            		$data['user']->save(false);
             	}
 	            $order = new Order('checkout');
 	            $order->shop_id = (int)$_POST['shop_id'];

@@ -654,6 +654,7 @@ class GoodsController extends Controller
 		    );
 		   	$sort->applyOrder($condition);
 		   	
+		   	$condition->order = 't.state asc, t.orderid desc';
 		   	$goods = Goods::model()->with(array('shop', 'foodGoods', 'foodGoods.goodsCategory'))->findAll($condition);
 		   	$goods_list = Goods::getSortGoods($goods);
 		    

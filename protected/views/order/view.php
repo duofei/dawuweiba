@@ -38,8 +38,8 @@
 	<h4 class="f16px fl lh30px ma-r10px" >订单提交成功</h4>
 	<div class="fl order-ok"></div>
 	<div class="clear"></div>
-	<p class="f14px lh24px cgray" >大多数情况下，大约<span class="cred">30-45分钟</span>左右美食就能送到，天气情况较差或者餐厅繁忙的时候配送时间可能略有延长。<p/>
-	<p class="f14px lh24px cgray" >请您留意您的电话：<span class="cred"><?php echo $order->telphone;?></span>，餐厅会通过这个电话联系您。</p>
+	<p class="f14px lh24px cgray" >请您留意您的手机：<span class="cred"><?php echo $order->telphone;?></span>。大约2-3分钟左右收到商铺的确认短信。 </p>
+	<p class="f14px lh24px cgray" >如果长时间未收到短信请致电<span class="cred">(<?php echo $order->shop->nameLinkHtml;?>)<?php echo $order->shop->telphone;?></span>或登陆<span class="cred"><?php echo l('个人中心', url('my/order/online'));?></span>查看订单状态.<p/>
 </div>
 <div class="ma-t10px ma-b10px border-aaa pa-l30px pa-r20px pa-b20px ">
 <?php if(user()->isGuest):?>
