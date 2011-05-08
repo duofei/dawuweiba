@@ -46,10 +46,7 @@ a{ color:#333; text-decoration:underline; font-size:14px;}
 <p>1.参加网站不定期活动</p>
 <p>2.积分兑换白吃点</p>
 <p>3.邀请好友同获白吃点</p>
-<<<<<<< HEAD
 <div class="B_CB"></div>
-=======
->>>>>>> a7d403cb6d7b31038d72df1ba756201a26a0dd0a
 <div class="B_bcd">
 a、被邀请人必须是首次注册用户,并且手机与email都是首次注册<br />
 b、被邀请人必须完成一次有效购买（有效购买是指在网站上选择了在线购物的外卖店铺，下单成功，并货到付款成功）
