@@ -5,7 +5,13 @@
 <?php else:?>
 	<?php echo '亲爱的' . user()->screenName . '，欢迎光临我爱外卖';?>
 	<?php //echo l('购物车', url('cart/checkout')) . sprintf('(%d个美食)', Cart::getGoodsCount());?>
-	<?php echo l('个人中心', url('my'));?>
+	<?php
+	    if (empty($_SESSION['shop']))
+            $cp = l('个人中心', url('my'));
+        else
+            $cp = l('商家中心', url('shopcp'), array('target'=>'_blank'));
+        echo $cp;
+	?>
 	<?php //echo l('收藏夹', url('my/favorite'));?>
 	<?php echo l('安全退出', url('site/logout'));?>
 <?php endif;?>

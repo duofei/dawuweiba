@@ -93,7 +93,7 @@ class Shop extends CActiveRecord
 
     public static $business_states = array(
         self::BUSINESS_STATE_OPEN => '营业中',
-        self::BUSINESS_STATE_SUSPEND => '休息中',
+        self::BUSINESS_STATE_SUSPEND => '暂停送餐',
         self::BUSINESS_STATE_CLOSE => '关闭',
     );
     
