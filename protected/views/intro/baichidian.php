@@ -19,7 +19,7 @@ label{ height:24px;}
 .B_bk_3{ background: url(<?php echo resBu('images/bc/bcjs_r11_c3.jpg'); ?>) no-repeat 50px 20px; background-color:#e2e2e2;}
 .B_bk_4{ background:url(<?php echo resBu('images/bc/bcjs_r23_c18.jpg'); ?>) no-repeat 600px 20px; background-color:#e2e2e2; width:700px; height:80px; font-size:14px;}
 a{ color:#333; text-decoration:underline; font-size:14px;}
-.B_bcd{float:left; width:500px; margin-left:150px; color:#4f4f4f; margin-bottom:10px; font-size:14px; line-height:16px;}
+.B_bcd{width:500px; padding-left:150px; color:#4f4f4f; margin-bottom:10px; font-size:14px; line-height:16px;}
 .B_1{margin-left:100px; width:500px; float:left; font-size:14px;}
 .B_2{height:33px; line-height:33px; vertical-align:middle; display:block; float:left; margin-left:20px;}
 .B_3{height:25px; line-height:25px; margin-left:10px; display:block; float:left;}
@@ -46,8 +46,10 @@ a{ color:#333; text-decoration:underline; font-size:14px;}
 <p>1.参加网站不定期活动</p>
 <p>2.积分兑换白吃点</p>
 <p>3.邀请好友同获白吃点</p>
-<div class="B_bcd">a、被邀请人必须是首次注册用户,并且手机与email都是首次注册<br />
-b、被邀请人必须完成一次有效购买（有效购买是指在网站上选择了在线购物的外卖店铺，下单成功，并货到付款成功）</div>
+<div class="B_bcd">
+a、被邀请人必须是首次注册用户,并且手机与email都是首次注册<br />
+b、被邀请人必须完成一次有效购买（有效购买是指在网站上选择了在线购物的外卖店铺，下单成功，并货到付款成功）
+</div>
 <div class="B_1"><span class="B_fl"><a href="<?php echo url('my/default/inviteurl');?>"><img src="<?php echo resBu('images/bc/bcjs_r15_c7.jpg'); ?>" width="125" height="33" /></a></span><span class="B_2"><a href="<?php echo url('my/'); ?>">查看我的白吃点</a></span></div>
 
 <?php if(0):?>
