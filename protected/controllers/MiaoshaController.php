@@ -39,7 +39,7 @@ class MiaoshaController extends Controller
 			exit;
 		}
 		
-		if ($temp2 < time()) {
+		if ($temp2 && $temp2 < time()) {
 			foreach ($miaoshalist as $m) {
 				$m->state = Miaosha::STATE_OVER;
 				$m->save();
@@ -123,7 +123,7 @@ class MiaoshaController extends Controller
 			
 			/* 当前秒杀是否过期 */
 			if($miaosha->state == Miaosha::STATE_OVER) {
-				user()->setFlash('error', '本次秒杀已结束');
+				user()->setFlash('error', '当前商铺这轮秒杀已结束');
 				$this->redirect(url('miaosha/error'));
 				exit;
 			}
