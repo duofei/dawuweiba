@@ -23,7 +23,7 @@
 	    	<?php echo l(h($val->consignee ? $val->consignee : $val->user->username), url('admin/user/info', array('id'=>$val->user->id)));?>
 	    	(<?php echo $val->user->getApproveStateText();?>)
 	    </td>
-	    <td width="90"><?php echo h($val->mobile)?></td>
+	    <td width="90"><?php echo h($val->telphone);?><br /><?php echo h($val->mobile);?></td>
 	    <td class="pa-r10px" ><?php echo h($val->address)?></td>
 	    <td width="50">&yen;<?php echo $val->dispatchingAmountPrice;?></td>
 	    <td width="60">&yen;<?php echo $val->amountPrice;?></td>
