@@ -16,9 +16,13 @@
  */
 class Miaosha extends CActiveRecord
 {
+	const STATE_CLOSE = 0;
+	const STATE_OPEN = 1;
+	const STATE_OVER = 2;
 	public static $states = array(
-		STATE_DISABLED => '关闭',
-		STATE_ENABLED => '开启'
+		self::STATE_CLOSE => '关闭',
+		self::STATE_OPEN => '开启',
+		self::STATE_OVER => '结束'
 	);
 	public function getStateText()
 	{

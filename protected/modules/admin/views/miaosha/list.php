@@ -29,7 +29,7 @@
 		<td><?php echo date(param('formatShortDateTime'), $val->active_time);?></td>
 		<td class="ac"><?php echo $val->active_num;?></td>
 		<td class="ac"><?php echo $val->untrue_num;?></td>
-		<td class="ac"><?php echo $val->active_time < time() ? '已结束' : $val->stateText;?></td>
+		<td class="ac"><?php echo $val->stateText;?></td>
 		<td class="ac">
 			<?php //if($val->active_time > time()):?>
 			<a href="<?php echo url('admin/miaosha/edit', array('id'=>$val->id))?>"><span class="color">编辑</span></a>

@@ -6,7 +6,7 @@ class MiaoshaController extends Controller
 	{
 		$criteria = new CDbCriteria();
 		$criteria->order = 't.active_time desc';
-		$miaosha = Miaosha::model()->with('shop,miaoshaGoods')->findAll($criteria);
+		$miaosha = Miaosha::model()->with('shop')->findAll($criteria);
 		$this->render('list', array(
 			'miaosha' => $miaosha
 		));

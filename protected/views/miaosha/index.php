@@ -16,7 +16,7 @@
 	            <div class="zhouqi"><?php echo $m->activeTimeWeek;?></div>
 	            <div class="xqtu"><?php echo $m->shop->logoHtml;?></div>
 	     	</div>
-	<?php $temp[date("Y-m-d",$m->active_time)][] = $m->shop_id;?>
+		<?php $temp[date("Y-m-d",$m->active_time)][] = $m->shop_id;?>
 	<?php endif;?>
 	     	<?php endforeach;?>
 	    </div>
@@ -37,7 +37,7 @@
                                 <p>起送条件：<?php echo $m->shop->transport_condition;?></p>
                                 <p>店铺简介：<?php echo $m->shop->desc;?> </p>
                             </div>
-                            <div class=" clear"></div>
+                            <div class="clear"></div>
                         </div>
                     </div>
                     <div class="spaceline"></div>
@@ -67,11 +67,18 @@
                 <div class="cont">
                 <?php echo CHtml::beginForm(url('miaosha/post'), 'post', array('id'=>'postform'));?>
                 	<?php foreach ($miaoshalist as $m):?>
-                	<div class="cdtit"><?php echo l($m->shop->shop_name, url('shop/show', array('shopid'=>$m->shop->id)));?><?php if($shopInArea[$m->shop->id]=='disabled') echo '(不在配送范围之内)'?></div>
+                	<div class="cdtit">
+                		<?php echo l($m->shop->shop_name, url('shop/show', array('shopid'=>$m->shop->id)));?>
+                		<?php if($shopInArea[$m->shop->id]=='disabled') echo '(不在配送范围之内)'?>
+                		<?php if($m->state==Miaosha::STATE_OVER) echo '(已被抢光)';?>
+                	</div>
                     <div class="list02">
                     	<ul>
                     		<?php foreach ($m->miaoshaGoods as $g):?>
-                        	<li title="<?php echo $g->goods->name;?>(原价<?php echo $g->goods->wmPrice;?>元)"><input type="radio" name="goodsid" value="<?php echo $g->goods_id;?>" mid="<?php echo $g->miaosha_id;?>" <?php echo $shopInArea[$m->shop->id];?> /> <?php echo $g->goods->name;?>(原价<?php echo $g->goods->wmPrice;?>元)</li>
+                        	<li title="<?php echo $g->goods->name;?>(原价<?php echo $g->goods->wmPrice;?>元)">
+                        		<input type="radio" name="goodsid" value="<?php echo $g->goods_id;?>" mid="<?php echo $g->miaosha_id;?>" <?php echo $shopInArea[$m->shop->id];?> <?php if($m->state==Miaosha::STATE_OVER) echo 'disabled';?> />
+								<?php echo $g->goods->name;?>(原价<?php echo $g->goods->wmPrice;?>元)
+                        	</li>
                         	<?php endforeach;?>
                             <div class="clear"></div>
                         </ul>
@@ -147,7 +154,6 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script language="javascript" type="text/javascript">
 var activeTime = <?php echo $miaoshalist[0]->active_time - time();?>;
-//activeTime = -50;
 var interval;
 var map = null;
 $(function(){
@@ -221,7 +227,7 @@ function showStartTime(){
 		$('#submit').attr('class', 'queding');
 		$('#time').html('00:00:00');
 		clearInterval(interval);
-		setTimeout("location.reload();", (60-Math.abs(activeTime)) * 1000);
+		//setTimeout("location.reload();", (60-Math.abs(activeTime)) * 1000);
 	} else {
 		var html = '';
 		var s = activeTime%60;

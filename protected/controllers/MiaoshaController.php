@@ -9,30 +9,42 @@ class MiaoshaController extends Controller
 		$startTime = param('miaoshaStartTime');
 		$endTime = param('miaoshaEndTime');
 		$criteria = new CDbCriteria();
-		$criteria->addColumnCondition(array('t.state'=>STATE_ENABLED));
+		$criteria->addCondition('t.state != ' . Miaosha::STATE_CLOSE);
 		$criteria->addBetweenCondition('active_time', $startTime, $endTime);
 		$criteria->order = 'active_time asc';
 		$miaosha = Miaosha::model()->with('shop')->findAll($criteria);
 		$miaoshalist = array();
 		$temp = 0;
+		$temp2 = 0;
 		foreach ($miaosha as $m) {
-			if($m->active_time > (time()-60)) {
+			if($m->state == Miaosha::STATE_OPEN) {
 				if($temp == 0) {
-					$miaoshalist[] = $m;
 					$temp = $m->active_time;
-				} else {
-					if($temp == $m->active_time) {
-						$miaoshalist[] = $m;
-					} else {
-						break;
-					}
+				} elseif($temp != $m->active_time) {
+					$temp2 = $m->active_time;
+					break;
 				}
+			}
+		}
+		foreach ($miaosha as $m) {
+			if($temp == $m->active_time) {
+				$miaoshalist[] = $m;
+			} elseif($m->active_time > $temp) {
+				break;
 			}
 		}
 		
 		if(!$miaoshalist) {
 			$this->render('over');
 			exit;
+		}
+		
+		if ($temp2 < time()) {
+			foreach ($miaoshalist as $m) {
+				$m->state = Miaosha::STATE_OVER;
+				$m->save();
+			}
+			$this->redirect(url('miaosha/index'));
 		}
 		
 		$lastLatLng = Location::getLastCoordinate();
@@ -101,32 +113,40 @@ class MiaoshaController extends Controller
 		/* 判断用户是不是已登陆，提交秒杀Id，提交秒杀商品 */
 		if($user_id && $miaosha_id && $goods_id) {
 			$miaosha = Miaosha::model()->with('miaoshaGoods')->findByPk($miaosha_id);
-			if($miaosha->state == STATE_DISABLED) {
-				user()->setFlash('error', '秒杀已关闭');
-				$this->redirect(url('miaosha/index'));
+			
+			/* 当前秒杀已闭 */
+			if($miaosha->state == Miaosha::STATE_CLOSE) {
+				user()->setFlash('error', '本次秒杀已关闭');
+				$this->redirect(url('miaosha/error'));
 				exit;
 			}
+			
+			/* 当前秒杀是否过期 */
+			if($miaosha->state == Miaosha::STATE_OVER) {
+				user()->setFlash('error', '本次秒杀已结束');
+				$this->redirect(url('miaosha/error'));
+				exit;
+			}
+			
 			/* 查看是否允许秒杀 */
 			if($miaosha->active_time > time()) {
 				user()->setFlash('error', '秒杀还未开始，你别来捣蛋');
 				$this->redirect(url('miaosha/index'));
 				exit;
 			}
-			/* 当前秒杀是否过期 */
-			if(time() - $miaosha->active_time > 60) {
-				user()->setFlash('error', '秒杀已结束');
-				$this->redirect(url('miaosha/index'));
-				exit;
-			}
+			
 			/* 判断数量是否已到 */
 			$c = new CDbCriteria();
 			$c->addCondition('order_id > 0 and miaosha_id='.$miaosha_id);
 			$count = MiaoshaResult::model()->count($c);
 			if($count >= $miaosha->active_num) {
-				//user()->setFlash('error', '秒杀数量已满，请下次再参加');
-				//$this->redirect(url('miaosha/index'));
-				//exit;
+				$miaosha->state = Miaosha::STATE_OVER;
+				$miaosha->save();
+				user()->setFlash('error', '您的手太慢了，本次秒杀名额已抢完了');
+				$this->redirect(url('miaosha/error'));
+				exit;
 			}
+			
 			/* 判断goods_id是否在秒杀列表里 */
 			foreach ((array)$miaosha->miaoshaGoods as $goods) {
 				$goodsids[] = $goods->goods_id;
@@ -136,6 +156,7 @@ class MiaoshaController extends Controller
 				$this->redirect(url('miaosha/index'));
 				exit;
 			}
+			
 			/* 判断用户是否已参加当天秒杀 */
 			$criteria = new CDbCriteria();
 			$criteria->addColumnCondition(array('user_id'=>$user_id));
@@ -147,19 +168,21 @@ class MiaoshaController extends Controller
 				$this->redirect(url('miaosha/index'));
 				exit;
 			}
-			/* 此用户加入到秒杀结果表 */
+			
+			/* 把用户加入到秒杀结果表 */
 			$miaosha_result = new MiaoshaResult();
 			$miaosha_result->user_id = $user_id;
 			$miaosha_result->goods_id = $goods_id;
 			$miaosha_result->miaosha_id = $miaosha_id;
 			if(!$miaosha_result->save()) {
-				//echo CHtml::errorSummary($miaosha_result);
 				user()->setFlash('error', '秒杀失败或已结束');
 				$this->redirect(url('miaosha/index'));
 				exit;
 			}
+			
 			/* 清空购物车，加入秒杀成功的物品 */
 			Cart::clearCart();
+			
 			/* 把秒杀商品加入到购物车 */
 	    	$goods = Goods::model()->findByPk($goods_id);
 	   	 	if (null === $goods) throw new CHttpException(404);
@@ -169,14 +192,21 @@ class MiaoshaController extends Controller
 	    	$cart->goods_price = $goods->wmPrice;
 	    	$cart->group_price = $goods->groupPrice;
 	    	$cart->goods_name = $goods->name;
-		    $cart->save();
-		    /* 跳转到下订单页面 */
-		    $this->redirect(url('cart/checkout', array('miaosha_id'=>$miaosha_id)));
+		    
+	    	if($cart->save()) {
+	    		/* 跳转到下订单页面 */
+		    	$this->redirect(url('cart/checkout', array('miaosha_id'=>$miaosha_id)));
+	    	}
 		}
 		user()->setFlash('error', '秒杀失败，你是不是没有进选择美食');
 		$this->redirect(url('miaosha/index'));
 		exit;
-		
+	}
+	
+	public function actionError()
+	{
+		$error = user()->getFlash('error');
+		$this->render('error', array('error'=>$error));
 	}
 	
 	public function actionRules()

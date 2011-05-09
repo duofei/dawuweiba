@@ -297,17 +297,21 @@ class CartController extends Controller
 			    	$criteria = new CDbCriteria();
 			    	$criteria->addColumnCondition(array('miaosha_id'=>$miaosha_id));
 			    	$criteria->addCondition('order_id > 0');
-			    	$count = MiaoshaResult::model()->count($criteria);
+			    	$resultCount = MiaoshaResult::model()->count($criteria);
 			    	$miaosha = Miaosha::model()->findByPk($miaosha_id);
-			    	if($count >= $miaosha->active_num) {
+			    	if($miaosha->state!=Miaosha::STATE_OPEN || $resultCount >= $miaosha->active_num) {
 			    		$miaoshaResult->create_time = time();
 			    		$miaoshaResult->save();
+			    		if($miaosha->state == Miaosha::STATE_OPEN) {
+			    			$miaosha->state = Miaosha::STATE_OVER;
+			    			$miaosha->save();
+			    		}
 			    		$this->redirect(url('miaosha/fail'));
 			    		exit;
 			    	} else {
 			    		$order->paid_amount = Cart::getGoodsAmount() + $cart[0]->goods->shop->matchDispatchingAmount - 1;
 	            		$order->paid_remark = '一元秒杀活动优惠' . $order->paid_amount . '元';
-	            		if($count == 0) {
+	            		if($resultCount == 0) {
 	            			MiaoshaResult::addUntrues($miaosha_id);
 	            		}
 			    	}
@@ -341,6 +345,17 @@ class CartController extends Controller
 		            	$miaoshaResult->order_id = $order->id;
 		            	$miaoshaResult->create_time = time();
 		            	$miaoshaResult->save();
+		            	/* 如果秒杀数量达到 结束当前秒杀 */
+		            	$criteria = new CDbCriteria();
+			    		$criteria->addColumnCondition(array('miaosha_id'=>$miaosha_id));
+			    		$criteria->addCondition('order_id > 0');
+			    		$resultCount = MiaoshaResult::model()->count($criteria);
+		            	if($resultCount >= $miaosha->active_num) {
+			            	if($miaosha->state == Miaosha::STATE_OPEN) {
+				    			$miaosha->state = Miaosha::STATE_OVER;
+				    			$miaosha->save();
+				    		}
+		            	}
 		            }
 		            /* 完成订单跳转到成功显示页面 */
 	                $this->redirect(url('order/view', array('orderid'=>$order->id, 'ordersn'=>$order->orderSn)));
