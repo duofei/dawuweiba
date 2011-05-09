@@ -32,7 +32,7 @@
                     	<div style="padding-top:5px;border-bottom:1px dashed #b7cbda; padding-bottom:5px;">
                         	<div class="fl"><img src="<?php echo $m->shop->logoUrl;?>" /></div>
                             <div class="fr lh20" style="width:290px;">
-                            	<h1 class="cd60a01 f14px"><?php echo l($m->shop->shop_name, url('shop/show', array('shopid'=>$m->shop->id)))?></h1>
+                            	<h1 class="cd60a01 f14px"><?php echo $m->shop->shop_name;?></h1>
                                 <p>送餐时间：<?php echo $m->shop->transport_time;?> </p>
                                 <p>起送条件：<?php echo $m->shop->transport_condition;?></p>
                                 <p>店铺简介：<?php echo $m->shop->desc;?> </p>

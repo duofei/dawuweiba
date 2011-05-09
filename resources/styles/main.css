@@ -8,7 +8,7 @@
 .main {width:760px; overflow:hidden;}
 .sidebar {width:200px; overflow:hidden;}
 
-.location-nav {margin-top:43px; line-height:17px; width:400px;}
+.location-nav {margin-top:43px; line-height:17px; width:350px;}
 .topnav {height:27px; background:#c8181b; padding-top:3px; line-height:27px;}
 .topnav a {height:27px; line-height:27px; padding:0px 10px; display:inline-block;}
 .topnav a.select {background-position:-82px -162px; color:#c8181b;}

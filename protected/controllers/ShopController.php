@@ -251,6 +251,7 @@ class ShopController extends Controller
     	}
 
 	   	$criteria->addColumnCondition(array('t.shop_id'=>$shop->id, 't.state'=>Goods::STATE_SELL));
+	   	$criteria->order = 't.orderid desc';
 	   	$sort = new CSort('Goods');
 	   	$sort->attributes = array(
 	    	'wm_price'=> array(

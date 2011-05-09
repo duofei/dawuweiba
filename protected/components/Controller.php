@@ -212,6 +212,12 @@ class Controller extends CController
 		return $html;
 	}
 	
+	public function getBannerImg()
+	{
+		$html = l(CHtml::image(resBu('images/banner_r1_c2.png')), url('miaosha/index'));
+		return $html;
+	}
+	
 	public function getUserSearchLocationHistory()
 	{
 	    $html = '';

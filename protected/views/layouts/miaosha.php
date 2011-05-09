@@ -36,6 +36,10 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 <!--copyright begin-->
 <?php $this->renderPartial('/public/newfooter');?>
 <!--copyright end-->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F527dc523b729b66e5fd237d810b74d2f' type='text/javascript'%3E%3C/script%3E"));
+</script>
 </body>
 </html>
 <?php
