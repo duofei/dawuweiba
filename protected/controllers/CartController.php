@@ -294,6 +294,37 @@ class CartController extends Controller
 	            
 	            /* 秒杀活动处理 */
 	            if($data['miaosha_state']) {
+	            	/* 过滤IP */
+	            	$ipArray = array('219.218.121.210', '219.218.121.209', '219.218.121.208' ,'219.218.121.211');
+	            	if(in_array($_SERVER['REMOTE_ADDR'], $ipArray)) {
+	            		$this->redirect(url('miaosha/fail'));
+	            		exit;
+	            	}
+	            	
+	            	/* 过滤手机号 */
+	            	$phoneArray = MiaoshaResult::getSuccessUserTelphone();
+	            	if(in_array($order->telphone, $phoneArray)) {
+	            		$this->redirect(url('miaosha/fail'));
+	            		exit;
+	            	}
+	            	
+	            	/* 过滤Cookie */
+	            	if($_COOKIE['miaosha']) {
+	            		$this->redirect(url('miaosha/fail'));
+	            		exit;
+	            	}
+	            	
+	            	/* 判断用户今天是否已抢到过订单 */
+			        $criteria = new CDbCriteria();
+					$criteria->addColumnCondition(array('user_id'=>user()->id));
+					$criteria->addBetweenCondition('create_time', mktime(0,0,0,date('m'),date('d'),date('Y')), mktime(23,59,59,date('m'),date('d'),date('Y')));
+					$criteria->addCondition('order_id > 0');
+					$myMiaosha = MiaoshaResult::model()->count($criteria);
+					if($myMiaosha > 0) {
+						$this->redirect(url('miaosha/fail'));
+						exit;
+					}
+					
 			    	$criteria = new CDbCriteria();
 			    	$criteria->addColumnCondition(array('miaosha_id'=>$miaosha_id));
 			    	$criteria->addCondition('order_id > 0');
@@ -330,7 +361,7 @@ class CartController extends Controller
 		            }
 		            /* 如果是打印机订单&&用户已认证 */
 		            if($cart[0]->goods->shop->buy_type == Shop::BUYTYPE_PRINTER && $data['user']->approve_state==User::APPROVE_STATE_VERIFY) {
-		            	UserInviter::inviteSuccess(user()->id);
+		            	UserInviter::inviteSuccess(user()->id); //如果是被邀请增加用户白吃点
 		            }
 		            /* 如果使用了白吃点 */
 		            if($useBcnumState) {
@@ -345,6 +376,8 @@ class CartController extends Controller
 		            	$miaoshaResult->order_id = $order->id;
 		            	$miaoshaResult->create_time = time();
 		            	$miaoshaResult->save();
+		            	/* 秒杀成功后设置Cookie */
+		            	setcookie('miaosha', '1', time()+7200);
 		            	/* 如果秒杀数量达到 结束当前秒杀 */
 		            	$criteria = new CDbCriteria();
 			    		$criteria->addColumnCondition(array('miaosha_id'=>$miaosha_id));

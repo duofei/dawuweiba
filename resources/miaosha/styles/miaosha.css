@@ -145,13 +145,17 @@ a:active { color: #333; text-decoration:none; }
 .box .box-btn {background:url(../images/btn.png) no-repeat; font-size:14px; font-weight:bold; width:120px; height:30px; line-height:30px; float:left; text-align:center; margin-left:30px; margin-top:10px; cursor:pointer;}
 .box .select {background:url(../images/btn-select.png) no-repeat;}
 
-.fail {width:660px; height:288px; background:url(../images/fail_bg.png) no-repeat; margin:0px auto; padding:20px;} 
-.fail div.txt{font-size:26px; font-weight:bold; margin-left:300px; line-height:30px; padding-top:20px;}
-.fail a.btn1{width:229px; height:36px; background:url(../images/fail_btn1.png) no-repeat; margin-left:300px; margin-top:10px; cursor:pointer; display:block;}
+.fail-top {width:700px; height:18px; background:url(../images/fail_top.jpg) no-repeat; margin:0px auto;}
+.fail-bottom {width:700px; height:18px; background:url(../images/fail_bottom.jpg) no-repeat; margin:0px auto;}
+.fail {width:660px; background:url(../images/fail_bg.jpg) repeat-y; margin:0px auto; padding:20px;} 
+.fail div.txt{font-size:26px; font-weight:bold; width:380px; margin-left:25px; line-height:30px; padding-top:20px;}
+.fail a.btn1{width:229px; height:36px; background:url(../images/fail_btn1.png) no-repeat; margin-left:25px;  margin-top:10px; cursor:pointer; display:block;}
 .fail a.btn1.select1{background:url(../images/fail_btn1_select.png)}
-.fail a.btn2{width:166px; height:29px; background:url(../images/fail_btn2.png) no-repeat; margin-left:300px; margin-top:10px; cursor:pointer; display:block;}
+.fail a.btn2{width:166px; height:29px; background:url(../images/fail_btn2.png) no-repeat; margin-left:25px; margin-top:10px; cursor:pointer; display:block;}
 .fail a.btn2.select2{background:url(../images/fail_btn2_select.png)}
 
+.user-tip1{width:370px; height:57px; background:url(../images/usertip1.jpg) no-repeat; padding-left:95px; padding-top:35px;}
+.user-tip2{width:370px; height:57px; background:url(../images/usertip2.jpg) no-repeat; padding-left:95px; padding-top:35px;}
 
 #M_nav{ width:893px; height:57px; background:url(../images/jilu_r3_c1.jpg) no-repeat; overflow:hidden; line-height:57px; vertical-align:middle; text-align:center; font-size:12px;}
 #M_nav span{ margin:0 7px;}

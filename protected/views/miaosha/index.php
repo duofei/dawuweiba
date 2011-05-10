@@ -34,7 +34,7 @@
                             <div class="fr lh20" style="width:290px;">
                             	<h1 class="cd60a01 f14px"><?php echo $m->shop->shop_name;?></h1>
                                 <p>送餐时间：<?php echo $m->shop->transport_time;?> </p>
-                                <p>起送条件：<?php echo $m->shop->transport_condition;?></p>
+                                <!-- <p>起送条件：<?php echo $m->shop->transport_condition;?></p> -->
                                 <p>店铺简介：<?php echo $m->shop->desc;?> </p>
                             </div>
                             <div class="clear"></div>
@@ -68,7 +68,7 @@
                 <?php echo CHtml::beginForm(url('miaosha/post'), 'post', array('id'=>'postform'));?>
                 	<?php foreach ($miaoshalist as $m):?>
                 	<div class="cdtit">
-                		<?php echo l($m->shop->shop_name, url('shop/show', array('shopid'=>$m->shop->id)));?>
+                		<?php echo l($m->shop->shop_name, '#');?>
                 		<?php if($shopInArea[$m->shop->id]=='disabled') echo '(不在配送范围之内)'?>
                 		<?php if($m->state==Miaosha::STATE_OVER) echo '(已被抢光)';?>
                 	</div>
@@ -120,10 +120,35 @@
                 	</div>
                 </div>
                 <?php endif;?>
+                <?php if(user()->id):?>
+                <?php if($user->approve_state == User::APPROVE_STATE_VERIFY && $userAddressCount > 0):?>
+                <div class="user-tip2 ma-t10px">
+                <?php else:?>
+                <div class="user-tip1 ma-t10px">
+                <?php endif;?>
+                	<div class="lh24px f14px">
+                		<?php if($user->approve_state == User::APPROVE_STATE_VERIFY):?>
+                		您已通过用户认证
+                		<?php else:?>
+                		您还未进行用户认证(<?php echo l('点击认证', url('my/default/approve'), array('class'=>'cred'));?>)
+                		<?php endif;?>
+                	</div>
+                	<div class="lh24px f14px">
+                		<?php if($userAddressCount > 0):?>
+                		您已填写送餐地址
+                		<?php else:?>
+                		您还没填写地址(<?php echo l('点击填写', url('my/address/list'), array('class'=>'cred'));?>)
+                		<?php endif;?>
+                	</div>
+                </div>
+                <?php endif;?>
             </div>
         </div>
         <div class="spaceline"></div>
         <div align="center"><a href="<?php echo url('my/default/inviteurl')?>" target="_blank"><img src="<?php echo resBu('miaosha/images/pic03.jpg');?>" /></a></div>
+    <div class="ma-t10px">
+    	<iframe width="100%" height="500"frameborder="0" scrolling="no" src="http://service.t.sina.com.cn/widget/livestream/listlive.php?width=0&height=500&uid=1819934857&skin=1&pic=1&titlebar=1&border=1&publish=1&atalk=1&recomm=1&at=1&listid=155739977&appkey=692781524"></iframe>
+    </div>
         <div class="spaceline"></div>
         <div class="clear"></div>
     </div>
@@ -190,7 +215,7 @@ $(function(){
 	});
 	
 
-	var isComCount = <?php echo $isComCount;?>;
+	var isComCount = <?php echo $isComCount;?> -1;
 	var moveNum = 0;
 	if(isComCount > 0) {
 		if((length-6) > isComCount) {
@@ -212,8 +237,8 @@ $(function(){
 		$(this).removeClass('select');
 	});
 	<?php if($error):?>
-	$(".shade-content").height($(".column02").height()-24);
-	$(".box").css('top',($(".column02").height()-111)/2);
+	$(".shade-content").height($(".column02").height()-126);
+	$(".box").css('top',($(".column02").height()-213)/2);
 	<?php else:?>
 	$(".notice").show();
 	$(".notice").click(function(){ $(this).hide(); });

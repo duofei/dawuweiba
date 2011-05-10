@@ -155,4 +155,23 @@ class MiaoshaResult extends CActiveRecord
 		}
 		return true;
 	}
+
+	public static function getSuccessUserTelphone() {
+		$startTime = param('miaoshaStartTime');
+		$endTime = param('miaoshaEndTime');
+		
+		$c = new CDbCriteria();
+		$c->addCondition('t.order_id > 1');
+		$c->addBetweenCondition('t.create_time', $startTime, $endTime);
+		$model = self::model()->with('order')->findAll($c);
+		
+		$phoneArray = array();
+		
+		if($model) {
+			foreach ($model as $v) {
+				$phoneArray[] = $v->order->telphone;
+			}
+		}
+		return $phoneArray;
+	}
 }

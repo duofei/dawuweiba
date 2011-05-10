@@ -90,6 +90,16 @@ class MiaoshaController extends Controller
 			}
 		}
 		
+		/* 取用户信息 */
+		$user = null;
+		$userAddressCount = 0;
+		if(user()->id) {
+			$user = User::model()->findByPk(user()->id);
+			$c = new CDbCriteria();
+			$c->addColumnCondition(array('user_id'=>user()->id));
+			$userAddressCount = UserAddress::model()->count($c);
+		}
+		
 		$this->pageTitle = "秒杀活动";
 		$this->render('index', array(
 			'miaoshalist' => $miaoshalist,
@@ -101,7 +111,9 @@ class MiaoshaController extends Controller
 			'error_flash' => user()->getFlash('error'),
 			'notInArea' => $notInArea,
 			'shopInArea' => $shopInArea,
-			'myTodayMiaosha' => $myTodayMiaosha
+			'myTodayMiaosha' => $myTodayMiaosha,
+			'user' => $user,
+			'userAddressCount' => $userAddressCount
 		));
 	}
 	
@@ -169,15 +181,20 @@ class MiaoshaController extends Controller
 				exit;
 			}
 			
-			/* 把用户加入到秒杀结果表 */
-			$miaosha_result = new MiaoshaResult();
-			$miaosha_result->user_id = $user_id;
-			$miaosha_result->goods_id = $goods_id;
-			$miaosha_result->miaosha_id = $miaosha_id;
-			if(!$miaosha_result->save()) {
-				user()->setFlash('error', '秒杀失败或已结束');
-				$this->redirect(url('miaosha/index'));
-				exit;
+			$criteria = new CDbCriteria();
+			$criteria->addColumnCondition(array('user_id'=>$user_id, 'miaosha_id'=>$miaosha_id));
+			$myCurrentMiaosha = MiaoshaResult::model()->find($criteria);
+			if(!$myCurrentMiaosha) {
+				/* 把用户加入到秒杀结果表 */
+				$miaosha_result = new MiaoshaResult();
+				$miaosha_result->user_id = $user_id;
+				$miaosha_result->goods_id = $goods_id;
+				$miaosha_result->miaosha_id = $miaosha_id;
+				if(!$miaosha_result->save()) {
+					user()->setFlash('error', '秒杀失败或已结束');
+					$this->redirect(url('miaosha/index'));
+					exit;
+				}
 			}
 			
 			/* 清空购物车，加入秒杀成功的物品 */
@@ -229,6 +246,7 @@ class MiaoshaController extends Controller
 		$e = mktime(23,59,59,date('m', $d),date('d', $d),date('Y', $d));
 		$criteria = new CDbCriteria();
 		$criteria->addBetweenCondition('create_time', $s, $e);
+		$criteria->addCondition('order_id > 0');
 		$pages = new CPagination(MiaoshaResult::model()->count($criteria));
 		$pages->pageSize = 50;
 		$pages->applyLimit($criteria);

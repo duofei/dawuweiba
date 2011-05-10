@@ -71,6 +71,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
         <th class="al">评价次数</th>
         <th class="al">白吃点</th>
         <th class="al">状态</th>
+        <th class="al">认证状态</th>
         <th class="al">类型</th>
         <th class="al" width="160">操作</th>
     </tr>
@@ -84,6 +85,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 		<td><?php echo $val->credit_nums?></td>
 		<td><?php echo $val->bcnums?> <?php echo l('增加', url('admin/user/addbcnums', array('id'=>$val->id)))?></td>
 		<td><?php echo $val->stateText?></td>
+		<td><?php echo $val->approveStateText?></td>
 		<td><?php echo empty($val->shops) ? '个人' : '商家';?></td>
 		<td>
 		<a href="<?php echo url('admin/user/info', array('id'=>$val->id))?>"><span class="color">查看</span></a>

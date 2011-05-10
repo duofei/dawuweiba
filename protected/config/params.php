@@ -146,7 +146,7 @@ return array(
 	/*
 	 * 白吃点设置
 	 */
-	'defaultInviterBcIntegral' => 5,	// 默认邀请增加的白吃点数
+	'defaultInviterBcIntegral' => 10,	// 默认邀请增加的白吃点数
 
     // 分享文本模板
     'share_title' => '我在我爱外卖网上发现一个非常不错的餐馆：%s，推荐给大家。',
