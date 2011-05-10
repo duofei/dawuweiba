@@ -51,7 +51,7 @@ if ($result) {
                 $shop_contact = '如有疑问请致电商铺：' . $shop['telphone'];
             else
                 $shop_contact = '';
-                
+            $m = (strtolower($m) == 'timeout') ? '人手不足' : $m;
             $content = iconv('utf-8', 'gb2312', '很抱歉，您在我爱外卖网下的订单'. $orderid .'已被商家取消，取消原因:'. $m .'。' . $shop_contact);
         
         }
