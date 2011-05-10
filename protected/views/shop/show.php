@@ -35,7 +35,7 @@
 	<div class="clear"></div>
 	<ul class="lh24px">
 		<?php if ($shop->transport_time):?><li>送餐时间：<?php echo $shop->transport_time;?></li><?php endif;?>
-		<?php if ($shop->matchTransportCondition):?><li>起送条件：<?php echo $shop->matchTransportCondition;?></li><?php endif;?>
+		<?php if ($shop->matchTransportCondition):?><li>起送条件：<?php echo $shop->matchTransportAmount;?>元</li><?php endif;?>
 		<?php if ($shop->desc):?><li>店铺简介：<?php echo $shop->desc;?></li><?php endif;?>
 		<li>
 		    <?php echo l('收藏该店铺', url('shop/favorite', array('shopid'=>$shop->id)), array('class'=>'ma-r10px shop-favorite'));?>&nbsp;|&nbsp;
