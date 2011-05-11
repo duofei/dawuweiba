@@ -52,7 +52,7 @@ class MiaoshaController extends Controller
 		$region = array();
 		$shopInArea = array();
 		foreach ($miaoshalist as $m) {
-			$points = $m->shop->getMaxMapRegion();
+			$points = $m->shop->getMapRegion();
 			if($lastLatLng && CdcBetaTools::pointInPolygon($points, $lastLatLng[0], $lastLatLng[1])) {
 				$notInArea = false;
 			} else {
@@ -258,4 +258,5 @@ class MiaoshaController extends Controller
 			'pages' => $pages
 		));
 	}
+
 }

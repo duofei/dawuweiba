@@ -122,20 +122,20 @@
                 <?php endif;?>
  			<?php if(user()->id):?>
                 <?php if($user->approve_state == User::APPROVE_STATE_VERIFY && $userAddressCount > 0):?>
-                <div class="user-tip2 ma-t10px">
+                <div class="user-tip4 ma-t10px">
                 <?php else:?>
                 <div class="user-tip1 ma-t10px">
                 <?php endif;?>
                 	<div class="lh24px f14px">
                 		<?php if($user->approve_state == User::APPROVE_STATE_VERIFY):?>
-                		您已通过用户认证
+                		<!-- 您已通过用户认证 -->
                 		<?php else:?>
                 		您还未进行用户认证(<?php echo l('点击认证', url('my/default/approve'), array('class'=>'cred'));?>)
                 		<?php endif;?>
                 	</div>
                 	<div class="lh24px f14px">
                 		<?php if($userAddressCount > 0):?>
-                		您已填写送餐地址
+                		<!-- 您已填写送餐地址 -->
                 		<?php else:?>
                 		您还没填写地址(<?php echo l('点击填写', url('my/address/list'), array('class'=>'cred'));?>)
                 		<?php endif;?>
@@ -281,7 +281,7 @@ function showMap() {
 
 	<?php foreach ($miaoshalist as $key=>$m):?>
 		var croods<?php echo $m->shop_id;?> = new Array();
-    	<?php foreach ($m->shop->maxMapRegion as $k=>$r):?>
+    	<?php foreach ($m->shop->mapRegion as $k=>$r):?>
 			croods<?php echo $m->shop_id;?>[<?php echo $k;?>] = new google.maps.LatLng(<?php echo $r[1];?>, <?php echo $r[0];?>);
     	<?php endforeach;?>
     	var polygon<?php echo $m->shop_id;?> = new google.maps.Polygon({
