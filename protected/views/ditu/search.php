@@ -111,7 +111,7 @@ div.right-down-show-select {background-postion: 0 -150px;}
 	</div>
 </div>
 <?php endif;?>
-<script type="text/javascript" src=" http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src=" http://ditu.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 var shopUrl = '<?php echo aurl('shop/list', array('cid'=>$cid)); ?>';
 var addusernumsUrl = '<?php echo aurl('at/addusenums'); ?>';

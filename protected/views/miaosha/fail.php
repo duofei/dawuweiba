@@ -11,7 +11,7 @@
 			<a class="btn2" href="<?php echo url('miaosha/history')?>"></a>
 		</div>
 		<div class="clear"></div>
-		<div class="line1px" style="width:650px; margin:20px auto;"></div>
+		<div class="line1px" style="width:650px; margin:40px auto;"></div>
 		<div style="margin:20px 125px;"><?php echo l(CHtml::image(resBu('miaosha/images/fail_link1.jpg')), url('site/index'));?></div>
 		<div style="margin:20px 125px;"><?php echo l(CHtml::image(resBu('miaosha/images/fail_link2.jpg')), url('my/default/inviteurl'));?></div>
 	</div>

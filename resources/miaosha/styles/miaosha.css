@@ -156,6 +156,7 @@ a:active { color: #333; text-decoration:none; }
 
 .user-tip1{width:370px; height:57px; background:url(../images/usertip1.jpg) no-repeat; padding-left:95px; padding-top:35px;}
 .user-tip2{width:370px; height:57px; background:url(../images/usertip2.jpg) no-repeat; padding-left:95px; padding-top:35px;}
+.user-tip3{width:370px; height:57px; padding-left:95px; padding-top:35px;}
 
 #M_nav{ width:893px; height:57px; background:url(../images/jilu_r3_c1.jpg) no-repeat; overflow:hidden; line-height:57px; vertical-align:middle; text-align:center; font-size:12px;}
 #M_nav span{ margin:0 7px;}

@@ -25,6 +25,7 @@ class BuildingController extends Controller
 			$building->attributes = $post;
 			$building->city_id = $this->city['id'];
 			$building->type = Location::TYPE_OFFICE;
+			$building->source = Location::SOURCE_USERPOST;
 			if ($building->save()) {
 				$success = '您提交的楼宇信息我们已收到，非常感谢！';
 			}

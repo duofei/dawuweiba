@@ -120,7 +120,7 @@
                 	</div>
                 </div>
                 <?php endif;?>
-                <?php if(user()->id):?>
+ 			<?php if(user()->id):?>
                 <?php if($user->approve_state == User::APPROVE_STATE_VERIFY && $userAddressCount > 0):?>
                 <div class="user-tip2 ma-t10px">
                 <?php else:?>
@@ -141,14 +141,16 @@
                 		<?php endif;?>
                 	</div>
                 </div>
-                <?php endif;?>
+            <?php else:?>
+            <div class="user-tip3 ma-t10px"></div>
+            <?php endif;?>
             </div>
         </div>
         <div class="spaceline"></div>
         <div align="center"><a href="<?php echo url('my/default/inviteurl')?>" target="_blank"><img src="<?php echo resBu('miaosha/images/pic03.jpg');?>" /></a></div>
-    <div class="ma-t10px">
-    	<iframe width="100%" height="500"frameborder="0" scrolling="no" src="http://service.t.sina.com.cn/widget/livestream/listlive.php?width=0&height=500&uid=1819934857&skin=1&pic=1&titlebar=1&border=1&publish=1&atalk=1&recomm=1&at=1&listid=155739977&appkey=692781524"></iframe>
-    </div>
+		<div class="ma-t10px">
+			<iframe scrolling="no" frameborder="0" src="http://www.connect.renren.com/widget/liveWidget?api_key=49e422d84b694b69ba5e3c5809db4102&url=http%3A%2F%2Fwww.52wm.com%2Fmiaosha&desp=%E4%B8%80%E5%85%83%E5%8D%88%E9%A4%90%E7%81%AB%E7%83%AD%E8%BF%9B%E8%A1%8C%E4%B8%AD" style="width:850px;height:390px;"></iframe>
+		</div>
         <div class="spaceline"></div>
         <div class="clear"></div>
     </div>
@@ -159,6 +161,7 @@
 <?php
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id'=>'ShowMap',
+	'htmlOptions' => array('class'=>'none'),
     'options'=>array(
         'title'=>'◎请在电子地图上查询您的位置',
         'autoOpen'=>false,
@@ -176,7 +179,7 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
 
 <!--main end-->
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="http://ditu.google.com/maps/api/js?sensor=false"></script>
 <script language="javascript" type="text/javascript">
 var activeTime = <?php echo $miaoshalist[0]->active_time - time();?>;
 var interval;
@@ -228,8 +231,6 @@ $(function(){
 		}
 	}
 	
-	showMap();
-	
 	$(".box-btn").mouseover(function(){
 		$(this).addClass('select');
 	});
@@ -246,6 +247,8 @@ $(function(){
 	$("input[type='radio']").click(function(){
 		$(".notice").hide();
 	});
+
+	showMap();
 });
 function showStartTime(){
 	if(activeTime < 0) {

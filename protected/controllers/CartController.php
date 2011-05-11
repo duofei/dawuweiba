@@ -295,7 +295,7 @@ class CartController extends Controller
 	            /* 秒杀活动处理 */
 	            if($data['miaosha_state']) {
 	            	/* 过滤IP */
-	            	$ipArray = array('219.218.121.210', '219.218.121.209', '219.218.121.208' ,'219.218.121.211');
+	            	$ipArray = array('219.218.121.210', '219.218.121.209', '219.218.121.208' ,'219.218.121.211', '124.133.15.227');
 	            	if(in_array($_SERVER['REMOTE_ADDR'], $ipArray)) {
 	            		$this->redirect(url('miaosha/fail'));
 	            		exit;

@@ -133,29 +133,10 @@ class MiaoshaController extends Controller
 				exit;
 			}
 			
-			/* 当前秒杀是否过期 */
-			if($miaosha->state == Miaosha::STATE_OVER) {
-				user()->setFlash('error', '当前商铺这轮秒杀已结束');
-				$this->redirect(url('miaosha/error'));
-				exit;
-			}
-			
 			/* 查看是否允许秒杀 */
 			if($miaosha->active_time > time()) {
 				user()->setFlash('error', '秒杀还未开始，你别来捣蛋');
 				$this->redirect(url('miaosha/index'));
-				exit;
-			}
-			
-			/* 判断数量是否已到 */
-			$c = new CDbCriteria();
-			$c->addCondition('order_id > 0 and miaosha_id='.$miaosha_id);
-			$count = MiaoshaResult::model()->count($c);
-			if($count >= $miaosha->active_num) {
-				$miaosha->state = Miaosha::STATE_OVER;
-				$miaosha->save();
-				user()->setFlash('error', '您的手太慢了，本次秒杀名额已抢完了');
-				$this->redirect(url('miaosha/error'));
 				exit;
 			}
 			
@@ -195,6 +176,25 @@ class MiaoshaController extends Controller
 					$this->redirect(url('miaosha/index'));
 					exit;
 				}
+			}
+			
+			/* 当前秒杀是否过期 */
+			if($miaosha->state == Miaosha::STATE_OVER) {
+				user()->setFlash('error', '当前商铺这轮秒杀已结束');
+				$this->redirect(url('miaosha/error'));
+				exit;
+			}
+			
+			/* 判断数量是否已到 */
+			$c = new CDbCriteria();
+			$c->addCondition('order_id > 0 and miaosha_id='.$miaosha_id);
+			$count = MiaoshaResult::model()->count($c);
+			if($count >= $miaosha->active_num) {
+				$miaosha->state = Miaosha::STATE_OVER;
+				$miaosha->save();
+				user()->setFlash('error', '您的手太慢了，本次秒杀名额已抢完了');
+				$this->redirect(url('miaosha/error'));
+				exit;
 			}
 			
 			/* 清空购物车，加入秒杀成功的物品 */
