@@ -74,7 +74,7 @@ return array(
 		
 		'db' => array(
 		    'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=192.168.1.254; port=3306; dbname=wm_my52wm',
+			'connectionString' => 'mysql:host=192.168.1.201; port=3306; dbname=wm_my52wm',
 		    'username' => 'my52wm',
 		    'password' => '123',
 		    'charset' => 'utf8',
@@ -124,21 +124,6 @@ return array(
 		 * 大数据使用的内存方式
 		 */
 		'cache' => array(
-		    'class' => 'CMemCache',
-		    'servers' => array(
-		        array(
-    		        'host' => '192.168.1.254',
-    		        'port' => '22122',
-    		        'persistent' => true,
-		        ),
-		    ),
-		    'useMemcached' => false, //此处上线后要修改为true
-		),
-		
-		/*
-		 * 小数据始终使用文件缓存
-		 */
-		'fileCache' => array(
 		    'class' => 'CFileCache',
 		    'directoryLevel' => 2,
 		),
