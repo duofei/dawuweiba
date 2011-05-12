@@ -35,7 +35,7 @@
                             	<h1 class="cd60a01 f14px"><?php echo $m->shop->shop_name;?></h1>
                                 <p>送餐时间：<?php echo $m->shop->transport_time;?> </p>
                                 <!-- <p>起送条件：<?php echo $m->shop->transport_condition;?></p> -->
-                                <p>店铺简介：<?php echo $m->shop->desc;?> </p>
+                                <p>店铺简介：<?php echo mb_substr($m->shop->desc, 0, 86);?><?php if(strlen($m->shop->desc) > 86) echo '...';?> </p>
                             </div>
                             <div class="clear"></div>
                         </div>

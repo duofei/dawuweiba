@@ -827,7 +827,9 @@ class Shop extends CActiveRecord
     			return $html;
     		}
     		if($this->transport_condition) {
-    			return $this->transport_condition;
+    			if(is_numeric(substr_replace('元','',$this->transport_condition))) {
+    				return $this->transport_condition;
+    			}
     		}
     	}
 		if($this->mapRegion2 && CdcBetaTools::pointInPolygon($this->mapRegion2, $lat, $lon)) {
@@ -839,7 +841,9 @@ class Shop extends CActiveRecord
 	    		return $html;
     		}
 			if($this->transport_condition2) {
-    			return $this->transport_condition2;
+				if(is_numeric(substr_replace('元','',$this->transport_condition2))) {
+    				return $this->transport_condition2;
+    			}
     		}
     	}
 		if($this->mapRegion3 && CdcBetaTools::pointInPolygon($this->mapRegion3, $lat, $lon)) {
@@ -851,7 +855,9 @@ class Shop extends CActiveRecord
 	    		return $html;
     		}
 			if($this->transport_condition3) {
-    			return $this->transport_condition3;
+				if(is_numeric(substr_replace('元','',$this->transport_condition3))) {
+    				return $this->transport_condition3;
+    			}
     		}
     	}
     	return null;

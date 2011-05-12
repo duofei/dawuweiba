@@ -117,6 +117,12 @@ class ShopController extends Controller
 	public function actionProfile()
 	{
 	    $shop_info = Shop::model()->findByPk($_SESSION['shop']->id);
+	    /* 如果是打印机类型 清除文字起送条件 */
+	    if($shop_info->buy_type == Shop::BUYTYPE_PRINTER) {
+	    	$shop_info->transport_condition = '';
+	    	$shop_info->transport_condition2 = '';
+	    	$shop_info->transport_condition3 = '';
+	    }
 		if(app()->request->isPostRequest && isset($_POST['Shop'])) {
 			$shop_info->attributes = $_POST['Shop'];
 			if($shop_info->state==Shop::STATE_PSEUDO) {

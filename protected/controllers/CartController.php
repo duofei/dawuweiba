@@ -295,8 +295,9 @@ class CartController extends Controller
 	            /* 秒杀活动处理 */
 	            if($data['miaosha_state']) {
 	            	/* 过滤IP */
-	            	$ipArray = array('219.218.121.210', '219.218.121.209', '219.218.121.208' ,'219.218.121.211', '124.133.15.227');
+	            	$ipArray = array('219.218.121.210', '219.218.121.209', '219.218.121.208' ,'219.218.121.211', '124.133.15.227', '127.0.0.1');
 	            	if(in_array($_SERVER['REMOTE_ADDR'], $ipArray)) {
+	            		sleep(1);
 	            		$this->redirect(url('miaosha/fail'));
 	            		exit;
 	            	}
@@ -304,12 +305,14 @@ class CartController extends Controller
 	            	/* 过滤手机号 */
 	            	$phoneArray = MiaoshaResult::getSuccessUserTelphone();
 	            	if(in_array($order->telphone, $phoneArray)) {
+	            		sleep(1);
 	            		$this->redirect(url('miaosha/fail'));
 	            		exit;
 	            	}
 	            	
 	            	/* 过滤Cookie */
 	            	if($_COOKIE['miaosha']) {
+	            		sleep(1);
 	            		$this->redirect(url('miaosha/fail'));
 	            		exit;
 	            	}
@@ -321,6 +324,7 @@ class CartController extends Controller
 					$criteria->addCondition('order_id > 0');
 					$myMiaosha = MiaoshaResult::model()->count($criteria);
 					if($myMiaosha > 0) {
+						sleep(1);
 						$this->redirect(url('miaosha/fail'));
 						exit;
 					}

@@ -222,6 +222,9 @@ class MiaoshaController extends Controller
 	
 	public function actionError()
 	{
+		/* 清空购物车，加入秒杀成功的物品 */
+		Cart::clearCart();
+		
 		$error = user()->getFlash('error');
 		$this->render('error', array('error'=>$error));
 	}
@@ -234,6 +237,9 @@ class MiaoshaController extends Controller
 	
 	public function actionFail()
 	{
+		/* 清空购物车，加入秒杀成功的物品 */
+		Cart::clearCart();
+		
 		$this->pageTitle = '秒杀失败';
 		$this->render('fail');
 	}
