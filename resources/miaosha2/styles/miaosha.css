@@ -1,5 +1,6 @@
 @charset "utf-8";
 body{background-color:#cd0314}
+.mline1px{border-bottom:1px solid #d7d7d7; font-size:0px; height:1px;}
 
 .header{background:url(../images/header_bg.jpg) repeat-x; height:326px;}
 .header-info{background:url(../images/header_img.jpg) no-repeat; width:980px; height:326px; margin:0px auto;}
@@ -30,12 +31,19 @@ body{background-color:#cd0314}
 .c-right{width:650px; background-color:#ffffff;}
 .c-right-top{width:650px; height:10px; font-size:0px; background:url(../images/c_right_top.gif) no-repeat 640px 0px;}
 .c-right-bottom{width:650px; height:10px; font-size:0px; background:url(../images/c_right_bottom.gif) no-repeat right;}
-.c-right-content{}
+.miaosha-info {width:610px; margin:0px auto;}
 .invite{width:608px; border:1px solid #e8bc23; background:#fff9d6; height:40px; line-height:40px; margin:0px auto;}
-.m-info{width:610px; margin:10px auto 0px; line-height:35px; border-bottom:1px solid #d7d7d7;}
-.goods-list{width:610px; margin:10px auto 0px; border-bottom:1px solid #d7d7d7;}
+.m-info{line-height:35px; border-bottom:1px solid #d7d7d7;}
+.goods-list{border-bottom:1px solid #d7d7d7;}
 .goods-list li{height:30px; margin-bottom:5px; word-break:keep-all;}
 .shop-name{background:url(../images/M_r3_c27.jpg) no-repeat; height:29px; line-height:29px}
 .goods-list li.goods{height:24px; border:2px solid #dadada; padding: 2px 10px 0px; line-height:24px; margin-right:5px; _height:28px}
 .goods-list li.goods-hover{border:2px solid #ffb400;}
 .goods-list li.goods-select{border:2px solid #f60000; background:url(../images/M_xc_bg.jpg) no-repeat right bottom;}
+.showtime{width:273px; height:62px; background:url(../images/showtime.gif) no-repeat;}
+.showtime span{display:block; width:77px; float:left; height:60px; line-height:60px; padding-left:11px; text-align:center; font-size:48px; font-weight:bold; font-family: Arial, Helvetica, sans-serif;}
+.mslc{height:27px; background:#D6D6D6; padding:0px 12px; line-height:27px;}
+.jiantou{background:url(../images/jiantou.gif) no-repeat; width:19px; height:27px;}
+
+.footer{width:900px; margin:30px auto;}
+.footer li{padding:0px 50px; height:150px; border-right:1px solid #A40210; border-left:1px solid #DC4F5B;}

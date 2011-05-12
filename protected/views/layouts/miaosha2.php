@@ -90,65 +90,132 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 	<div class="c-right fl">
 		<div class="c-right-top"></div>
 		<div class="c-right-conten">
-			<div class="invite">
-				<div class="fl ma-t10px ma-l10px"><?php echo CHtml::image(resBu('miaosha2/images/new.gif'));?></div>
-				<div class="fl ma-l5px">邀请好友有奖：成功邀请好友，同获10元返利(无上限)。　邀请好友:</div>
-				<div class="fl ma-t5px"><?php echo CHtml::image(resBu('miaosha2/images/invite_icon.jpg'));?></div>
-				<div class="fr ma-r5px ma-t10px"><?php echo CHtml::image(resBu('miaosha2/images/close.gif'));?></div>
-				<div class="clear"></div>
-			</div>
-			<div class="m-info">
-				<div class="fl  fb">价格:</div>
-				<div class="fl ma-l5px"><?php echo CHtml::image(resBu('miaosha2/images/1yuan.gif'));?></div>
-				<div class="fl ma-l20px "><span class="fb">总计:</span>50单(已抢30单)</div>
-				<div class="clear"></div>
-			</div>
-			<div class="goods-list">
-				<div class="fl  fb lh30px">菜品:</div>
-				<ul class="fl subfl ma-l5px" style="width:560px">
-					<li class="shop-name pa-l10px fb"><a href="#">家家欢乐餐厅</a></li>
-					<li class="ma-r5px"><?php echo CHtml::image(resBu('miaosha2/images/M_r11_c34.jpg'));?></li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods goods-select">友有奖：成功</li>
-					<li class="goods goods-hover">无可奈何花落去</li>
-					<li class="goods">功邀请好友，</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">友有奖：成功</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="clear" style="font-size:0px; height:0px;"></li>
-				</ul>
-				<div class="clear"></div>
-			</div>
-			<div class="goods-list">
-				<div class="fl  fb lh30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-				<ul class="fl subfl ma-l5px" style="width:560px">
-					<li class="shop-name pa-l10px fb"><a href="#">家家欢乐餐厅</a></li>
-					<li class="ma-r5px"><?php echo CHtml::image(resBu('miaosha2/images/M_r11_c34.jpg'));?></li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods goods-select">友有奖：成功</li>
-					<li class="goods goods-hover">无可奈何花落去</li>
-					<li class="goods">功邀请好友，</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">友有奖：成功</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="goods">无可奈何花落去</li>
-					<li class="clear" style="font-size:0px; height:0px;"></li>
-				</ul>
-				<div class="clear"></div>
+			<div class="miaosha-info">
+				<div class="invite">
+					<div class="fl ma-t10px ma-l10px"><?php echo CHtml::image(resBu('miaosha2/images/new.gif'));?></div>
+					<div class="fl ma-l5px">邀请好友有奖：成功邀请好友，同获10元返利(无上限)。　邀请好友:</div>
+					<div class="fl ma-t5px"><?php echo CHtml::image(resBu('miaosha2/images/invite_icon.jpg'));?></div>
+					<div class="fr ma-r5px ma-t10px"><?php echo CHtml::image(resBu('miaosha2/images/close.gif'));?></div>
+					<div class="clear"></div>
+				</div>
+				<div class="m-info ma-t10px">
+					<div class="fl  fb">价格:</div>
+					<div class="fl ma-l5px"><?php echo CHtml::image(resBu('miaosha2/images/1yuan.gif'));?></div>
+					<div class="fl ma-l20px "><span class="fb">总计:</span>50单(已抢30单)</div>
+					<div class="clear"></div>
+				</div>
+				<div class="goods-list ma-t10px">
+					<div class="fl  fb lh30px">菜品:</div>
+					<ul class="fl subfl ma-l5px" style="width:560px">
+						<li class="shop-name pa-l10px fb"><a href="#">家家欢乐餐厅</a></li>
+						<li class="ma-r5px"><?php echo CHtml::image(resBu('miaosha2/images/M_r11_c34.jpg'));?></li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods goods-select">友有奖：成功</li>
+						<li class="goods goods-hover">无可奈何花落去</li>
+						<li class="goods">功邀请好友，</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">友有奖：成功</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="clear" style="font-size:0px; height:0px;"></li>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<div class="goods-list ma-t10px">
+					<div class="fl  fb lh30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+					<ul class="fl subfl ma-l5px" style="width:560px">
+						<li class="shop-name pa-l10px fb"><a href="#">家家欢乐餐厅</a></li>
+						<li class="ma-r5px"><?php echo CHtml::image(resBu('miaosha2/images/M_r11_c34.jpg'));?></li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods goods-select">友有奖：成功</li>
+						<li class="goods goods-hover">无可奈何花落去</li>
+						<li class="goods">功邀请好友，</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">友有奖：成功</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="goods">无可奈何花落去</li>
+						<li class="clear" style="font-size:0px; height:0px;"></li>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<div class="pa-b5px ma-t10px">
+					<div class="fl  fb lh30px">秒杀:</div>
+					<div class="fl showtime">
+						<span>01</span>
+						<span>12</span>
+						<span>34</span>
+						<div class="clear"></div>
+					</div>
+					<div class="fl ma-l10px">
+						<div class=""><span class="fb">已选择：</span>无可奈何花落去</div>
+						<div class="ma-t5px"><?php echo CHtml::image(resBu('miaosha2/images/btn1.jpg'));?></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="mline1px"></div>
+				<div class="ma-t10px fb">秒杀流程</div>
+				<div class="ma-t5px ma-b20px">
+					<div class="fl mslc">请登陆</div>
+					<div class="fl jiantou"></div>
+					<div class="fl mslc">选择您的地址(未选择)</div>
+					<div class="fl jiantou"></div>
+					<div class="fl mslc">填写送餐地址(未填写)</div>
+					<div class="fl jiantou"></div>
+					<div class="fl mslc">用户认证(未认证)</div>
+					<div class="fl jiantou"></div>
+					<div class="fl mslc">等待秒杀</div>
+					<div class="clear"></div>
+				</div>
+				<div class="mline1px"></div>
+				<div class="ma-t10px fb">秒杀技巧</div>
+				<div class="ma-t5px">我爱外卖抢购午餐是以下定单最快为抢购成功，所以要在抢购前准备好4步，首先注册用户，其次要选择自己所在的地址，再次要填写好送餐的地址，最后一定要进行用户认证。</div>
+				<div class="ma-t10px"><?php echo CHtml::image(resBu('miaosha2/images/yaoqing.png'));?></div>
+				<div class="ma-t10px" style="height:390px"> 
+					<iframe scrolling="no" frameborder="0" src="http://www.connect.renren.com/widget/liveWidget?api_key=49e422d84b694b69ba5e3c5809db4102&url=http%3A%2F%2Fwww.52wm.com%2Fmiaosha&desp=%E4%B8%80%E5%85%83%E5%8D%88%E9%A4%90%E7%81%AB%E7%83%AD%E8%BF%9B%E8%A1%8C%E4%B8%AD" style="width:610px;height:390px;"></iframe> 
+				</div> 
 			</div>
 		</div>
 		<div class="c-right-bottom"></div>
 	</div>
 	<div class="clear"></div>
 </div>
-<div class="footer">
-
+<div class="footer ma-t20px">
+	<ul class="cwhite lh30px">
+		<li class="fl" style="border-left:0px;">
+			<div class="f16px fb">关于我们</div>
+			<div>关于工工</div>
+		</li>
+		<li class="fl">
+			<div class="f16px fb">订餐指南</div>
+			<div>关于工工</div>
+		</li>
+		<li class="fl">
+			<div class="f16px fb">订餐指南</div>
+			<div>关于工工</div>
+		</li>
+		<li class="fl" style="border-right:0px;">
+			<div class="f16px fb">订餐指南</div>
+			<div>关于工工</div>
+		</li>
+		<div class="clear"></div>
+	</ul>
+	<div class="fb f14px; ma-t20px ma-b20px ac cblack">
+		本站所有店铺图片资料及文字资料未经书面许可 不得转载 违者必究 2010-2011 我爱外卖 网 52WM.com
+	</div>
 </div>
+<script language="JavaScript">
+<!--
+$(function(){
+	/* 设置左右高 */
+	var rightHeight = $('.c-right-conten').height();
+	$('.c-left-content').height(rightHeight);
+});
+//-->
+</script>
 </body>
 </html>
 <?php
