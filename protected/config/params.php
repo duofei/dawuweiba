@@ -167,7 +167,7 @@ return array(
 	's_orderApproveCloseTime' => 'order_approve_close_time',
 
 	// 秒杀时间
-	'miaoshaStartTime' => mktime(0,0,0,4,27,2011),
+	'miaoshaStartTime' => mktime(0,0,0,5,9,2011),
 	'miaoshaEndTime' => mktime(23,59,59,5,18,2011),
 
 	/*

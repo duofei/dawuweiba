@@ -1,7 +1,8 @@
 @charset "utf-8";
 body{background-color:#cd0314}
-.mline1px{border-bottom:1px solid #d7d7d7; font-size:0px; height:1px;}
+.mline1px{border-bottom:1px solid #e8e8e8; font-size:0px; height:1px;}
 
+/* header */
 .header{background:url(../images/header_bg.jpg) repeat-x; height:326px;}
 .header-info{background:url(../images/header_img.jpg) no-repeat; width:980px; height:326px; margin:0px auto;}
 .user-info{background:#91020f; height:34px; line-height:34px;}
@@ -10,9 +11,11 @@ body{background-color:#cd0314}
 .header-h215px{height:215px;}
 .header-nav{padding-left:40px;}
 .header-nav li{width:70px; float:left; margin-right:10px; padding:0px 5px; text-align:center;}
-.header-nav li.hover{background:url(../images/header_nav_hover.gif) no-repeat 0px 3px;}
-.header-nav li.select{background:url(../images/header_nav_select.gif) no-repeat 0px 3px; width:100px;}
+.header-nav li.select{background:url(../images/header_nav_hover.gif) no-repeat 0px 3px;}
+.header-nav li.today{width:106px; padding:0px 2px;}
+.header-nav li.today-select{background:url(../images/header_nav_select.gif) no-repeat 0px 3px;}
 
+/* content */
 .content{width:900px; margin:0px auto;}
 .c-left{width:250px; background-color:#ebebeb;}
 .c-left-top{width:10px; height:10px; font-size:0px; background:url(../images/c_left_top.gif) no-repeat;}
@@ -20,9 +23,9 @@ body{background-color:#cd0314}
 .c-left-content{}
 .today-shop{background:url(../images/c_left_today_shop.gif) no-repeat; margin:20px auto 10px; width:89px; height:24px;}
 .shop-logo{width:224px; margin:0 auto; padding-bottom:5px; border-bottom:1px solid #afafaf;}
-.shop-logo div.s-logo{width:100px; height:100px; border:1px solid #d7d7d7; float:left; margin:5px; _margin-right:0px;} 
+.shop-logo div.s-logo{width:100px; height:100px; border:1px; float:left; margin:5px; _margin-right:0px;}
 .shop-area{width:224px; border-top:1px solid #ffffff; margin:0px auto;}
-.shop-maps{width:216px; height:174px; margin:0px auto; background:#d9d9d9;}
+.shop-maps{width:216px; height:174px; margin:0px auto; background:#d9d9d9; border:1px solid #C0C0C0;}
 .shop-maps-color{width:216px;margin:10px auto 0px;}
 .shop-box{width:216px; border-left:1px solid #b8b8b8; border-right:1px solid #b8b8b8; margin:0px auto; background:#ffffff;}
 .shop-box-top{width:216px; font-size:0px; height:4px; background:url(../images/box_top.gif) no-repeat; margin:10px auto 0px;}
@@ -33,17 +36,19 @@ body{background-color:#cd0314}
 .c-right-bottom{width:650px; height:10px; font-size:0px; background:url(../images/c_right_bottom.gif) no-repeat right;}
 .miaosha-info {width:610px; margin:0px auto;}
 .invite{width:608px; border:1px solid #e8bc23; background:#fff9d6; height:40px; line-height:40px; margin:0px auto;}
-.m-info{line-height:35px; border-bottom:1px solid #d7d7d7;}
-.goods-list{border-bottom:1px solid #d7d7d7;}
+.m-info{line-height:35px; border-bottom:1px solid #e8e8e8;}
+.goods-list{border-bottom:1px solid #e8e8e8;}
 .goods-list li{height:30px; margin-bottom:5px; word-break:keep-all;}
 .shop-name{background:url(../images/M_r3_c27.jpg) no-repeat; height:29px; line-height:29px}
-.goods-list li.goods{height:24px; border:2px solid #dadada; padding: 2px 10px 0px; line-height:24px; margin-right:5px; _height:28px}
+.goods-list li.goods{height:24px; border:2px solid #dadada; padding: 2px 10px 0px; line-height:24px; margin-right:5px; _height:28px; cursor:pointer;}
 .goods-list li.goods-hover{border:2px solid #ffb400;}
 .goods-list li.goods-select{border:2px solid #f60000; background:url(../images/M_xc_bg.jpg) no-repeat right bottom;}
+.goods-list li.disabled{color:gray; cursor:auto;}
 .showtime{width:273px; height:62px; background:url(../images/showtime.gif) no-repeat;}
 .showtime span{display:block; width:77px; float:left; height:60px; line-height:60px; padding-left:11px; text-align:center; font-size:48px; font-weight:bold; font-family: Arial, Helvetica, sans-serif;}
 .mslc{height:27px; background:#D6D6D6; padding:0px 12px; line-height:27px;}
 .jiantou{background:url(../images/jiantou.gif) no-repeat; width:19px; height:27px;}
 
+/* footer */
 .footer{width:900px; margin:30px auto;}
 .footer li{padding:0px 50px; height:150px; border-right:1px solid #A40210; border-left:1px solid #DC4F5B;}

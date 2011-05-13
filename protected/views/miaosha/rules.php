@@ -26,7 +26,7 @@ img{ border:0px;}
     <area shape="rect" coords="745,37,868,137" href="#a7" />
   </map>
 </div>
-<div class="M_m30 M_mc"><img src="<?php echo resBu('miaosha/images/miao_r4_c1.jpg'); ?>" width="900" height="404" /></div>
+<div class="M_m30 M_mc"><img src="<?php echo resBu('miaosha/images/miao_r4_c12.jpg'); ?>" width="900" height="404" /></div>
 <div class="M_m30 M_mc"><a name="a1" href="#top"><img src="<?php echo resBu('miaosha/images/miao_r6_c1.jpg'); ?>" width="895" height="35" /></a></div>
 <div class="M_m30 M_mc"><img src="<?php echo resBu('miaosha/images/miao_r8_c4.jpg'); ?>" width="661" height="615" /></div>
 <div class="M_mc"><a name="a2" href="#top"><img src="<?php echo resBu('miaosha/images/miao_r10_c1.jpg'); ?>" width="900" height="35" /></a></div>

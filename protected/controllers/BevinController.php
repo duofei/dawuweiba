@@ -5,6 +5,9 @@ class BevinController extends Controller
 
 	public function actionTest()
 	{
+		$a = MiaoshaResult::getSuccessUserTelphone();
+		print_r($a);
+
 		echo mktime(0,0,0,05,09,2011);
 		echo '<br>';
 		echo mktime(0,0,0,05,10,2011);
