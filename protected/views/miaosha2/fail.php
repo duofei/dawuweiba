@@ -14,11 +14,11 @@
 	<div class="c-right-top"></div>
 	<div class="c-right-content">
 		<div class="miaosha-info">
-			<div class="fl ma-t30px ma-l30px"><?php echo CHtml::image(resBu('miaosha2/images/js__r1_c1.gif'));?></div>
+			<div class="fl ma-t30px ma-l30px"><?php echo CHtml::image(resBu('miaosha2/images/xyl_r1_c1.gif'));?></div>
 			<div class="fl ma-t30px ma-l30px">
-				<div class="ma-l20px ma-t20px"><?php echo CHtml::image(resBu('miaosha2/images/js__r2_c4.gif'));?></div>
+				<div class="ma-l20px ma-t20px f18px fb lh30px" style="width:300px;">很抱歉！您下手太慢了，本次秒杀商品已被抢光了。本活动15分钟一轮，您可以进入下一轮秒杀。</div>
 				<div class="ma-t10px f14px cblack ac"><?php echo l('查看成功用户', url('miaosha2/history', array('t'=>$t)));?></div>
-				<div class="ma-t10px ac"><a href="<?php echo url('miaosha2/index', array('t'=>$t+86400));?>"><?php echo CHtml::image(resBu('miaosha2/images/js__r4_c5.gif'))?></a></div>
+				<div class="ma-t10px ac"><a href="<?php echo url('miaosha2/index', array('t'=>time()+86400));?>"><?php echo CHtml::image(resBu('miaosha2/images/js__r4_c5.gif'))?></a></div>
 			</div>
 			<div class="clear"></div>
 			<div class="mline1px ma-t30px "></div>
@@ -29,9 +29,3 @@
 	<div class="c-right-bottom"></div>
 </div>
 <div class="clear"></div>
-<script type="text/javascript">
-$(function(){
-	var html = '<?php echo date("m月d日", $t);?>(已结束) ';
-	$('.today-select a').html(html);
-});
-</script>

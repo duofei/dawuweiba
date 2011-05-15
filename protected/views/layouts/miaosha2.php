@@ -28,11 +28,12 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 		<div class="clear"></div>
 		<div class="header-h215px"></div>
 		<ul class="header-nav lh30px cwhite f12px">
+		<?php $t = $_GET['t'] ? $_GET['t'] : time();?>
 		<?php for ($i=param('miaoshaStartTime'); $i<=param('miaoshaEndTime'); $i=$i+86400):?>
 			<?php if(date('Ymd', $i) == date('Ymd')):?>
-			<li class="today <?php if($_GET['t'] && date('Ymd', $i)!=date('Ymd', $_GET['t'])) echo ''; else echo 'today-select';?>"><a href="<?php echo url('miaosha2/index', array('t'=>$i));?>"><?php echo date('m月d日', $i);?>(进行中)</a></li>
+			<li class="today <?php if(date('Ymd', $i)!=date('Ymd', $t)) echo ''; else echo 'today-select';?>"><a href="<?php echo url('miaosha2/index', array('t'=>$i));?>"><?php echo date('m月d日', $i);?>(进行中)</a></li>
 			<?php else:?>
-			<li class="<?php if($_GET['t'] && date('Ymd', $i)!=date('Ymd', $_GET['t'])) echo ''; else echo 'select';?>"><a href="<?php echo url('miaosha2/index', array('t'=>$i));?>"><?php echo date('m月d日', $i);?></a></li>
+			<li class="<?php if(date('Ymd', $i)!=date('Ymd', $t)) echo ''; else echo 'select';?>"><a href="<?php echo url('miaosha2/index', array('t'=>$i));?>"><?php echo date('m月d日', $i);?></a></li>
 			<?php endif;?>
 		<?php endfor;?>
 		</ul>
@@ -46,19 +47,24 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 	<ul class="cwhite lh30px">
 		<li class="fl" style="border-left:0px;">
 			<div class="f16px fb">关于我们</div>
-			<div>关于工工</div>
+			<div><a href="<?php echo url('static/about');?>">关于52wm</a></div>
+			<div><a href="<?php echo url('static/contact');?>">联系我们</a></div>
+            <div>人才招聘</div>
 		</li>
 		<li class="fl">
 			<div class="f16px fb">订餐指南</div>
-			<div>关于工工</div>
+			<div>客服电话55500071 客服QQ</div>
+            <div>客服在线时间(周一至周五 9:00-18:00)</div>
 		</li>
 		<li class="fl">
-			<div class="f16px fb">订餐指南</div>
-			<div>关于工工</div>
+			<div class="f16px fb">社区活动</div>
+			<div><?php echo l('奖品兑换', url('gift/index'));?></div>
 		</li>
 		<li class="fl" style="border-right:0px;">
-			<div class="f16px fb">订餐指南</div>
-			<div>关于工工</div>
+			<div class="f16px fb">其他</div>
+			<div><?php echo l('店铺加盟', url('shop/checkin'));?></div>
+			<div><?php echo l('友情链接', url('friendlink/index'));?></div>
+            <div><?php echo l('反馈留言', url('feedback'), array('target'=>'_blank'));?></div>
 		</li>
 		<div class="clear"></div>
 	</ul>
@@ -69,6 +75,9 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 <script language="JavaScript">
 <!--
 $(function(){
+	/* 设置左右高 */
+	setLeftRightHeight();
+	
 	/* logo显示效果 */
 	$('.header-logo').hover(function(){
 		$(this).addClass('header-logo-select');
@@ -78,6 +87,7 @@ $(function(){
 	$('.header-logo').click(function(){
 		location.href = BU;
 	});
+	
 	/* header-nav效果 */
 	var navClass = false;
 	$('.header-nav li').hover(function(){
@@ -96,17 +106,25 @@ $(function(){
 		}
 		navClass = false;
 	});
-
+	
 	/* 显示地图 */
-	showMap();
+	jQuery.getScript('http://ditu.google.com/maps/api/js?sensor=false', function(){
+		showMap();
+	});
 });
-function setLeftRightHeight(rightHeight) {
-	/* 设置左右高 */
-	$('.c-left-content').height(rightHeight);
-	$('.c-right-conten').height(rightHeight);
+function setLeftRightHeight()
+{
+	var lHeight = $('.c-left-content').height();
+	var rHeight = $('.c-right-content').height();
+	if(lHeight > rHeight) {
+		$('.c-right-content').height(lHeight);
+	} else {
+		$('.c-left-content').height(rHeight);
+	}
 }
 //-->
 </script>
+<script type="text/javascript" src="http://ditu.google.com/maps/api/js?sensor=false"></script>
 </body>
 </html>
 <?php

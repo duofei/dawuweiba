@@ -23,7 +23,7 @@
 
 <!-- 关注新浪微博 -->
 <div class="ac ma-t20px">
-	<?php echo CHtml::image(resBu('miaosha2/images/gz52wm_sina.gif'));?>
+	<a href="http://weibo.com/my52wm" target="_blank"><?php echo CHtml::image(resBu('miaosha2/images/gz52wm_sina.gif'));?></a>
 </div>
 
 <!-- 意见反馈 -->
@@ -35,6 +35,7 @@
 <div class="shop-box-bottom"></div>
 
 <!-- 邮件订阅 -->
+<!--
 <div class="shop-box-top"></div>
 <div class="shop-box">
 	<div class="pa-t10px pa-l10px"><?php echo CHtml::image(resBu('miaosha2/images/smshhd.gif'));?></div>
@@ -46,15 +47,17 @@
 	<div class="pa-l10px lh20px pa-r10px">我们会通过邮件在第一时间通知您最新的活动(随时可以取消)。</div>
 </div>
 <div class="shop-box-bottom"></div>
+-->
 
 <!-- 讨论区-->
+<!--
 <div class="shop-box-top"></div>
 <div class="shop-box">
 	<div class="pa-t10px pa-l5px"><?php echo CHtml::image(resBu('miaosha2/images/taolq.gif'));?></div>
 </div>
 <div class="shop-box-bottom"></div>
+-->
 
-<script type="text/javascript" src="http://ditu.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 function showMap() {
 	var latlng = new google.maps.LatLng(<?php echo $center['lat'];?>, <?php echo $center['lng'];?>);

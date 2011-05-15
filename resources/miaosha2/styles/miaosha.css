@@ -1,6 +1,11 @@
 @charset "utf-8";
 body{background-color:#cd0314}
+
+/* public */
 .mline1px{border-bottom:1px solid #e8e8e8; font-size:0px; height:1px;}
+
+.bgred{background-color:#cb0313;}
+.bgf3{background-color:#f3f3f3;}
 
 /* header */
 .header{background:url(../images/header_bg.jpg) repeat-x; height:326px;}
@@ -17,6 +22,7 @@ body{background-color:#cd0314}
 
 /* content */
 .content{width:900px; margin:0px auto;}
+/* left */
 .c-left{width:250px; background-color:#ebebeb;}
 .c-left-top{width:10px; height:10px; font-size:0px; background:url(../images/c_left_top.gif) no-repeat;}
 .c-left-bottom{width:10px; height:10px; font-size:0px; background:url(../images/c_left_bottom.gif) no-repeat;}
@@ -30,7 +36,7 @@ body{background-color:#cd0314}
 .shop-box{width:216px; border-left:1px solid #b8b8b8; border-right:1px solid #b8b8b8; margin:0px auto; background:#ffffff;}
 .shop-box-top{width:216px; font-size:0px; height:4px; background:url(../images/box_top.gif) no-repeat; margin:10px auto 0px;}
 .shop-box-bottom{width:216px; font-size:0px; height:4px; background:url(../images/box_bottom.gif) no-repeat; margin:0px auto;}
-
+/* right */
 .c-right{width:650px; background-color:#ffffff;}
 .c-right-top{width:650px; height:10px; font-size:0px; background:url(../images/c_right_top.gif) no-repeat 640px 0px;}
 .c-right-bottom{width:650px; height:10px; font-size:0px; background:url(../images/c_right_bottom.gif) no-repeat right;}
@@ -48,6 +54,12 @@ body{background-color:#cd0314}
 .showtime span{display:block; width:77px; float:left; height:60px; line-height:60px; padding-left:11px; text-align:center; font-size:48px; font-weight:bold; font-family: Arial, Helvetica, sans-serif;}
 .mslc{height:27px; background:#D6D6D6; padding:0px 12px; line-height:27px;}
 .jiantou{background:url(../images/jiantou.gif) no-repeat; width:19px; height:27px;}
+
+/* postbox */
+.postbox {width:550px; margin:0px auto;}
+.postbox .top{background:url(../images/tj_r1_c1.gif) no-repeat; width:540px; height:57px; line-height:57px; color:#ffffff; font-size:18px; font-weight:bold; padding-left:10px;}
+.postbox .content{width:540px; border-left:5px solid #cf1910; border-right:5px solid #cf1910;}
+.postbox .bottom{background:url(../images/tj_r5_c1.gif) no-repeat; width:550px; height:16px;}
 
 /* footer */
 .footer{width:900px; margin:30px auto;}

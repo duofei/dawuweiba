@@ -1,5 +1,5 @@
 <h2 class="pa-l10px cred f16px bline lh30px">反馈留言</h2>
-<?php foreach ((array)$feedback as $v):?>	  
+<?php foreach ((array)$feedback as $v):?>
 <div class="bline lh24px m10px pa-b5px bgcolor">
     <p class="bg-icon arrows pa-l20px">
     	<span class="cred f14px"><?php echo $v->user->screenName;?></span>
@@ -7,7 +7,7 @@
     	<?php if(!user()->isGuest):?>
     	<span class="cred f12px"><a href="<?php echo url('feedback/reply', array('id'=>$v->id));?>" class="f12px">[回复本文]</a></span>
     	<?php endif;?>
-    </p>    
+    </p>
     <p class="f14px"><?php echo nl2br(h($v->content));?></p>
     <?php foreach ((array)$v->reply as $r):?>
     <div class="m10px ma-l20px border-dashed pad10px">

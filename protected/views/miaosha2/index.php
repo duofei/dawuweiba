@@ -12,7 +12,7 @@
 </div>
 <div class="c-right fl">
 	<div class="c-right-top"></div>
-	<div class="c-right-conten">
+	<div class="c-right-content">
 		<div class="miaosha-info">
 			<!-- 邀请好友 -->
 			<div class="invite">
@@ -30,23 +30,15 @@
 				<div class="clear"></div>
 			</div>
 			<!-- 秒杀商铺菜品信息 -->
-			<?php echo CHtml::beginForm(url('miaosha/post'), 'post', array('id'=>'postform'));?>
+			<?php echo CHtml::beginForm(url('miaosha2/post'), 'post', array('id'=>'postform'));?>
 			<input type="hidden" name="miaoshaid" id="miaoshaid" value="0" />
 			<input type="hidden" name="goodsid" id="goodsid" value="0" />
-			<?php $i=0;?>
+			<?php echo CHtml::endForm();?>
+			<?php $i = 0;?>
 			<?php foreach ($miaoshalist as $m):?>
 			<div class="goods-list ma-t5px">
 				<div class="fl  fb lh30px"><?php if($i===0){ echo '菜品:';} else {echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';}?></div>
 				<div class="fl" style="width:575px">
-					<?php if($m->state==Miaosha::STATE_OVER || $shopInArea[$m->shop->id]=='disabled'):?>
-					<div class="ma-l5px ma-b5px lh24px cblack pa-l10px" style="border:1px solid #E8BC23; height:24px; background:#FFF9D6;">
-						<?php if($m->state==Miaosha::STATE_OVER):?>
-						温馨提示: <?php echo $m->shop->shop_name;?>的菜太火爆了，已经被抢光了，请您选择另一家进行秒杀。
-						<?php elseif($shopInArea[$m->shop->id]=='disabled'):?>
-						温馨提示: <?php echo $m->shop->shop_name;?>不在您的配送范围内，无法参与秒杀。请<span class="cred"><a href="<?php echo app()->homeUrl;?>">正常点餐</a></span>或<span class="cred cursor showMapClick">更改您的地址</span>
-						<?php endif;?>
-					</div>
-					<?php endif;?>
 					<ul class="subfl ma-l5px" style="width:560px">
 						<li class="shop-name pa-l10px fb cred" title="<?php if($shopInArea[$m->shop->id]=='disabled') echo '(不在配送范围之内)'?>"><?php echo $m->shop->shop_name;?></li>
 						<li class="ma-r5px"><?php echo CHtml::image(resBu('miaosha2/images/M_r11_c34.jpg'));?></li>
@@ -56,6 +48,16 @@
 						<?php endforeach;?>
 						<li class="clear" style="font-size:0px; height:0px;"></li>
 					</ul>
+					<div class="clear"></div>
+					<?php if($m->state==Miaosha::STATE_OVER || ($shopInArea[$m->shop->id]=='disabled' && $lastLatLng[0])):?>
+					<div class="ma-l5px ma-b10px lh24px cblack pa-l10px" style="border:1px solid #E8BC23; height:24px; background:#FFF9D6;">
+						<?php if($m->state==Miaosha::STATE_OVER):?>
+						温馨提示: <?php echo $m->shop->shop_name;?>的菜太火爆了，已经被抢光了，请您选择另一家进行秒杀。
+						<?php elseif($shopInArea[$m->shop->id]=='disabled'):?>
+						温馨提示: <?php echo $m->shop->shop_name;?>不在您的配送范围内，无法参与秒杀。请<span class="cred"><a href="<?php echo app()->homeUrl;?>">正常点餐</a></span>或<span class="cred cursor showMapClick">更改您的地址</span>
+						<?php endif;?>
+					</div>
+					<?php endif;?>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -70,20 +72,32 @@
 					<div class="clear"></div>
 				</div>
 				<div class="fl ma-l10px">
-					<?php if($myTodayMiaosha>0):?>
-					<div>过</div>
+					<?php $hasError = true;?>
+					<?php if(user()->isGuest):?>
+					<div><span class="fb">提示：</span>请您先登陆。<?php echo l('点击登陆', url('site/login', array('referer'=>aurl('miaosha2/index'))));?></div>
+					<?php elseif($myTodayMiaosha>0 || $_COOKIE['miaosha']):?>
+					<div><span class="fb">提示：</span>每位用户一天只仅限抢购一份午餐。<span class="cred"><?php echo l('查看规则', url('miaosha2/rules'))?></span></div>
+					<?php elseif (!$lastLatLng[0]):?>
+					<div><span class="fb">提示：</span>您还没有设置位置。<span class="cred cursor showMapClick">设置位置</span></div>
+					<?php elseif(!notInArea):?>
+					<div><span class="fb">提示：</span>您不在活动范围之内。<span class="cred cursor showMapClick">重新设置位置</span></div>
+					<?php else:?>
+					<div id="showGoodsName"><span class="fb">请选择：</span>秒杀午餐</div>
+					<?php $hasError = false;?>
 					<?php endif;?>
-					<div class="" id="showGoodsName"><span class="fb">请选择：</span>秒杀午餐</div>
-					<div class="ma-t5px"><?php echo CHtml::image(resBu('miaosha2/images/btn1.jpg'), '提交', array('id'=>'submit'));?></div>
+					<?php if($hasError):?>
+					<div class="ma-t5px cursor"><?php echo CHtml::image(resBu('miaosha2/images/btn1.jpg'), '提交', array('id'=>'button'));?></div>
+					<?php else: ?>
+					<div class="ma-t5px cursor"><?php echo CHtml::image(resBu('miaosha2/images/btn1.jpg'), '提交', array('id'=>'submit'));?></div>
+					<?php endif;?>
 				</div>
 				<div class="clear"></div>
 			</div>
-			<?php echo CHtml::endForm();?>
 			<div class="mline1px"></div>
 			<div class="ma-t10px fb">秒杀流程</div>
 			<div class="ma-t5px ma-b20px" style="height:27px;">
 				<?php if(user()->isGuest):?>
-				<div class="fl mslc cred"><?php echo l('请登陆', url('site/login', array('referer'=>aurl('miaosha/index'))));?></div>
+				<div class="fl mslc cred"><?php echo l('请登陆', url('site/login', array('referer'=>aurl('miaosha2/index'))));?></div>
 				<?php else:?>
 				<div class="fl mslc">已登陆</div>
 				<?php endif;?>
@@ -107,6 +121,8 @@
                 <?php endif;?>
 				<div class="fl jiantou"></div>
 				<div class="fl mslc">等待秒杀</div>
+<!-- 浮动提示 -->
+<!--
 <?php if(user()->isGuest):?>
 	<?php echo CHtml::image(resBu('miaosha2/images/tip.gif'), '', array('style'=>'position:relative; top:-60px; left:-35px;'));?>
 <?php elseif (!$lastLatLng[0]):?>
@@ -116,15 +132,23 @@
 <?php elseif ($user->approve_state != User::APPROVE_STATE_VERIFY):?>
 	<?php echo CHtml::image(resBu('miaosha2/images/tip.gif'), '', array('style'=>'position:relative; top:-60px; left:400px;'));?>
 <?php endif;?>
+-->
 				<div class="clear"></div>
 			</div>
 			<div class="mline1px"></div>
 			<div class="ma-t10px fb">秒杀技巧</div>
 			<div class="ma-t5px">我爱外卖抢购午餐是以下定单最快为抢购成功，所以要在抢购前准备好4步，首先注册用户，其次要选择自己所在的地址，再次要填写好送餐的地址，最后一定要进行用户认证。</div>
-			<div class="ma-t10px"><?php echo l(CHtml::image(resBu('miaosha2/images/yaoqing.png')), url('my/default/inviteurl'));?></div>
-			<div class="ma-t10px" style="height:390px">
-				<iframe scrolling="no" frameborder="0" src="http://www.connect.renren.com/widget/liveWidget?api_key=49e422d84b694b69ba5e3c5809db4102&url=http%3A%2F%2Fwww.52wm.com%2Fmiaosha&desp=%E4%B8%80%E5%85%83%E5%8D%88%E9%A4%90%E7%81%AB%E7%83%AD%E8%BF%9B%E8%A1%8C%E4%B8%AD" style="width:610px;height:390px;"></iframe>
+			<div class="mline1px ma-t10px "></div>
+			<div class="ma-t10px fb">秒杀规则</div>
+			<div class="ma-t5px lh20px">
+				抢购成功判断标准：<br />
+				抢购成功判断标准以提交订单为准，用户能否抢购成功不再是点击“秒杀”按钮的速度了，而是从点击“秒杀”按钮开始，一直到完成本订单的整个流程的速度。<br />
+				抢购限制：<br />
+				1、每位用户一天只能抢购一份；（以同台电脑同个手机号为限）<br />
+				2、用户送餐地址需在活动商家的配送范围内。
 			</div>
+			<div class="mline1px ma-t10px "></div>
+			<div class="ma-t10px"><?php echo l(CHtml::image(resBu('miaosha2/images/yaoqing.png')), url('my/default/inviteurl'));?></div>
 		</div>
 	</div>
 	<div class="c-right-bottom"></div>
@@ -154,7 +178,8 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 <script type="text/javascript">
 var activeTime = <?php echo $miaoshalist[0]->active_time - time();?>;
 var interval;
-var btn2 = "<?php echo resBu('miaosha2/images/btn1.jpg'); ?>";
+var btn2 = "<?php echo resBu('miaosha2/images/btn2.jpg'); ?>";
+var btn3 = "<?php echo resBu('miaosha2/images/btn3.jpg'); ?>";
 $(function(){
 	interval = setInterval("showStartTime()", 1000);
 	
@@ -162,9 +187,6 @@ $(function(){
 	$('#inviteClose').click(function(){
 		$('.invite').hide();
 	});
-	
-	/* 设置左右高 */
-	setLeftRightHeight(1080);
 
 	/* 菜品处理 */
 	$('.goods').hover(function(){
@@ -181,6 +203,7 @@ $(function(){
 			$('#goodsid').val(goodsid);
 			$('.goods').removeClass('goods-select');
 			$(this).addClass('goods-select');
+			$('#showGoodsName').removeClass('cred');
 			$('#showGoodsName').html('<span class="fb">已选择：</span>' + $(this).html());
 		}
 	});
@@ -191,15 +214,23 @@ $(function(){
 	});
 
 	/* 提交表单 */
-	$('#submit').click(function(){
+	$('#submit').live('click', function(){
 		if($(this).attr('src') == btn2) {
-			$('#postform').submit();
+			var miaoshaid = $('#miaoshaid').val();
+			var goodsid = $('#goodsid').val();
+			if(miaoshaid > 0 && goodsid > 0) {
+				$('#postform').submit();
+			} else {
+				$('#showGoodsName').addClass('cred');
+			}
 		}
 	});
+	
 });
 function showStartTime(){
 	if(activeTime < 0) {
 		$('#submit').attr('src', btn2);
+		$('#button').attr('src', btn3);
 		$('#timeH').html('00');
 		$('#timeI').html('00');
 		$('#timeS').html('00');
