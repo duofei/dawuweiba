@@ -6,6 +6,7 @@
 			'center' => $center,
 			'colors' => $colors,
 			'lastLatLng' => $lastLatLng,
+			't' => $t
 		));?>
 	</div>
 	<div class="c-left-bottom"></div>
@@ -30,8 +31,5 @@
 </div>
 <div class="clear"></div>
 <script type="text/javascript">
-$(function(){
-	var html = '<?php echo date("m月d日", $t);?>(已结束) ';
-	$('.today-select a').html(html);
-});
+
 </script>

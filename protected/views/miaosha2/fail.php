@@ -6,6 +6,7 @@
 			'center' => $center,
 			'colors' => $colors,
 			'lastLatLng' => $lastLatLng,
+			't' => $t
 		));?>
 	</div>
 	<div class="c-left-bottom"></div>

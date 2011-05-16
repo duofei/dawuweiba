@@ -53,8 +53,10 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 		</li>
 		<li class="fl">
 			<div class="f16px fb">订餐指南</div>
-			<div>客服电话55500071 客服QQ</div>
-            <div>客服在线时间(周一至周五 9:00-18:00)</div>
+			<div>客服电话55500071</div>
+			<div>客服QQ</div>
+            <div>客服在线时间</div>
+            <div>(周一至周五 9:00-18:00)</div>
 		</li>
 		<li class="fl">
 			<div class="f16px fb">社区活动</div>

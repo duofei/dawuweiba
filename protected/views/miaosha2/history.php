@@ -6,6 +6,7 @@
 			'center' => $center,
 			'colors' => $colors,
 			'lastLatLng' => $lastLatLng,
+			't' => $t
 		));?>
 	</div>
 	<div class="c-left-bottom"></div>
@@ -14,7 +15,7 @@
 	<div class="c-right-top"></div>
 	<div class="c-right-content">
 		<div class="miaosha-info pa-t10px">
-			<div class="bgred cwhite fb lh30px ma-l10px ma-r20px pa-l10px"><?php echo date('m月d日')?>成功秒杀展示</div>
+			<div class="bgred cwhite fb lh30px ma-l10px ma-r20px pa-l10px"><?php echo date('m月d日', $t)?>成功秒杀展示</div>
 			<?php if($history):?>
 			<?php foreach ((array)$history as $k=>$h):?>
 				<div class="lh30px ma-l10px ma-r20px pa-l10px <?php if($k%2){echo 'bgf3';}?>">
