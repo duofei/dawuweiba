@@ -47,8 +47,11 @@ if ($result) {
             $sql = 'select `telphone` from ' . $tblShop . ' where `id` = ' . $order['shop_id'];
             $result = mysql_query($sql);
             $shop = mysql_fetch_assoc($result);
-            if ($shop)
-                $shop_contact = '如有疑问请致电商铺：' . $shop['telphone'];
+            if ($shop) {
+                $telphone = $shop['telphone'];
+                preg_match('/([\d\-]+)[\/\,\，\s]*/i', $telphone, $matches);
+                $shop_contact = '如有疑问请致电商铺：' . $matches[1];
+            }
             else
                 $shop_contact = '';
             $m = (strtolower($m) == 'timeout') ? '人手不足' : $m;
