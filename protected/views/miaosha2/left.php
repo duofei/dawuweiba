@@ -1,5 +1,9 @@
 <div class="cblack ma-l20px">您的位置：<?php echo l('首页', app()->homeUrl);?> > <?php echo l('一元秒杀', url('miaosha/index'));?></div>
+<?php if(date('Ymd',$t) == date('Ymd')):?>
 <div class="today-shop"></div>
+<?php else:?>
+<div class="f16px cred lh30px fb ac ma-t20px"><?php echo date('m月d日店铺',$t);?></div>
+<?php endif;?>
 <!-- 商铺LOGO -->
 <div class="shop-logo">
 	<?php foreach ($todayShops as $shop):?>
@@ -30,7 +34,7 @@
 <div class="shop-box-top"></div>
 <div class="shop-box">
 	<div class="pa-t10px pa-l10px"><?php echo CHtml::image(resBu('miaosha2/images/yjfk.gif'));?></div>
-	<div class="pa-l10px lh30px">请<?php echo l('点击这里', url('feedback/index'));?>提交意见反馈</div>
+	<div class="pa-l10px lh30px">请<?php echo l('点击这里', url('miaosha2/feedback', array('type'=>2)));?>提交意见反馈</div>
 </div>
 <div class="shop-box-bottom"></div>
 
@@ -97,4 +101,12 @@ function showMap() {
     });
     <?php endif;?>
 }
+
+$(function(){
+	// 日期还需要处理
+	<?php if(date('H') >= 11):?>
+	var html = '<?php echo date("m月d日");?>(已结束) ';
+	$('.today a').html(html);
+	<?php endif;?>
+});
 </script>

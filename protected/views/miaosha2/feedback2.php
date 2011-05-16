@@ -16,10 +16,10 @@
 	<div class="c-right-content">
 		<div class="miaosha-info pa-t10px">
 			<div class="postbox">
-				<div class="top">发表一下成功感言吧，很多网友很期待噢!</div>
+				<div class="top">发表一下意见反馈吧!</div>
 				<div class="content">
-					<?php echo CHtml::beginForm(url('miaosha2/postfeedback'), 'post', array('id'=>'postFormId'));?>
-					<div class="ma-l10px f14px">成功感言
+					<?php echo CHtml::beginForm(url('miaosha2/postfeedback', array('type'=>2)), 'post', array('id'=>'postFormId'));?>
+					<div class="ma-l10px f14px">意见反馈
 					<?php echo CHtml::activeTextArea($model, 'content', array('style' => 'width:430px; height:150px;', 'tabIndex'=>1));?>
 					</div>
 					<div class="ma-l10px ma-t10px f14px">验证码：
@@ -33,7 +33,10 @@
 						));?>
 					</div>
 					<?php echo CHtml::endForm();?>
-					<div class="ma-t10px ac"><?php echo CHtml::image(resBu('miaosha2/images/fbgy.gif'), '', array('id'=>'submit', 'class'=>'cursor'));?></div>
+					<div class="ma-t10px ac">
+						<?php echo CHtml::image(resBu('miaosha2/images/tj_r3_c2.gif'), '', array('id'=>'submit', 'class'=>'cursor'));?>
+						<?php echo CHtml::image(resBu('miaosha2/images/w_r2_c3.gif'), '', array('id'=>'goback', 'class'=>'cursor'));?>
+					</div>
 					<?php if($errormodel):?>
 					<div class="ma-l10px ma-t10px"><?php echo CHtml::errorSummary($errormodel);?></div>
 					<?php endif;?>
@@ -49,6 +52,9 @@
 $(function(){
 	$('#submit').click(function(){
 		$('#postFormId').submit();
+	});
+	$('#goback').click(function(){
+		history.back(1);
 	});
 });
 </script>

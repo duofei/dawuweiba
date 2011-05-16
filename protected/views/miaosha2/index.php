@@ -6,6 +6,7 @@
 			'center' => $center,
 			'colors' => $colors,
 			'lastLatLng' => $lastLatLng,
+			't' => $t
 		));?>
 	</div>
 	<div class="c-left-bottom"></div>
@@ -26,7 +27,7 @@
 			<div class="m-info ma-t10px">
 				<div class="fl  fb">价格:</div>
 				<div class="fl ma-l5px"><?php echo CHtml::image(resBu('miaosha2/images/1yuan.gif'));?></div>
-				<div class="fl ma-l20px "><span class="fb">总计:</span><?php echo $todayCountOrderNum;?>单(<a href="#">已抢<?php echo $todayCompleteOrderNum;?>单</a>)</div>
+				<div class="fl ma-l20px "><span class="fb">总计:</span><?php echo $todayCountOrderNum;?>单(<a href="<?php echo url('miaosha2/history', array('t'=>$t))?>">已抢<?php echo $todayCompleteOrderNum;?>单</a>)</div>
 				<div class="clear"></div>
 			</div>
 			<!-- 秒杀商铺菜品信息 -->
@@ -49,7 +50,7 @@
 						<li class="clear" style="font-size:0px; height:0px;"></li>
 					</ul>
 					<div class="clear"></div>
-					<?php if($m->state==Miaosha::STATE_OVER || ($shopInArea[$m->shop->id]=='disabled' && $lastLatLng[0])):?>
+					<?php if($m->state==Miaosha::STATE_OVER || ($shopInArea[$m->shop->id]=='disabled' && $lastLatLng[0] && !$notInArea)):?>
 					<div class="ma-l5px ma-b10px lh24px cblack pa-l10px" style="border:1px solid #E8BC23; height:24px; background:#FFF9D6;">
 						<?php if($m->state==Miaosha::STATE_OVER):?>
 						温馨提示: <?php echo $m->shop->shop_name;?>的菜太火爆了，已经被抢光了，请您选择另一家进行秒杀。
@@ -79,7 +80,7 @@
 					<div><span class="fb">提示：</span>每位用户一天只仅限抢购一份午餐。<span class="cred"><?php echo l('查看规则', url('miaosha2/rules'))?></span></div>
 					<?php elseif (!$lastLatLng[0]):?>
 					<div><span class="fb">提示：</span>您还没有设置位置。<span class="cred cursor showMapClick">设置位置</span></div>
-					<?php elseif(!notInArea):?>
+					<?php elseif($notInArea):?>
 					<div><span class="fb">提示：</span>您不在活动范围之内。<span class="cred cursor showMapClick">重新设置位置</span></div>
 					<?php else:?>
 					<div id="showGoodsName"><span class="fb">请选择：</span>秒杀午餐</div>

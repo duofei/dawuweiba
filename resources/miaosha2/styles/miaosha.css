@@ -6,6 +6,7 @@ body{background-color:#cd0314}
 
 .bgred{background-color:#cb0313;}
 .bgf3{background-color:#f3f3f3;}
+.bgeee{background-color:#eeeeee;}
 
 /* header */
 .header{background:url(../images/header_bg.jpg) repeat-x; height:326px;}
@@ -54,6 +55,8 @@ body{background-color:#cd0314}
 .showtime span{display:block; width:77px; float:left; height:60px; line-height:60px; padding-left:11px; text-align:center; font-size:48px; font-weight:bold; font-family: Arial, Helvetica, sans-serif;}
 .mslc{height:27px; background:#D6D6D6; padding:0px 12px; line-height:27px;}
 .jiantou{background:url(../images/jiantou.gif) no-repeat; width:19px; height:27px;}
+.messagespan{width:130px;}
+.messagespan span{padding:0px 10px; line-height:24px; height:24px; margin-left:5px; border:1px solid #a3a3a3; cursor:pointer;}
 
 /* postbox */
 .postbox {width:550px; margin:0px auto;}
