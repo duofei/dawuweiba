@@ -41,12 +41,14 @@ if ($result) {
         
         $orderid = $order['order_sn'] . $order['id'];
         
+        $sql = 'select `telphone` from ' . $tblShop . ' where `id` = ' . $order['shop_id'];
+        $result = mysql_query($sql);
+        $shop = mysql_fetch_assoc($result);
+        
         if ($accept_refuse)
-            $content = iconv('utf-8', 'gb2312', '您在我爱外卖网的订单'. $orderid .'商铺已确认，预计'. $dt .'送达，请保持电话畅通。http://www.52wm.com');
+//            $content = iconv('utf-8', 'gb2312', '您在我爱外卖网的订单'. $orderid .'商铺已确认，预计'. $dt .'送达，请保持电话畅通。http://www.52wm.com');
+            $content = iconv('utf-8', 'gb2312', '您在' . trim($shop['name']) . '定的外卖预计' . $dt . '送达，请保持电话畅通，单号：' . $orderid. '，http://www.52wm.com');
         else {
-            $sql = 'select `telphone` from ' . $tblShop . ' where `id` = ' . $order['shop_id'];
-            $result = mysql_query($sql);
-            $shop = mysql_fetch_assoc($result);
             if ($shop) {
                 $telphone = $shop['telphone'];
                 preg_match('/([\d\-]+)[\/\,\，\s]*/i', $telphone, $matches);
