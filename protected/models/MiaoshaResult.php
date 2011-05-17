@@ -156,9 +156,34 @@ class MiaoshaResult extends CActiveRecord
 		return true;
 	}
 
+	/**
+	 * 获取已成功秒杀的用户手机号
+	 */
 	public static function getSuccessUserTelphone() {
 		$startTime = param('miaoshaStartTime');
 		$endTime = param('miaoshaEndTime');
+		
+		$c = new CDbCriteria();
+		$c->addCondition('t.order_id > 1');
+		$c->addBetweenCondition('t.create_time', $startTime, $endTime);
+		$model = self::model()->with('order')->findAll($c);
+		
+		$phoneArray = array();
+		
+		if($model) {
+			foreach ($model as $v) {
+				$phoneArray[] = $v->order->telphone;
+			}
+		}
+		return $phoneArray;
+	}
+	
+	/**
+	 * 获取当天已成功秒杀的用户手机号
+	 */
+	public static function getTodaySuccessUserTelphone() {
+		$startTime = mktime(0,0,0,date('m'),date('d'),date('Y'));
+		$endTime = mktime(23,59,59,date('m'),date('d'),date('Y'));
 		
 		$c = new CDbCriteria();
 		$c->addCondition('t.order_id > 1');

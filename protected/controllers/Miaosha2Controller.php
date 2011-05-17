@@ -95,8 +95,6 @@ class Miaosha2Controller extends Controller
 					break;
 				}
 			}
-			/* 计算总共可以抢的单数 */
-			$todayCountOrderNum += $m->active_num;
 		}
 		/* 当期秒杀列表 */
 		$miaoshalist = array();
@@ -106,6 +104,11 @@ class Miaosha2Controller extends Controller
 			} elseif($m->active_time > $temp) {
 				break;
 			}
+		}
+		
+		/* 计算总共可以抢的单数 */
+		foreach ($miaosha as $m) {
+			$todayCountOrderNum += $m->active_num;
 		}
 		/* 如果不存在当天的都已结束 */
 		if(!$miaoshalist) {
@@ -360,6 +363,15 @@ class Miaosha2Controller extends Controller
 					$this->redirect(url('miaosha2/fail'));
 					exit;
 				}
+			} else {
+				$myCurrentMiaosha->user_id = $user_id;
+				$myCurrentMiaosha->goods_id = $goods_id;
+				$myCurrentMiaosha->miaosha_id = $miaosha_id;
+				if(!$myCurrentMiaosha->save()) {
+					user()->setFlash('error', '秒杀失败或已结束');
+					$this->redirect(url('miaosha2/fail'));
+					exit;
+				}
 			}
 			
 			/* 当前秒杀是否过期 */
@@ -438,7 +450,7 @@ class Miaosha2Controller extends Controller
     		}
     	} else {
     		/* 非秒杀用户进来自动跳转到 秒杀首页 */
-    		$this->redirect(url('miaosha2/index'));
+    		$this->redirect(url('miaosha2/fail'));
     		exit;
     	}
     	
@@ -507,7 +519,7 @@ class Miaosha2Controller extends Controller
     		}
     	} else {
     		/* 非秒杀用户进来自动跳转到 秒杀首页 */
-    		$this->redirect(url('miaosha2/index'));
+    		$this->redirect(url('miaosha2/fail'));
     		exit;
     	}
     	$user = User::model()->findByPk(user()->id);
@@ -519,11 +531,11 @@ class Miaosha2Controller extends Controller
 	        $order->telphone = $_POST['UserAddress']['telphone'];
 	        $order->message = $_POST['UserAddress']['message'];
 	        
-	        setcookie('consignee', $order->consignee, time()+600, '/');
-	        setcookie('address', $order->address, time()+600, '/');
-	        setcookie('telphone', $order->telphone, time()+600, '/');
-	        setcookie('message', $order->message, time()+600, '/');
-	        setcookie('miaosha_id', $miaosha_id, time()+600, '/');
+	        setcookie('consignee', $order->consignee, time()+1800, '/');
+	        setcookie('address', $order->address, time()+1800, '/');
+	        setcookie('telphone', $order->telphone, time()+1800, '/');
+	        setcookie('message', $order->message, time()+1800, '/');
+	        setcookie('miaosha_id', $miaosha_id, time()+1800, '/');
 	        
 	        /* 如果用户未通过认证 */
 			if($user->approve_state != User::APPROVE_STATE_VERIFY) {
@@ -535,7 +547,9 @@ class Miaosha2Controller extends Controller
             		$user->save(false);
 				} else {
 					/* 跳转到认证页面 */
-					user()->setFlash('error', '验证码错误!');
+					if($_POST['vfcode']) {
+						user()->setFlash('error', '验证码错误!');
+					}
 					$this->redirect(url('miaosha2/approve'));
 					exit;
 				}
@@ -562,16 +576,24 @@ class Miaosha2Controller extends Controller
 			/* 过滤手机号 */
 			$phoneArray = MiaoshaResult::getSuccessUserTelphone();
 			if(in_array($order->telphone, $phoneArray)) {
-				//sleep(1);
-				//$this->redirect(url('miaosha2/fail'));
-				//exit;
+				sleep(1);
+				$this->redirect(url('miaosha2/fail'));
+				exit;
+			}
+			
+			/* 过滤今日成功的手机号 */
+			$phoneArray = MiaoshaResult::getTodaySuccessUserTelphone();
+			if(in_array($order->telphone, $phoneArray)) {
+				sleep(1);
+				$this->redirect(url('miaosha2/fail'));
+				exit;
 			}
 			
 			/* 过滤Cookie */
 			if($_COOKIE['miaosha']) {
-				//sleep(1);
-				//$this->redirect(url('miaosha2/fail'));
-				//exit;
+				sleep(1);
+				$this->redirect(url('miaosha2/fail'));
+				exit;
 			}
 			
 			/* 判断用户今天是否已抢到过订单 */
@@ -652,7 +674,7 @@ class Miaosha2Controller extends Controller
 	{
 		$data = $this->getLeftData();
 		$data['address'] = $_COOKIE['address'];
-		$data['telphone'] = $_COOKIE['telphone'];
+		$data['telphone'] = str_replace('-', '', $_COOKIE['telphone']);
 		$data['consignee'] = $_COOKIE['consignee'];
 		$data['message'] = $_COOKIE['message'];
 		$data['miaosha_id'] = $_COOKIE['miaosha_id'];
@@ -663,7 +685,7 @@ class Miaosha2Controller extends Controller
 		}
 		
 		$data['error'] = null;
-		
+		$data['sendtype'] = 1;
 		if($_COOKIE['isSend'] != '1') {
 			if(SendSms::filter_mobile($data['telphone'])) {
 				if(User::sendSmsVerifyCode(user()->id, $data['telphone'])){
@@ -671,6 +693,7 @@ class Miaosha2Controller extends Controller
 				}
 			} elseif(SendVoice::filter_phone($data['telphone'])) {
 				if(User::sendVoiceVerifyCode(user()->id, $data['telphone'])){
+					$data['sendtype'] = 2;
 					setcookie('isSend', 1, time()+120, '/');
 				}
 			} else {

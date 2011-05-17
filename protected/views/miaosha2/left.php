@@ -30,14 +30,6 @@
 	<a href="http://weibo.com/my52wm" target="_blank"><?php echo CHtml::image(resBu('miaosha2/images/gz52wm_sina.gif'));?></a>
 </div>
 
-<!-- 意见反馈 -->
-<div class="shop-box-top"></div>
-<div class="shop-box">
-	<div class="pa-t10px pa-l10px"><?php echo CHtml::image(resBu('miaosha2/images/yjfk.gif'));?></div>
-	<div class="pa-l10px lh30px">请<?php echo l('点击这里', url('miaosha2/feedback', array('type'=>2)));?>提交意见反馈</div>
-</div>
-<div class="shop-box-bottom"></div>
-
 <!-- 邮件订阅 -->
 <!--
 <div class="shop-box-top"></div>
@@ -54,13 +46,19 @@
 -->
 
 <!-- 讨论区-->
-<!--
 <div class="shop-box-top"></div>
 <div class="shop-box">
-	<div class="pa-t10px pa-l5px"><?php echo CHtml::image(resBu('miaosha2/images/taolq.gif'));?></div>
+	<div class="pa-t10px pa-l5px"><a href="<?php echo url('feedback/index')?>"><?php echo CHtml::image(resBu('miaosha2/images/taolq.gif'));?></a></div>
 </div>
 <div class="shop-box-bottom"></div>
--->
+
+<!-- 意见反馈 -->
+<div class="shop-box-top"></div>
+<div class="shop-box">
+	<div class="pa-t10px pa-l10px"><?php echo CHtml::image(resBu('miaosha2/images/yjfk.gif'));?></div>
+	<div class="pa-l10px lh30px">请<?php echo l('点击这里', url('miaosha2/feedback', array('type'=>2)));?>提交意见反馈</div>
+</div>
+<div class="shop-box-bottom"></div>
 
 <script type="text/javascript">
 function showMap() {

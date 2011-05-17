@@ -77,9 +77,6 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 <script language="JavaScript">
 <!--
 $(function(){
-	/* 设置左右高 */
-	setLeftRightHeight();
-	
 	/* logo显示效果 */
 	$('.header-logo').hover(function(){
 		$(this).addClass('header-logo-select');
@@ -108,11 +105,14 @@ $(function(){
 		}
 		navClass = false;
 	});
-	
+
+	/* 设置左右高 */
+	setLeftRightHeight();
+
 	/* 显示地图 */
-	jQuery.getScript('http://ditu.google.com/maps/api/js?sensor=false', function(){
+	//jQuery.getScript('http://ditu.google.com/maps/api/js?sensor=false', function(){
 		showMap();
-	});
+	//});
 });
 function setLeftRightHeight()
 {
@@ -127,6 +127,10 @@ function setLeftRightHeight()
 //-->
 </script>
 <script type="text/javascript" src="http://ditu.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F527dc523b729b66e5fd237d810b74d2f' type='text/javascript'%3E%3C/script%3E"));
+</script>
 </body>
 </html>
 <?php

@@ -7,6 +7,9 @@ body{background-color:#cd0314}
 .bgred{background-color:#cb0313;}
 .bgf3{background-color:#f3f3f3;}
 .bgeee{background-color:#eeeeee;}
+.bgfff{background-color:#ffffff;}
+
+.bg-lightning{background:url(../images/lightning.gif); repeat;}
 
 /* header */
 .header{background:url(../images/header_bg.jpg) repeat-x; height:326px;}
@@ -42,15 +45,16 @@ body{background-color:#cd0314}
 .c-right-top{width:650px; height:10px; font-size:0px; background:url(../images/c_right_top.gif) no-repeat 640px 0px;}
 .c-right-bottom{width:650px; height:10px; font-size:0px; background:url(../images/c_right_bottom.gif) no-repeat right;}
 .miaosha-info {width:610px; margin:0px auto;}
-.invite{width:608px; border:1px solid #e8bc23; background:#fff9d6; height:40px; line-height:40px; margin:0px auto;}
+.invite{width:608px; border:1px solid #e8bc23; background:#fff9d6; height:40px; line-height:40px; margin:0px auto 10px;}
 .m-info{line-height:35px; border-bottom:1px solid #e8e8e8;}
 .goods-list{border-bottom:1px solid #e8e8e8;}
-.goods-list li{height:30px; margin-bottom:5px; word-break:keep-all;}
-.shop-name{background:url(../images/M_r3_c27.jpg) no-repeat; height:29px; line-height:29px}
-.goods-list li.goods{height:24px; border:2px solid #dadada; padding: 2px 10px 0px; line-height:24px; margin-right:5px; _height:28px; cursor:pointer;}
+.goods-list li{height:30px; margin-bottom:5px; word-break:keep-all; white-space:nowrap;}
+.shop-name{background:url(../images/M_r3_c27.jpg) no-repeat; height:29px; line-height:29px; padding-left:30px;}
+.shop-name-graybg {background:url(../images/M_r3_c28.jpg) no-repeat;}
+.goods-list li.goods{height:24px; border:2px solid #a9a9a9; padding: 2px 10px 0px; line-height:24px; margin-right:5px; _height:28px; cursor:pointer;}
 .goods-list li.goods-hover{border:2px solid #ffb400;}
 .goods-list li.goods-select{border:2px solid #f60000; background:url(../images/M_xc_bg.jpg) no-repeat right bottom;}
-.goods-list li.disabled{color:gray; cursor:auto;}
+.goods-list li.disabled{color:gray; cursor:auto; border:2px solid #d3d3d3; background:#f5f5f5;}
 .showtime{width:273px; height:62px; background:url(../images/showtime.gif) no-repeat;}
 .showtime span{display:block; width:77px; float:left; height:60px; line-height:60px; padding-left:11px; text-align:center; font-size:48px; font-weight:bold; font-family: Arial, Helvetica, sans-serif;}
 .mslc{height:27px; background:#D6D6D6; padding:0px 12px; line-height:27px;}

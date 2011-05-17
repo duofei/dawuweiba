@@ -819,6 +819,11 @@ class Shop extends CActiveRecord
     	$lon = $coordinate[1];
     	$html = '';
     	if($this->mapRegion && CdcBetaTools::pointInPolygon($this->mapRegion, $lat, $lon)) {
+    		/* 如果是电话店铺 */
+    		if($this->buy_type==self::BUYTYPE_TELPHONE) {
+    			return $this->transport_condition;
+    		}
+    		
     		if($this->transport_amount > 0) {
     			$html = '最低起送价' . $this->transport_amount . '元';
     			if($this->dispatching_amount > 0) {
@@ -833,6 +838,11 @@ class Shop extends CActiveRecord
     		}
     	}
 		if($this->mapRegion2 && CdcBetaTools::pointInPolygon($this->mapRegion2, $lat, $lon)) {
+			/* 如果是电话店铺 */
+    		if($this->buy_type==self::BUYTYPE_TELPHONE) {
+    			return $this->transport_condition2;
+    		}
+    		
     		if($this->transport_amount2 > 0) {
     			$html = '最低起送价' . $this->transport_amount2 . '元';
     			if($this->dispatching_amount2 > 0) {
@@ -847,6 +857,10 @@ class Shop extends CActiveRecord
     		}
     	}
 		if($this->mapRegion3 && CdcBetaTools::pointInPolygon($this->mapRegion3, $lat, $lon)) {
+			/* 如果是电话店铺 */
+    		if($this->buy_type==self::BUYTYPE_TELPHONE) {
+    			return $this->transport_condition3;
+    		}
     		if($this->transport_amount3 > 0) {
     			$html = '最低起送价' . $this->transport_amount3 . '元';
     			if($this->dispatching_amount3 > 0) {

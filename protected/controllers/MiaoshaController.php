@@ -2,6 +2,8 @@
 class MiaoshaController extends Controller
 {
 	public function init() {
+		$this->redirect(url('miaosha2/index'));
+		exit;
 		$this->layout = 'miaosha';
 	}
 	public function actionIndex()
@@ -174,6 +176,15 @@ class MiaoshaController extends Controller
 				if(!$miaosha_result->save()) {
 					user()->setFlash('error', '秒杀失败或已结束');
 					$this->redirect(url('miaosha/index'));
+					exit;
+				}
+			} else {
+				$myCurrentMiaosha->user_id = $user_id;
+				$myCurrentMiaosha->goods_id = $goods_id;
+				$myCurrentMiaosha->miaosha_id = $miaosha_id;
+				if(!$myCurrentMiaosha->save()) {
+					user()->setFlash('error', '秒杀失败或已结束');
+					$this->redirect(url('miaosha2/fail'));
 					exit;
 				}
 			}

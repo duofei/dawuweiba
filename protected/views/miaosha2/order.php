@@ -53,7 +53,9 @@
 				<?php echo CHtml::beginForm(url('miaosha2/checkout', array('miaosha_id'=>$miaosha_id)), 'post', array('id'=>'postform'));?>
 				<ul class="lh30px pa-l10px ma-t10px f14px">
 					<li class="lh30px">姓名：<input type="text" value="<?php echo $address_default->consignee;?>" id="consignee" name="UserAddress[consignee]" tabindex="1" class="txt" style="width:240px;"> <span id="consignee_msg" class="cred"></span></li>
-					<li class="lh30px ma-t5px">手机：<input type="text" value="<?php echo $address_default->telphone;?>" id="telphone" name="UserAddress[telphone]" tabindex="2" class="txt" style="width:240px;"> <span id="telphone_msg" class="cred"></span></li>
+					<li class="lh30px ma-t5px">手机：<input type="text" value="<?php echo $address_default->telphone;?>" id="telphone" name="UserAddress[telphone]" tabindex="2" class="txt" style="width:240px;">
+					 <span id="telphone_msg" class="cred f12px"><?php if($user->approve_state!=User::APPROVE_STATE_VERIFY):?>稍后会向您手机发送验证码<?php endif;?></span>
+					</li>
 					<li class="lh30px ma-t5px">地址：<input type="text" value="<?php echo $address_default->address;?>" id="address" name="UserAddress[address]" tabindex="3" class="txt" style="width:240px;"> <span id="address_msg" class="cred"></span></li>
 					<li class="lh30px ma-t5px">
 						<div class="fl">备注：<textarea name="UserAddress[message]" id="message" style="width:240px; height:65px;" tabindex="4"><?php echo $message;?></textarea></div>
@@ -68,7 +70,11 @@
 				<?php echo CHtml::endForm();?>
 				<div class="mline1px ma-t10px ma-b10px"></div>
 				<div class="ar">
+					<?php if($user->approve_state!=User::APPROVE_STATE_VERIFY):?>
+					<span class="cursor" id="submit"><?php echo CHtml::image(resBu('miaosha2/images/dd_r3_c3.gif'));?></span>
+					<?php else:?>
 					<span class="cursor" id="submit"><?php echo CHtml::image(resBu('miaosha2/images/dd_r3_c2.gif'));?></span>
+					<?php endif;?>
 				</div>
 			</div>
 		</div>
