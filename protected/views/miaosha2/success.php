@@ -23,7 +23,9 @@
 			</div>
 			<div class="clear"></div>
 			<div class="mline1px ma-t30px "></div>
-			<div class="ma-t20px ac"><a href="<?php echo url('my/default/inviteurl');?>"><?php echo CHtml::image(resBu('miaosha2/images/yaoqing.png'));?></a></div>
+			<div class="ma-t20px ac">
+				<!-- <a href="<?php echo url('my/default/inviteurl');?>" target="_blank"><?php echo CHtml::image(resBu('miaosha2/images/yaoqing.png'));?></a> -->
+			</div>
 		</div>
 	</div>
 	<div class="c-right-bottom"></div>

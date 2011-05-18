@@ -48,7 +48,7 @@
 <!-- 讨论区-->
 <div class="shop-box-top"></div>
 <div class="shop-box">
-	<div class="pa-t10px pa-l5px"><a href="<?php echo url('feedback/index')?>"><?php echo CHtml::image(resBu('miaosha2/images/taolq.gif'));?></a></div>
+	<div class="pa-t10px pa-l5px"><a href="<?php echo url('feedback/index')?>" target="_blank"><?php echo CHtml::image(resBu('miaosha2/images/taolq.gif'));?></a></div>
 </div>
 <div class="shop-box-bottom"></div>
 

@@ -1,4 +1,15 @@
 <?php
+/**
+ *
+ * ==秒杀活动==
+ *
+ * 需要完善功能：
+ * 1. param需要拿到后台
+ * 2. 秒杀后台需要增加分城市
+ * 3. 秒杀后台需要增加设置，能对ip，手机号等限制的开启和关闭
+ * 4. 秒杀感言等增加小留言
+ *
+ */
 class Miaosha2Controller extends Controller
 {
 	public function init()
@@ -10,8 +21,9 @@ class Miaosha2Controller extends Controller
 	{
 		/* 接收时间 */
 		$t = intval($_GET['t']);
-		//echo param('miaoshaStartTime') . '<br />' . $t. '<br />' . param('miaoshaEndTime'). '<br />';
-		if($t < param('miaoshaStartTime') || $t > param('miaoshaEndTime')) {
+		$miaoshaStartTime = param('miaoshaStartTime');
+		$miaoshaEndTime = param('miaoshaEndTime');
+		if($t < $miaoshaStartTime || $t > $miaoshaEndTime) {
 			$t = time();
 		}
 		/* 查询当天的秒杀 */
@@ -61,6 +73,8 @@ class Miaosha2Controller extends Controller
 			'center' => $center,
 			'colors' => $colors,
 			'lastLatLng' => $lastLatLng,
+			'miaoshaStartTime' => $miaoshaStartTime,
+			'miaoshaEndTime' => $miaoshaEndTime
 		);
 	}
 	
@@ -68,7 +82,9 @@ class Miaosha2Controller extends Controller
 	{
 		/* 接收时间 */
 		$t = intval($_GET['t']);
-		if($t < param('miaoshaStartTime') || $t > param('miaoshaEndTime')) {
+		$miaoshaStartTime = param('miaoshaStartTime');
+		$miaoshaEndTime = param('miaoshaEndTime');
+		if($t < $miaoshaStartTime || $t > $miaoshaEndTime) {
 			$t = time();
 		}
 		/* 查询当天的秒杀 */
@@ -218,6 +234,7 @@ class Miaosha2Controller extends Controller
 		
 		/* 接收时间 */
 		$t = intval($_GET['t']);
+		
 		if($t < param('miaoshaStartTime') || $t > param('miaoshaEndTime')) {
 			$t = time();
 		}
@@ -282,6 +299,12 @@ class Miaosha2Controller extends Controller
 		if (app()->request->isPostRequest && isset($_POST['Feedback'])) {
 			$feedback = new Feedback();
 			$post = CdcBetaTools::filterPostData(array('content', 'post_id', 'validateCode'), $_POST['Feedback']);
+			if($type==2) {
+				$post['content'] = '意见反馈:' . $post['content'];
+			} else {
+				$post['content'] = '秒杀感言:' . $post['content'];
+			}
+			
 			$feedback->attributes = $post;
 			
 			if($feedback->save()) {
@@ -563,7 +586,8 @@ class Miaosha2Controller extends Controller
 	        $order->dispatching_amount = $cart[0]->goods->shop->matchDispatchingAmount;
 			$order->status = Order::STATUS_UNDISPOSED;
 	        $order->is_carry = $_POST['iscarry'];
-	        $order->city_id = $this->city['id'];
+	        $order->city_id = 1;
+	        $order->verify_state = STATE_ENABLED;
 			
 			/* 过滤IP */
 			$ipArray = array('219.218.121.210', '219.218.121.209', '219.218.121.208' ,'219.218.121.211', '124.133.15.227');

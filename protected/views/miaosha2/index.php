@@ -19,7 +19,7 @@
 			<div class="invite">
 				<div class="fl ma-t10px ma-l10px"><?php echo CHtml::image(resBu('miaosha2/images/new.gif'));?></div>
 				<div class="fl ma-l5px">邀请好友有奖：成功邀请好友，同获10元返利(无上限)。　邀请好友:</div>
-				<div class="fl ma-t5px"><?php echo l(CHtml::image(resBu('miaosha2/images/invite_icon.jpg')), url('my/default/inviteurl'));?></div>
+				<div class="fl ma-t5px"><?php echo l(CHtml::image(resBu('miaosha2/images/invite_icon.jpg')), url('my/default/inviteurl'), array('target'=>'_blank'));?></div>
 				<div class="fr ma-r5px ma-t10px cursor"><?php echo CHtml::image(resBu('miaosha2/images/close.gif'), '关闭', array('id'=>'inviteClose'));?></div>
 				<div class="clear"></div>
 			</div>
@@ -78,9 +78,9 @@
 			<div class="pa-b5px ma-t10px">
 				<div class="fl  fb lh30px">秒杀:</div>
 				<div class="fl showtime">
-					<span id="timeH">23</span>
-					<span id="timeI">59</span>
-					<span id="timeS">59</span>
+					<span id="timeH"></span>
+					<span id="timeI"></span>
+					<span id="timeS"></span>
 					<div class="clear"></div>
 				</div>
 				<div class="fl ma-l10px">
@@ -162,7 +162,7 @@
 				2、用户送餐地址需在活动商家的配送范围内。
 			</div>
 			<div class="mline1px ma-t10px "></div>
-			<div class="ma-t10px"><?php echo l(CHtml::image(resBu('miaosha2/images/yaoqing.png')), url('my/default/inviteurl'));?></div>
+			<div class="ma-t10px"><?php echo l(CHtml::image(resBu('miaosha2/images/yaoqing.png')), url('my/default/inviteurl'), array('target'=>'_blank'));?></div>
 		</div>
 	</div>
 	<div class="c-right-bottom"></div>
