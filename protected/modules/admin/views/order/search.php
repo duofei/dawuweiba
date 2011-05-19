@@ -3,14 +3,18 @@
     <tr>
         <td width="120" class="ar">订单号：</td>
         <td width=""><?php echo CHtml::textField('Order[order_sn]', $order_get['order_sn'], array('class'=>'txt ')); ?></td>
+        <td width="120" class="ar">商铺名称：</td>
+        <td><?php echo CHtml::textField('Order[shop_name]', $order_get['shop_name'], array('class'=>'txt ')); ?></td>
     </tr>
     <tr>
         <td width="120" class="ar">收货人：</td>
+        <td><?php echo CHtml::textField('Order[consignee]', $order_get['consignee'], array('class'=>'txt w100')); ?></td>
+        <td width="120" class="ar">用户名：</td>
         <td><?php echo CHtml::textField('Order[username]', $order_get['username'], array('class'=>'txt w100')); ?></td>
     </tr>
     <tr>
         <td width="120" class="ar">下单时间：</td>
-        <td><?php
+        <td colspan="3"><?php
 $this->widget('zii.widgets.jui.CJuiDatePicker', array(
     'name'=>'Order[create_time_start]',
     'value' => $order_get['create_time_start']?$order_get['create_time_start']:date(param('formatDate'), strtotime('last Week')),
@@ -38,11 +42,11 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
     </tr>
     <tr>
         <td width="120" class="ar">订单状态：</td>
-        <td><?php echo CHtml::radioButtonList('Order[status]', $order_get['status'], Order::$states, array('separator'=>''))?></td>
+        <td colspan="3"><?php echo CHtml::radioButtonList('Order[status]', $order_get['status'], Order::$states, array('separator'=>''))?></td>
     </tr>
     <tr>
     	<td width="120" class="ar">店铺分类：</td>
-        <td><?php echo CHtml::radioButtonList('Order[category_id]', $order_get['category_id'], ShopCategory::$categorys, array('separator'=>''))?></td>
+        <td colspan="3"><?php echo CHtml::radioButtonList('Order[category_id]', $order_get['category_id'], ShopCategory::$categorys, array('separator'=>''))?></td>
     </tr>
 </table>
 <?php $this->widget('zii.widgets.jui.CJuiButton',

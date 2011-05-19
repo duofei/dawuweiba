@@ -161,8 +161,8 @@ class OrderController extends Controller
 		    if ($order_get['create_time_end']) {
 		    	$condition->addCondition('t.create_time<=' . $end_time);
 		    }
-		    if ($order_get['username']) {
-		    	$condition->addSearchCondition('t.consignee', $order_get['username']);
+		    if ($order_get['consignee']) {
+		    	$condition->addSearchCondition('t.consignee', $order_get['consignee']);
 		    }
 		    if ($order_get['status'] != '') {
 		    	$condition->addColumnCondition(array('t.status' => $order_get['status']));
@@ -170,12 +170,18 @@ class OrderController extends Controller
 		    if ($order_get['category_id'] != '') {
 		    	$condition->addColumnCondition(array('shop.category_id' => $order_get['category_id']));
 		    }
+			if ($order_get['shop_name'] != '') {
+		    	$condition->addSearchCondition('shop.shop_name', $order_get['shop_name']);
+		    }
+			if ($order_get['username'] != '') {
+		    	$condition->addSearchCondition('user.username', $order_get['username']);
+		    }
 		    $condition->order = 't.id desc';
 		    $condition->limit = 20;
-		    $pages = new CPagination(Order::model()->with('shop')->count($condition));
+		    $pages = new CPagination(Order::model()->with('shop','user')->count($condition));
 			$pages->pageSize = 20;
 			$pages->applyLimit($condition);
-		    $order = Order::model()->with('shop')->findAll($condition);
+		    $order = Order::model()->with('shop','user')->findAll($condition);
 		}
 	    $this->render('search', array('order'=>$order, 'order_get'=>$order_get, 'pages'=>$pages));
 	}
