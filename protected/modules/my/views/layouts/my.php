@@ -27,7 +27,6 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
         <div class="location-nav fl ma-l10px lh15px">
         	<?php $this->renderDynamic('getUserLocation');?>
         </div>
-        <a href="<?php echo url('miaosha/index');?>"><img src="<?php echo resBu('images/banner_r1_c2.png');?>" class="fr" /></a>
     	<div class="clear"></div>
     </div>
     <div class="topnav f14px fb">

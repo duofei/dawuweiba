@@ -4,13 +4,13 @@
 	<div id=Layer1 style="Z-INDEX: 1; RIGHT: 0px;  position:absolute;">
 		<DIV id=flash1></DIV>
 		<script type=text/javascript>
-		var so = new SWFObject("<?php echo resBu('images/newindex/shujiao20110508.swf');?>", "mymovie", "250", "250", "7", "#336699");
-		so.addParam("quality", "high");
-		so.addParam("wmode", "transparent");
-		so.addParam("menu", "false");
-		so.addParam("scale", "noscale");
-		so.addParam("flashVars", document.location.search.substr(1));
-		so.write("flash1");
+//		var so = new SWFObject("<?php echo resBu('images/newindex/shujiao20110508.swf');?>", "mymovie", "250", "250", "7", "#336699");
+//		so.addParam("quality", "high");
+//		so.addParam("wmode", "transparent");
+//		so.addParam("menu", "false");
+//		so.addParam("scale", "noscale");
+//		so.addParam("flashVars", document.location.search.substr(1));
+//		so.write("flash1");
 		</script>
 	</div>
 	</div>
