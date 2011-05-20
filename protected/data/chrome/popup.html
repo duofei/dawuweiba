@@ -14,13 +14,20 @@ div span{color:red;}
 <script>
 $(function(){
 	$("#waitNum").html(localStorage['waitNum']);
-	$("#o_approve").html(localStorage['o_approve']);
-	$("#approveDiv").click(function(){
-		chrome.tabs.create({url: 'http://www.52wm.com/admin/order/approve.html'});
-	});
+	// 打印机不在线
 	$("#p_unline").html(localStorage['p_unline']);
 	$("#printerUnlineDiv").click(function(){
 		chrome.tabs.create({url: 'http://www.52wm.com/admin/printer/list.html'});
+	});
+	// 未处理订单
+	$("#o_undisposed").html(localStorage['o_undisposed']);
+	$("#orderUndisposedDiv").click(function(){
+		chrome.tabs.create({url: 'http://www.52wm.com/admin/order/today.html'});
+	});
+	// 待审核订单
+	$("#o_approve").html(localStorage['o_approve']);
+	$("#orderApproveDiv").click(function(){
+		chrome.tabs.create({url: 'http://www.52wm.com/admin/order/approve.html'});
 	});
 });
 </script>
@@ -29,6 +36,7 @@ $(function(){
 <div class="title">我爱外卖网提醒</div>
 <div>你还有<span id="waitNum">0</span>个未处理项：</div>
 <div>·<a href="javascript:void(0);" id="printerUnlineDiv">打印机有<span id="p_unline">0</span>个掉线</a></div>
+<div>·<a href="javascript:void(0);" id="orderUndisposedDiv">未处理订单<span id="o_undisposed">0</span>条</a></div>
 <div>·<a href="javascript:void(0);" id="approveDiv">待审核订单<span id="o_approve">0</span>条</a></div>
 </body>
 </html>

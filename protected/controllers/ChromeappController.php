@@ -25,6 +25,13 @@ class ChromeappController extends Controller
 		$criteria->addColumnCondition(array('city_id' => $cityId, 'verify_state'=>STATE_DISABLED, 'buy_type'=>Shop::BUYTYPE_PRINTER, 'status'=>Order::STATUS_UNDISPOSED));
 		$data['o_approve'] = Order::model()->count($criteria);
 		
+		/* 打印机商铺待处理订单 */
+		$data['o_undisposed'] = 0;
+		$criteria = new CDbCriteria();
+		$criteria->addColumnCondition(array('city_id' => $cityId, 'buy_type'=>Shop::BUYTYPE_PRINTER, 'status'=>Order::STATUS_UNDISPOSED));
+		$criteria->addCondition("create_time < " . time()-300);
+		$data['o_undisposed'] = Order::model()->count($criteria);
+		
 		echo json_encode($data);
 	}
 	
@@ -32,4 +39,6 @@ class ChromeappController extends Controller
 	{
 
 	}
+
+
 }

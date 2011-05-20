@@ -2,8 +2,8 @@ var request_interval;
 var music_interval;
 var notification;
 
-var rTime = 10000;
-var playTime = 60000;
+var rTime = 20000;		// 请求时间
+var playTime = 60000; 	// 播放声音
 var audioSrc = 'system.wav';
 
 /* 初始化 */
@@ -26,8 +26,10 @@ function getRequest() {
 			setValue('o_approve', o_approve);
 			var p_unline = data.p_unline;
 			setValue('p_unline', p_unline);
+			var o_undisposed = data.o_undisposed;
+			setValue('o_undisposed', o_undisposed);
 			
-			var waitNum = parseInt(o_approve) + parseInt(p_unline);
+			var waitNum = parseInt(o_approve) + parseInt(p_unline) + parseInt(o_undisposed);
 			waitNum = isNaN(waitNum) ? 0 : waitNum;
 			setValue('waitNum', waitNum);
 			
