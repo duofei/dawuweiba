@@ -39,6 +39,7 @@
 	    	<?php echo CHtml::activeDropDownList($model, 'district_id', $districtarray, array('id'=>'district_id'));?>
 	    </td>
 	  </tr>
+	  <!--
 	  <tr>
 	    <td class="ar">选择楼宇：</td>
 	    <td>
@@ -49,6 +50,7 @@
 		    <?php echo CHtml::activeHiddenField($model, 'map_y', array('id'=>'map_y'));?>
 	    </td>
 	  </tr>
+	   -->
 	  <tr>
 	    <td class="ar">详细地址：</td>
 	    <td><?php echo CHtml::activeTextField($model, 'address', array('class'=>'txt'));?></td>
@@ -142,7 +144,7 @@ $(function(){
 });
 </script>
 
-<?php 
+<?php
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id'=>'ShowBuildingDialog',
 	'htmlOptions' => array('class'=>'none'),
@@ -165,7 +167,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 <div class="search">
 	<label>搜索小区/大厦：</label>
 	<input type="text" id="building_key" class="txt" />
-	<input type="button" id="building_button" value="搜索" /> 
+	<input type="button" id="building_button" value="搜索" />
 	<label><?php echo l('如果没有找到我的小区/大厦？ 请点击这里', url('building/create'));?></label>
 </div>
 <div class="letter">
