@@ -202,7 +202,7 @@ class Controller extends CController
 			$i++;
 			if($i >= $nums) break;
 		}
-		$html .= '<p class="bg-icon location-search">' . l('搜索新地址', url('site/index', array('f'=>STATE_ENABLED))) . '</p></div></div>';
+		$html .= '<p class="bg-icon location-search">' . l('搜索新地址', 'javascript:meishiMapSearch();') . '</p></div></div>';
 		if(is_array($lastvisit)) {
 			$html = '<p class="cgray">位置：' . $lastvisit[0] . ',' . $lastvisit[1] . '</p>' . $html;
 		} else {

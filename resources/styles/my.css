@@ -144,3 +144,4 @@ ul.nav .select{background: #fff; height:27px; }
 #invite .icon_kaixin001{background:url(../images/invite_ico.png) 0px -192px no-repeat;}
 #invite .icon_qqweibo{background:url(../images/invite_ico.png) 0px -1760px no-repeat;}
 
+.meishi-show .ui-dialog-content{overflow:hidden;}

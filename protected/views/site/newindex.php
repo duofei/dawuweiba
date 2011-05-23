@@ -55,6 +55,7 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 <?php
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id'=>'ShowMap',
+	'htmlOptions' => array('class'=>'none'),
     'options'=>array(
         'title'=>'◎请在电子地图上查询您的位置',
         'autoOpen'=>false,

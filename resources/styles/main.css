@@ -252,3 +252,6 @@ table.order-view td {font-size:14px; font-weight:bold; line-height:40px; padding
 .groupon-price2{background:url(../images/same-3.png) repeat-x; height:15px;}
 .groupon-price3{background:url(../images/same-2.png) no-repeat; width:15px; height:15px;}
 .groupon-message{background:url(../images/pic.png) no-repeat -258px -1149px; height:30px; padding-left:35px}
+
+
+.meishi-show .ui-dialog-content{overflow:hidden;}

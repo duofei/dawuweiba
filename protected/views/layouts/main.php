@@ -48,7 +48,7 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
         $this->widget('zii.widgets.CBreadcrumbs', array(
             'htmlOptions' => array('id'=>'breadcrumbs', 'class'=>'breadcrumbs ma-t10px ma-b10px'),
             'separator' => '<span class="cred">&nbsp;&gt;&nbsp;</span>',
-            'homeLink' => l('地址搜索', url('site/index', array('f'=>STATE_ENABLED))),
+            'homeLink' => l('地址搜索', 'javascript:meishiMapSearch();'),
             'links'=> $this->breadcrumbs,
         ));
     ?>
@@ -61,6 +61,33 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
 <div class="space10pxline"></div>
 <div class="pop-tag"></div>
 <span class="none" id="overlayBox" cart="<?php echo aurl('cart/conflict');?>" location="<?php echo aurl('location/conflict');?>" selectBuilding="<?php echo aurl('cart/selectBuilding', array('shopid'=>$_GET['shopid'],'goodsid'=>$_GET['goodsid']));?>" noGroupInCart="<?php echo aurl('cart/noGroupInCart'); ?>" groupInCart="<?php echo aurl('cart/groupInCart'); ?>"></span>
+
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+    'id'=>'ShowMeishiMap',
+	'htmlOptions' => array('class'=>'none'),
+    'options'=>array(
+        'title'=>'◎请在电子地图上查询您的位置',
+        'autoOpen'=>false,
+		'width' => 830,
+		'height' => 540,
+		'modal' => true,
+		'draggable' => true,
+		'resizable' => false,
+		'dialogClass' => 'meishi-show'
+    ),
+));
+?>
+<iframe id="ShowMeishiMapIframe" src="about:black" width="840" height="498" frameborder="no" border="0" scrolling="no" allowtransparency="yes"></iframe>
+<?php
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+?>
+<script type="text/javascript">
+function meishiMapSearch() {
+	$("#ShowMeishiMapIframe").attr('src', '<?php echo aurl('ditu/search', array('cid'=>ShopCategory::CATEGORY_FOOD)); ?>');
+	$("#ShowMeishiMap").dialog("open");
+}
+</script>
 </body>
 </html>
 <?php
