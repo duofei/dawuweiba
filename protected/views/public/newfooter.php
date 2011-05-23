@@ -25,7 +25,7 @@
         <div class="lh24 c999">
         	<div style="float:left; margin-right:20px;"><img src="<?php echo resBu('images/newindex/pic02.jpg');?>" /></div>
         	<p>本站所有店铺图片资料及文字资料未经书面许可 不得转载 违者必究</p>
-            <p>2010-2011 我爱外卖网 52WM.com </p>
+            <p>2010-2011 我爱外卖网 52WM.com  <a href="http://www.miitbeian.gov.cn/" target="_blank">鲁ICP备10205272号-1</a></p>
         </div>
     </div>
 </div>
