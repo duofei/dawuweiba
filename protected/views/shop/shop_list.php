@@ -20,6 +20,7 @@
         	    <?php echo $v->isSanitaryIcon;?>
         	    <?php echo $v->isCommercialIcon;?>
         	    <?php echo $v->isSignerIcon;?>
+        	    <?php echo $v->isBcshopIcon;?>
     		</h1></dd>
     		<?php if ($groupon):?>
     		<dt>达成条件：同楼所有订单总额达到<span class="cyellow"><?php echo (int)$v->group_success_price;?></span>元</dt>

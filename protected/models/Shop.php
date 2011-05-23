@@ -40,6 +40,7 @@
  * @property float $group_success_price
  * @property integer $reserve_hour
  * @property integer $is_muslim
+ * @property integer $is_bcshop
  * @property integer $is_approve
  * @property string $commercial_instrument
  * @property string $sanitary_license
@@ -210,7 +211,7 @@ class Shop extends CActiveRecord
 			array('user_id, shop_name, category_id, district_id, telphone, owner_name, owner_card, address', 'required', 'on'=>'insert'),
 			array('user_id, shop_name, category_id, district_id', 'required', 'on'=>'update'),
 			array('user_id, shop_name', 'required', 'on'=>'adminPost'),
-			array('user_id, category_id, district_id, create_time, update_time, order_nums, visit_nums, favorite_nums, comment_nums, taste_mark_nums, taste_mark, service_mark_nums, service_mark, business_state, is_group, is_muslim, is_sanitary_approve, is_commercial_approve, is_dailymenu, undressed_order_nums, goods_nums, buy_type, pay_type, coupon_nums, update_time, state, yewu_id, printer_no', 'numerical', 'integerOnly'=>true),
+			array('user_id, category_id, district_id, create_time, update_time, order_nums, visit_nums, favorite_nums, comment_nums, taste_mark_nums, taste_mark, service_mark_nums, service_mark, business_state, is_group, is_muslim, is_bcshop, is_sanitary_approve, is_commercial_approve, is_dailymenu, undressed_order_nums, goods_nums, buy_type, pay_type, coupon_nums, update_time, state, yewu_id, printer_no', 'numerical', 'integerOnly'=>true),
 			array('map_x, map_y', 'numerical'),
 			array('nick', 'unique'),
 			array('shop_name', 'length', 'max'=>100),
@@ -226,7 +227,7 @@ class Shop extends CActiveRecord
 			array('group_success_price, transport_amount, transport_amount2, transport_amount3, dispatching_amount, dispatching_amount2, dispatching_amount3', 'numerical', 'max'=>99999.99, 'min'=>0),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, shop_name, user_id, category_id, district_id, logo, desc, address, map_x, map_y, map_region, map_region2, map_region3, transport_amount, transport_amount2, transport_amount3, dispatching_amount, dispatching_amount2, dispatching_amount3, telphone, mobile, service_mark_nums, service_mark, qq, business_state, business_time, transport_time, transport_condition, transport_condition2, transport_condition3, pay_account, is_group, reserve_hour, is_muslim, is_sanitary_approve,is_commercial_approve, is_dailymenu, commercial_instrument, sanitary_license, owner_name, owner_card, create_time, update_time, create_ip, update_ip, order_nums, undressed_order_nums, goods_nums, visit_nums, favorite_nums, comment_nums, taste_mark_nums, taste_mark, buy_type, pay_type, announcement, coupon_nums, state, group_success_price, yewu_id, printer_no, remark, nick', 'safe', 'on'=>'search'),
+			array('id, shop_name, user_id, category_id, district_id, logo, desc, address, map_x, map_y, map_region, map_region2, map_region3, transport_amount, transport_amount2, transport_amount3, dispatching_amount, dispatching_amount2, dispatching_amount3, telphone, mobile, service_mark_nums, service_mark, qq, business_state, business_time, transport_time, transport_condition, transport_condition2, transport_condition3, pay_account, is_group, reserve_hour, is_muslim, is_sanitary_approve,is_commercial_approve, is_dailymenu, commercial_instrument, sanitary_license, owner_name, owner_card, create_time, update_time, create_ip, update_ip, order_nums, undressed_order_nums, goods_nums, visit_nums, favorite_nums, comment_nums, taste_mark_nums, taste_mark, buy_type, pay_type, announcement, coupon_nums, state, group_success_price, yewu_id, printer_no, remark, nick, is_bcshop', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -318,6 +319,7 @@ class Shop extends CActiveRecord
 			'group_success_price' => '同楼订餐成功金额',
 			'reserve_hour' => '预订提前时间',
 			'is_muslim' => '是否清真',
+			'is_bcshop' => '是否支持白吃点',
 			'is_sanitary_approve' => '是否通过卫生许可证认证',
 			'is_commercial_approve' => '是否通过营业许可证认证',
 			'is_dailymenu' => '是否支持每日菜单',
@@ -424,6 +426,7 @@ class Shop extends CActiveRecord
 		$criteria->compare('reserve_hour',$this->reserve_hour);
 
 		$criteria->compare('is_muslim',$this->is_muslim);
+		$criteria->compare('is_bcshop',$this->is_bcshop);
 
 		$criteria->compare('is_sanitary_approve',$this->is_sanitary_approve);
 		
@@ -1052,14 +1055,31 @@ class Shop extends CActiveRecord
 	{
 	   	if($this->buy_type == Shop::BUYTYPE_PRINTER) {
 		 	return CHtml::image(resBu('images/pixel.gif'),
-		        '签约商铺',
+		        '该店铺为签约商铺',
 		        array(
-		            'title' => '签约商铺',
+		            'title' => '该店铺为签约商铺',
 		            'class' => 'bg-icon is-signer'
 		        )
 		    );
 	   	}
 	   	return null;
+	}
+	
+	
+	/**
+	 * 生成是否支持白吃点的小图标
+	 * @param string HTML Code
+	 */
+	public function getIsBcshopIcon()
+	{
+	    if (STATE_ENABLED != $this->is_bcshop) return null;
+	    return CHtml::image(resBu('images/pixel.gif'),
+	        '该店铺支持白吃点的使用',
+	        array(
+	            'title' => '该店铺支持白吃点的使用',
+	            'class' => 'bg-icon is-bcshop'
+	        )
+	    );
 	}
 	
 	/**

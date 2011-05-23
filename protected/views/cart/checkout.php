@@ -1,5 +1,5 @@
 <div class="checkout_1" id="cart" view="checkout_cart">
-	<?php $this->renderPartial('/cart/checkout_cart', array('cart'=>$cart, 'miaosha_state'=>$miaosha_state));?>
+	<?php $this->renderPartial('/cart/checkout_cart', array('cart'=>$cart));?>
 </div>
 <div class="space10pxline"></div>
 <?php if($cart[0]->goods->shop->buy_type == Shop::BUYTYPE_TELPHONE):?>
@@ -14,15 +14,7 @@
 	<h3 class="f18px ma-b20px pa-l20px lh30px">登录后才能下订单！</h3>
 	<?php else:?>
 	<form method="post" id="addressPost">
-		<?php if($miaosha_state):?>
-		<p class="f16px lh24px pa-l20px fb">一元秒杀活动</p>
-		<ul class="lh40px pa-l20px ma-t5px ma-b10px">
-			<li class="h40px f14px">
-				为您优惠<?php echo Cart::getGoodsAmount()+$cart[0]->goods->shop->matchDispatchingAmount - 1;?>元，本订单您仅需1元
-			</li>
-		</ul>
-		<?php endif;?>
-		<?php if($usebcnum >= 1 && !$miaosha_state):?>
+		<?php if($usebcnum >= 1 && $cart[0]->goods->shop->is_bcshop==STATE_ENABLED):?>
 		<p class="f16px lh24px pa-l20px fb">使用白吃点</p>
 		<ul class="lh40px pa-l20px ma-t5px ma-b10px">
 			<?php if($user->bcnums):?>

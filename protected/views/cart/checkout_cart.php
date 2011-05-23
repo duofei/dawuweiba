@@ -23,18 +23,10 @@ if (count($cart) == 0) {
             <td class=" indent24px"><?php echo $v->goods_name;?></td>
             <td width="80" ><?php echo (int)$v->goods_price;?></td>
             <td width="80">&yen;<?php echo $v->goods_price;?></td>
-            <td width="80" >
-            <?php if($miaosha_state):?>
-			<?php echo $v->goods_nums;?>
-            <?php else: ?>
-            <input name="" type="text" value="<?php echo $v->goods_nums;?>" class="goods-nums" />
-            <?php endif;?>
-            </td>
+            <td width="80" ><input name="" type="text" value="<?php echo $v->goods_nums;?>" class="goods-nums" /></td>
             <td width="80" >&yen;<?php echo $v->goods_price * $v->goods_nums;?></td>
             <td width="80">
-            <?php if(!$miaosha_state):?>
             <?php echo l('删除', url('cart/delete', array('cartid'=>$v->id)), array('class'=>'cart-del', 'gid'=>$v->goods_id));?>
-            <?php endif;?>
             </td>
 		</tr>
 	<?php $totalPrice += $v->goods_price*$v->goods_nums;

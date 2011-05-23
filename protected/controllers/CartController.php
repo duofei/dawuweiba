@@ -199,8 +199,10 @@ class CartController extends Controller
 	  		$this->redirect(url('cart/empty'));
 	    }
 	    $data['cart'] = $cart;
-	    
-		$data['user'] = User::model()->findByPk(user()->id);
+		
+	    /* 获取已登陆用户信息 */
+	    $data['user'] = User::model()->findByPk(user()->id);
+		
 	    /* 白吃点处理 */
 	    $data['usebcnum'] = intval((Cart::getGoodsAmount()+$cart[0]->goods->shop->matchDispatchingAmount)/10);
 	    $data['allowUseBcnum'] = 0;
@@ -210,26 +212,13 @@ class CartController extends Controller
 	    	$data['allowUseBcnum'] = $data['user']->bcnums;
 	    }
 	    
-	    /* 秒杀处理 */
-	    $data['miaosha_state'] = false;
-	    if($_GET['miaosha_id']) {
-	    	$miaosha_id = intval($_GET['miaosha_id']);
-	    	$criteria = new CDbCriteria();
-	    	$criteria->addColumnCondition(array('miaosha_id'=>$miaosha_id, 'user_id'=>user()->id, 'order_id'=>0));
-	    	$miaoshaResult = MiaoshaResult::model()->find($criteria);
-	    	if($miaoshaResult) {
-	    		if($miaoshaResult->goods_id == $cart[0]->goods_id && !$cart[1]) {
-	    			$data['miaosha_state'] = true;
-	    		}
-	    	}
-	    }
 	    if (app()->request->isPostRequest && isset($_POST['UserAddress'])) {
+	    	/* 如果低于起送条件，直接返回。*/
 	    	if(Cart::getGoodsAmount() < $cart[0]->goods->shop->matchTransportAmount) {
 	    		$this->redirect(url('cart/checkout'));
 	    	}
-	        /*
-	         * 保存或添加收货人地址
-	         */
+	    	
+	        /* 保存或添加收货人地址 */
 	        $uaid = (int)$_POST['UserAddress']['id'];
 	        if (empty($uaid))
 	            $userAddress = new UserAddress();
@@ -283,77 +272,13 @@ class CartController extends Controller
 	           	if(is_array($lastvisit))  $lastvisit = 0;
 	           	$order->building_id = $lastvisit;
 	           	
-	           	/* 使用白吃点 */
+	           	/* 使用白吃点处理 */
 	           	$useBcnumState = false;
 		    	$postBcnum = intval($_POST['bcnum']);
-	            if($postBcnum > 0 && $postBcnum <= $data['allowUseBcnum']) {
+	            if($postBcnum > 0 && $postBcnum <= $data['allowUseBcnum'] && $cart[0]->goods->shop->is_bcshop==STATE_ENABLED) {
 	            	$order->paid_amount = $postBcnum;
 	            	$order->paid_remark = '使用' . $postBcnum . '点白吃点';
 	            	$useBcnumState = true;
-	            }
-	            
-	            /* 秒杀活动处理 */
-	            if($data['miaosha_state']) {
-	      			/* 使用新的秒杀 */
-	            	$this->redirect(url('miaosha2/fail'));
-	            	exit;
-	            	
-	            	/* 过滤IP */
-	            	$ipArray = array('219.218.121.210', '219.218.121.209', '219.218.121.208' ,'219.218.121.211', '124.133.15.227', '127.0.0.1');
-	            	if(in_array($_SERVER['REMOTE_ADDR'], $ipArray)) {
-	            		sleep(1);
-	            		$this->redirect(url('miaosha/fail'));
-	            		exit;
-	            	}
-	            	
-	            	/* 过滤手机号 */
-	            	$phoneArray = MiaoshaResult::getSuccessUserTelphone();
-	            	if(in_array($order->telphone, $phoneArray)) {
-	            		sleep(1);
-	            		$this->redirect(url('miaosha/fail'));
-	            		exit;
-	            	}
-	            	
-	            	/* 过滤Cookie */
-	            	if($_COOKIE['miaosha']) {
-	            		sleep(1);
-	            		$this->redirect(url('miaosha/fail'));
-	            		exit;
-	            	}
-	            	
-	            	/* 判断用户今天是否已抢到过订单 */
-			        $criteria = new CDbCriteria();
-					$criteria->addColumnCondition(array('user_id'=>user()->id));
-					$criteria->addBetweenCondition('create_time', mktime(0,0,0,date('m'),date('d'),date('Y')), mktime(23,59,59,date('m'),date('d'),date('Y')));
-					$criteria->addCondition('order_id > 0');
-					$myMiaosha = MiaoshaResult::model()->count($criteria);
-					if($myMiaosha > 0) {
-						sleep(1);
-						$this->redirect(url('miaosha/fail'));
-						exit;
-					}
-					
-			    	$criteria = new CDbCriteria();
-			    	$criteria->addColumnCondition(array('miaosha_id'=>$miaosha_id));
-			    	$criteria->addCondition('order_id > 0');
-			    	$resultCount = MiaoshaResult::model()->count($criteria);
-			    	$miaosha = Miaosha::model()->findByPk($miaosha_id);
-			    	if($miaosha->state!=Miaosha::STATE_OPEN || $resultCount >= $miaosha->active_num) {
-			    		$miaoshaResult->create_time = time();
-			    		$miaoshaResult->save();
-			    		if($miaosha->state == Miaosha::STATE_OPEN) {
-			    			$miaosha->state = Miaosha::STATE_OVER;
-			    			$miaosha->save();
-			    		}
-			    		$this->redirect(url('miaosha/fail'));
-			    		exit;
-			    	} else {
-			    		$order->paid_amount = Cart::getGoodsAmount() + $cart[0]->goods->shop->matchDispatchingAmount - 1;
-	            		$order->paid_remark = '一元秒杀活动优惠' . $order->paid_amount . '元';
-	            		if($resultCount == 0) {
-	            			MiaoshaResult::addUntrues($miaosha_id);
-	            		}
-			    	}
 	            }
 	            
 	            if ($order->save()) {
@@ -361,9 +286,6 @@ class CartController extends Controller
 		            if($cart[0]->goods->shop->pay_type == Shop::PAYTYPE_ONLINE) {
 		            	$this->redirect(url('alipay/pay', array('orderid'=>$order->id)));
 		            }
-		            //if($cart[0]->goods->shop->buy_type == Shop::BUYTYPE_SMS) {
-		            	// 发送短信
-		            //}
 		            if($is_group && $lastvisit) {
 		            	Groupon::addOrder($order);
 		            }
@@ -378,25 +300,6 @@ class CartController extends Controller
 		            	$userbclog->source = UserBcintegralLog::SOURCE_CONSUME;
 		            	$userbclog->integral = $postBcnum * -1;
 		            	$userbclog->save();
-		            }
-		            /* 如果秒杀活动 */
-		            if($data['miaosha_state'] && $miaoshaResult) {
-		            	$miaoshaResult->order_id = $order->id;
-		            	$miaoshaResult->create_time = time();
-		            	$miaoshaResult->save();
-		            	/* 秒杀成功后设置Cookie */
-		            	setcookie('miaosha', '1', time()+7200);
-		            	/* 如果秒杀数量达到 结束当前秒杀 */
-		            	$criteria = new CDbCriteria();
-			    		$criteria->addColumnCondition(array('miaosha_id'=>$miaosha_id));
-			    		$criteria->addCondition('order_id > 0');
-			    		$resultCount = MiaoshaResult::model()->count($criteria);
-		            	if($resultCount >= $miaosha->active_num) {
-			            	if($miaosha->state == Miaosha::STATE_OPEN) {
-				    			$miaosha->state = Miaosha::STATE_OVER;
-				    			$miaosha->save();
-				    		}
-		            	}
 		            }
 		            /* 完成订单跳转到成功显示页面 */
 	                $this->redirect(url('order/view', array('orderid'=>$order->id, 'ordersn'=>$order->orderSn)));

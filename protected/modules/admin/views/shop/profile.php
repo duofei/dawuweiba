@@ -68,6 +68,10 @@ $iss = array(
         <td><?php echo CHtml::activeRadioButtonList($shop_info, 'pay_type', $iss, array('separator'=>'&nbsp;')); ?><span class="cred">*</span></td>
     </tr>
     <tr>
+        <td class="ar">是否支持白吃点：</td>
+        <td><?php echo CHtml::activeRadioButtonList($shop_info, 'is_bcshop', $iss, array('separator'=>'&nbsp;')); ?><span class="cred">*</span></td>
+    </tr>
+    <tr>
         <td class="ar">审核：</td>
         <td><?php echo CHtml::activeRadioButtonList($shop_info, 'state', Shop::$states, array('separator'=>'&nbsp;')); ?><span class="cred">*</span></td>
     </tr>
