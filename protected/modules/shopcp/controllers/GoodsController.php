@@ -955,6 +955,27 @@ class GoodsController extends Controller
 		$this->redirect(url('shopcp/goods/list'));
 	}
 	
+	/**
+	 * 商品排序
+	 */
+	public function actionOrderid()
+	{
+		$goodsid = intval($_POST['goodsid']);
+		$orderid = intval($_POST['orderid']);
+		$shop_id = $_SESSION['shop']->id;
+		$c = new CDbCriteria();
+		$c->addColumnCondition(array('shop_id'=>$shop_id));
+		$goods = Goods::model()->findByPk($goodsid, $c);
+		if($goods) {
+			$goods->orderid = $orderid;
+			if($goods->save()) {
+				echo '1';
+				exit;
+			}
+		}
+		echo '0';
+	}
+	
 	public function filters()
 	{
 	    return array(

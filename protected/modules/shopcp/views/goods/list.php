@@ -8,6 +8,7 @@
         <th class="al" width="50"><?php echo $sort->link('wm_price', '外卖价');?></th>
         <?php if ($_SESSION['shop']->is_group):?><th class="al" width="50">团购价</th><?php endif;?>
         <th class="al" width="50"><?php echo $sort->link('state', '状态');?></th>
+        <th width="50">排序</th>
         <th class="al" width="120">操作</th>
     </tr>
   <?php foreach ((array)$goods_list as $k=>$v) :?>
@@ -25,6 +26,7 @@
     <td class="al"><?php echo $val->foodGoods->wmPrice?>元</td>
     <?php if ($_SESSION['shop']->is_group):?><td class="al"><?php echo $val->foodGoods->groupPrice;?>元</td><?php endif;?>
     <td class="al state<?php echo $val->state;?>"><?php echo $val->stateText?></td>
+    <td class="ac"><input type="text" goodsid="<?php echo $val->id?>" value="<?php echo $val->orderid;?>" class="txt orderid" style="width:24px" /></td>
     <td class="al"><a href="<?php echo url('shopcp/goods/edit', array(id=>$val->id))?>"><span class="color">编辑</span></a>
     <?php if ($val->state != Goods::STATE_SELL) :?>
     	<a href="<?php echo url('shopcp/goods/state', array(id=>$val->id, state=>'1'))?>"><span class="color">上架</span></a>
@@ -46,7 +48,8 @@
   <tr><td colspan="7">
   	<a href="javascript:void(0);" onclick="selectAll()">全选</a>/<a href="javascript:void(0);" onclick="counterSelect()">反选</a>
   	<?php echo CHtml::submitButton('删除', array('onclick'=>'return confirm("确定要删除吗？");'));?>
-  </td></tr>
+  </td>
+  </tr>
   <?php endif;?>
 </table>
 <?php echo CHtml::endForm();?>
@@ -58,10 +61,19 @@
 $(function() {
     $("div.pictext").mouseover(function(){
 	 	$(this).next("div.pic").attr("class","pic showbox");
-	})
+	});
 	$("div.pictext").mouseout(function(){
 		$(this).next("div.pic").attr("class","pic none showbox");
-	})
+	});
+	$('.orderid').change(function(){
+		var orderid = $(this).val();
+		var goodsid = $(this).attr('goodsid');
+		$.post("<?php echo url('shopcp/goods/orderid')?>",{orderid:orderid, goodsid:goodsid}, function(data){
+			if(data == '1') {
+				location.reload();
+			}
+		});
+	});
 });
 
 function selectAll() {
