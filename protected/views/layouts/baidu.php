@@ -24,7 +24,7 @@
 </html>
 
 <?php
-cs()->registerCssFile(resBu('baidu/styles/baidu.css'), 'screen');
+cs()->registerCssFile(resBu('baidu/styles/baidu.css?t=2011052501'), 'screen');
 cs()->registerCoreScript('jquery');
 ?>
 <script type="text/javascript">

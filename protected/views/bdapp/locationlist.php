@@ -28,7 +28,7 @@
         <div class="megas512"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
         <!-- fanye end -->
     </div>
-    <div style="font-size:0px;"><img src="<?php echo resBu('baidu/img/pic12.png');?>" /></div>
+    <div class="bottom-line"><img src="<?php echo resBu('baidu/img/pic12.png');?>" /></div>
 </div>
 
 <?php cs()->registerCoreScript('jquery');?>
