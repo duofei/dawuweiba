@@ -16,10 +16,14 @@ $shopSetting = array(
     array('label' => '每日菜单', 'url'=>url('shopcp/goods/daylist')),
     array('label' => '配送员管理', 'url'=>url('shopcp/delivery/list')),
     array('label' => '优惠信息管理', 'url'=>url('shopcp/promotion/list')),
+    array('label' => '优惠券管理', 'url'=>url('shopcp/voucher/list')),
     array('label' => '店铺设置', 'url'=>url('shopcp/shop/profile')),
     array('label' => '商家认证', 'url'=>url('shopcp/shop/approve')),
     array('label' => '修改密码', 'url'=>url('shopcp/shop/editpassword')),
 );
+if($_SESSION['shop']->buy_type == Shop::BUYTYPE_TELPHONE) {
+	unset($shopSetting[4]);
+}
 if ($_SESSION['shop']->category_id != ShopCategory::CATEGORY_FOOD) {
 	unset($shopSetting[1]);
 }

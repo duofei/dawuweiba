@@ -117,6 +117,9 @@
 		<li class="ac ma-r10px f14px fb <?php echo $tab_rating;?>"><?php echo l('热门点评', url('shop/show', array('shopid'=>$shop->id, 'tab'=>'rating')));?></li>
 		<li class="ac ma-r10px f14px fb <?php echo $tab_comment;?>"><?php echo l('用户留言', url('shop/show', array('shopid'=>$shop->id, 'tab'=>'comment')));?></li>
 		<li class="ac ma-r10px f14px fb <?php echo $tab_promotion;?>"><?php echo l('优惠信息', url('shop/show', array('shopid'=>$shop->id, 'tab'=>'promotion')));?></li>
+		<?php if($shop->is_voucher):?>
+		<li class="ac ma-r10px f14px fb <?php echo $tab_voucher;?>"><?php echo l('优惠券', url('shop/show', array('shopid'=>$shop->id, 'tab'=>'voucher')));?></li>
+		<?php endif;?>
 	</ul>
     <?php echo $this->renderPartial($tab, $$tab);?>
     <?php $this->endWidget();?>
