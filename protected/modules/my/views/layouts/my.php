@@ -62,7 +62,7 @@ echo CHtml::script('BU = \'' . abu() . '\'; RESBU = \'' . resBu() . '\'; SBU = \
      		<dd><a href="<?php echo url('my/address/list'); ?>" class="<?php if ($this->id == 'address') echo 'active'; else echo 'normal';?>"><span class="ico7">我的地址</span></a></dd>
      		<dd><a href="<?php echo url('my'); ?>" class="<?php if ($this->id == 'default' && $this->action->id == 'index') echo 'active'; else echo 'normal';?>"><span class="ico1">账户概览</span></a></dd>
      		<dd><a href="<?php echo url('my/default/profile'); ?>" class="<?php if ($this->id == 'default' && $this->action->id == 'profile') echo 'active'; else echo 'normal';?>"><span class="ico2">个人资料</span></a></dd>
-     		<dd><a href="<?php echo url('my/message/list'); ?>" class="<?php if ($this->id == 'message') echo 'active'; else echo 'normal';?>"><span class="ico3">系统消息</span></a></dd>
+     		<dd><a href="<?php echo url('my/message/list'); ?>" class="<?php if ($this->id == 'message') echo 'active'; else echo 'normal';?>"><span class="ico3">短消息</span></a></dd>
      		<dd><a href="<?php echo url('my/tuannav/favorite'); ?>" class="<?php if ($this->id == 'tuannav') echo 'active'; else echo 'normal';?>"><span class="ico4">团购管理</span></a></dd>
      		<dd><a href="<?php echo url('my/default/inviteurl'); ?>" class="<?php if ($this->id == 'default' && $this->action->id == 'inviteurl') echo 'active'; else echo 'normal';?>"><span class="ico8">邀请好友</span></a></dd>
      	</dl>
