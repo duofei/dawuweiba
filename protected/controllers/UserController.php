@@ -55,13 +55,13 @@ class UserController extends Controller
 		$sid = $_GET['sid'];
 		
 		if(!$uid || !$sid) {
-			$this->render('error', array('message'=>'对不起您的操作有误!'));
+			$this->redirect(url('my/user/emailquit'));
 			exit;
 		}
 
 		$user = User::model()->findByPk($uid);
 		if($user === null) {
-			$this->render('error', array('message'=>'对不起您的操作有误!'));
+			$this->redirect(url('my/user/emailquit'));
 			exit;
 		}
 		
@@ -73,8 +73,7 @@ class UserController extends Controller
 			$identity->authenticate();
 			user()->login($identity);
 			app()->fileCache->set($key, '', 1);
-			$this->redirect(url('my/user/emailquit'));
 		}
-		$this->render('error', array('message'=>'对不起您的操作有误!'));
+		$this->redirect(url('my/user/emailquit'));
 	}
 }
