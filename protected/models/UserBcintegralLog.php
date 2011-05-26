@@ -23,6 +23,7 @@ class UserBcintegralLog extends CActiveRecord
     const SOURCE_CONSUME = 3;
     const SOURCE_INVITER = 4;
     const SOURCE_INVITEE = 5;
+    const SOURCE_SYSGIVE = 6;
 
     public static $sources = array(
         self::SOURCE_INTERGRAL => '积分兑换',
@@ -30,6 +31,7 @@ class UserBcintegralLog extends CActiveRecord
         self::SOURCE_CONSUME => '消费',
         self::SOURCE_INVITER => '邀请好友',
         self::SOURCE_INVITEE => '被好友邀请',
+        self::SOURCE_SYSGIVE => '系统赠送'
     );
     
 	/**
