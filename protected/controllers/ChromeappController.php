@@ -37,8 +37,7 @@ class ChromeappController extends Controller
 	
 	public function actionUpdates()
 	{
-
+		$this->layout = 'blank';
+		$this->render('updates');
 	}
-
-
 }
