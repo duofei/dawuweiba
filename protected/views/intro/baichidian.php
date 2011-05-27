@@ -71,3 +71,4 @@ b、被邀请人必须完成一次有效购买（有效购买是指在网站上�
 </div>
 </body>
 </html>
+<?php echo $this->renderPartial('/public/tongji');?>
