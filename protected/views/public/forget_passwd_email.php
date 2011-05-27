@@ -47,7 +47,7 @@
         <td style="padding:0 20px "><a href="http://www.52wm.com" style="color:#006dd4;">我爱外卖网_爱生活 爱外卖</a></td>
     </tr>
     <tr>
-        <td style="padding:0 20px">网址：<a href="http://www.52wm.com" style="color:#006dd4;">http://www.52wm.cn/</a></td>
+        <td style="padding:0 20px">网址：<a href="http://www.52wm.com" style="color:#006dd4;">http://www.52wm.com/</a></td>
     </tr>
     <tr>
         <td style="padding:0 20px">客服电话：0531-5555547</td>

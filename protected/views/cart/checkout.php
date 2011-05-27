@@ -14,14 +14,15 @@
 	<h3 class="f18px ma-b20px pa-l20px lh30px">登录后才能下订单！</h3>
 	<?php else:?>
 	<form method="post" id="addressPost">
-		<?php if($usebcnum >= 1 && $cart[0]->goods->shop->is_bcshop==STATE_ENABLED):?>
+		<?php if($cart[0]->goods->shop->is_bcshop==STATE_ENABLED):?>
+		<?php if($usebcnum >= 1):?>
 		<p class="f16px lh24px pa-l20px fb">使用白吃点</p>
 		<ul class="lh40px pa-l20px ma-t5px ma-b10px">
 			<?php if($user->bcnums):?>
 			<li class="h40px f14px">
 				您有<?php echo $user->bcnums;?>点白吃点，最多可以使用
 				<input type="text" value="<?php echo $allowUseBcnum;?>" name="bcnum" onblur="bcnumBlur(this,'<?php echo $allowUseBcnum;?>')" class="txt f16px ar" style="width:30px" />
-				点。<?php echo l('我要获取更多白吃点', url('intro/baichidian'))?>。
+				点。<?php echo l('我要获取更多白吃点', url('intro/baichidian'), array('target'=>'_blank'))?>。
 			</li>
 			<?php else:?>
 			<li class="h40px f14px">
@@ -29,6 +30,14 @@
 			</li>
 			<?php endif;?>
 		</ul>
+		<?php else: ?>
+		<p class="f16px lh24px pa-l20px fb">使用白吃点</p>
+		<ul class="lh40px pa-l20px ma-t5px ma-b10px">
+			<li class="h40px f14px">
+				此商铺支持白吃点的使用，但您的订单没有超过10元。<a href="<?php echo url('intro/baichidian');?>" target="_blank">查看使用规则</a>。
+			</li>
+		</ul>
+		<?php endif;?>
 		<?php endif;?>
 		<input type="hidden" name="UserAddress[id]" id="addressid" value="<?php echo $address_default->id;?>" />
 		<input type="hidden" name="editAddress" id="editAddress" value="0" />
