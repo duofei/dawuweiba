@@ -192,6 +192,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus{-moz-box-
 /* icons */
 .is-new {background-position:-8px -410px; width:15px; height:15px; margin-left:2px;}
 .is-bcshop {background-position:-8px -1227px; width:15px; height:15px; margin-left:2px;}
+.is-voucher {background-position:-8px -1252px; width:15px; height:15px; margin-left:2px;}
 .is-signer {background-position:-8px -1204px; width:15px; height:15px; margin-left:2px;}
 .is-muslim {background-position:-8px -747px; width:15px; height:15px; right:0px; bottom:0px;}
 .is-spicy {background-position:-8px -713px; width:15px; height:15px; margin-left:2px;}

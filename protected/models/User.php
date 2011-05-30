@@ -43,6 +43,7 @@
  * @property integer $super_admin
  * @property integer $super_shop
  * @property integer $approve_state
+ * @property integer $is_sendmail
  */
 class User extends CActiveRecord
 {
@@ -123,7 +124,7 @@ class User extends CActiveRecord
 		    array('password', 'filter', 'filter'=>'md5', 'on'=>'insert'),
 		    array('state', 'default', 'value'=>1, 'setOnEmpty'=>false, 'on'=>'insert'),
 		    array('email', 'email'),
-			array('gender, source, source_uid, create_time, last_login_time, login_nums, integral, credit, credit_nums, bcnums, city_id, district_id, office_building_id, home_building_id, state, manage_city_id, super_admin, super_shop, approve_state', 'numerical', 'integerOnly'=>true),
+			array('gender, source, source_uid, is_sendmail, create_time, last_login_time, login_nums, integral, credit, credit_nums, bcnums, city_id, district_id, office_building_id, home_building_id, state, manage_city_id, super_admin, super_shop, approve_state', 'numerical', 'integerOnly'=>true),
 			array('username, realname', 'length', 'max'=>60),
 			array('office_map_x, office_map_y, home_map_x, home_map_y', 'numerical'),
 			array('password', 'length', 'max'=>32),
@@ -133,7 +134,7 @@ class User extends CActiveRecord
 			array('birthday', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, email, credit_nums, realname, gender, birthday, telphone, mobile, create_time, create_ip, last_login_time, last_login_ip, login_nums, portrait, integral, credit, bcnums, qq, msn, city_id, source, source_uid, district_id, office_building_id, home_building_id, office_map_x, office_map_y, home_map_x, home_map_y, state, manage_city_id, super_admin, super_shop, approve_state', 'safe', 'on'=>'search'),
+			array('id, username, email, credit_nums, is_sendmail, realname, gender, birthday, telphone, mobile, create_time, create_ip, last_login_time, last_login_ip, login_nums, portrait, integral, credit, bcnums, qq, msn, city_id, source, source_uid, district_id, office_building_id, home_building_id, office_map_x, office_map_y, home_map_x, home_map_y, state, manage_city_id, super_admin, super_shop, approve_state', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -241,6 +242,7 @@ class User extends CActiveRecord
            	'super_admin' => '超级管理人员',
            	'super_shop' => '超级商家',
 			'approve_state' => '认证状态',
+			'is_sendmail' => '是否接受邮件',
 		);
 	}
 	
@@ -464,6 +466,7 @@ class User extends CActiveRecord
 		$criteria->compare('super_shop',$this->super_shop);
 		
 		$criteria->compare('approve_state',$this->approve_state);
+		$criteria->compare('is_sendmail',$this->is_sendmail);
 
 		return new CActiveDataProvider('User', array(
 			'criteria'=>$criteria,

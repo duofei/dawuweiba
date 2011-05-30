@@ -119,7 +119,7 @@ class ShopController extends Controller
 	{
 	    $shopid = (int)$shopid;
 	    /* tab(在线菜单 热门点评 用户留言 优惠信息 ) */
-	    $tabArray = array('rating', 'comment', 'promotion');
+	    $tabArray = array('rating', 'comment', 'promotion', 'voucher');
 	    $tab = isset($_GET['tab']) ? $_GET['tab'] : null;
 	    $criteria = new CDbCriteria();
 	    /* 如果是商铺自己查看，不检查状态都显示 */
@@ -137,7 +137,7 @@ class ShopController extends Controller
 			$data[$tab] = $this->{load.$tab}($shopid);
 			/* 处理tab切换效果 */
 	        $data['tab_'.$tab] = 'bg-pic active';
-	        $title = array('rating'=>'热门评论', 'comment'=>'用户留言', 'promotion'=>'优惠信息');
+	        $title = array('rating'=>'热门评论', 'comment'=>'用户留言', 'promotion'=>'优惠信息', 'voucher'=>'优惠券');
 	        $this->pageTitle = $shop->shop_name . $title[$tab];
 	    } else {
 	    	if($shop->category_id == ShopCategory::CATEGORY_FOOD) {
@@ -356,6 +356,20 @@ class ShopController extends Controller
 
 		$data = array(
 			'list' => $promotion,
+		);
+		return $data;
+	}
+	/**
+	 * 优惠券
+	 */
+	private function loadvoucher($shopid)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addColumnCondition(array('shop_id' => $shopid));
+		$criteria->addCondition('end_time > ' . time());
+		$voucher = Voucher::model()->findAll($criteria);
+		$data = array(
+			'list' => $voucher
 		);
 		return $data;
 	}

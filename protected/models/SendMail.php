@@ -16,7 +16,7 @@
 class SendMail extends CActiveRecord
 {
     const ERRNO_SEND = 255;
-    const ADDRESS_SEPARATE = ','; 
+    const ADDRESS_SEPARATE = ',';
     
 	/**
 	 * Returns the static model of the specified AR class.

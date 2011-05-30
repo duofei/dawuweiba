@@ -161,10 +161,21 @@ class SiteController extends Controller
     		if ($loginModel->validate()) {
     		    $loginModel->login();
     		    
+    		    $returnUrl = CdcBetaTools::getReferrer();
+    		    
+    		    /* 如果有白吃点赠送 */
+    		    $key = 'getBcnum_' . user()->id;
+				$bc_cache = app()->fileCache->get($key);
+				if($bc_cache) {
+					$this->redirect(url('user/getbcnum', array('uid'=>user()->id, 'sid'=>$bc_cache, 'referer'=>urlencode($returnUrl))));
+					exit;
+				}
+			
+				/* 如果是商铺管理员 */
     		    if ($_SESSION['super_shop'] || $_SESSION['shop'])
     		        $this->redirect(url('shopcp/default/index'));
     		    
-    		    $returnUrl = CdcBetaTools::getReferrer();
+    		    /* 跳回上次页面 */
     		    $this->redirect($returnUrl);
     	   	}
 	    }

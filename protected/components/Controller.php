@@ -155,6 +155,12 @@ class Controller extends CController
 	        );
 	        
 	        $noRatingNums = sprintf('(%d个订单未点评)', User::getUserNoRatingNums(user()->id));
+	        $count = Message::getNoReadMsgCount();
+	        if($count) {
+	        	$noReadMsgCount = sprintf('(%d个未读消息)', $count);
+	        } else {
+	        	$noReadMsgCount = '';
+	        }
 	        $unrated = l($noRatingNums, url('my/order/norating'));
 	        if (empty($_SESSION['shop']))
 	            $cp = l('个人中心', url('my')) . $unrated;
@@ -162,6 +168,7 @@ class Controller extends CController
 	            $cp = l('商家中心', url('shopcp'), array('target'=>'_blank'));
 	        $data2 = array(
 	            l('购物车', url('cart/checkout')) . $cartGoodsNums,
+	            l('短消息', url('my/message/list')) . $noReadMsgCount,
 	            $cp,
 	            l('收藏夹', url('my/favorite')),
 	        );
