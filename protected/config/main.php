@@ -24,6 +24,7 @@ return array(
 	'import' => array(
 		'application.models.*',
 		'application.components.*',
+		'application.libs.*',
         'application.components.Portlet.*',
         'application.extensions.*',
         'application.extensions.AppApi.*',
@@ -84,6 +85,18 @@ return array(
 		    'enableParamLogging' => true,
 		    'enableProfiling' => true,
 		),
+		'pgdb' => array(
+		    'class' => 'CDbConnection',
+			'connectionString' => 'pgsql:host=192.168.1.254; port=5432; dbname=my52wm',
+		    'username' => 'my52wm',
+		    'password' => '',
+		    'charset' => 'utf8',
+		    'persistent' => true,
+		    'tablePrefix' => 'wm_',
+		    //'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
+		    'enableParamLogging' => true,
+		    'enableProfiling' => true,
+		),
 		'mdb' => array(
 		    'class' => 'application.extensions.mongodb.CDMongodb',
 		    'connectionString' => 'mongodb://192.168.1.254',
@@ -126,6 +139,12 @@ return array(
 		'cache' => array(
 		    'class' => 'CFileCache',
 		    'directoryLevel' => 2,
+		),
+		
+		'redis' => array(
+		    'class' => 'CRedisCache',
+		    'host' => '192.168.1.254',
+		    'port' => '6379',
 		),
 
 		'urlManager' => array(

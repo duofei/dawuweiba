@@ -187,32 +187,26 @@ class TestController extends Controller
         echo distanceBetweenPoints($p1, $p2);
     }
 
-    public function actionCurl()
+    public function actionConvert()
     {
-        $rest = new CdcCurl();
-        $data = $rest->open()->exec('http://www.google.com');
-        echo $rest->error();
-        echo '<hr /><hr />';
-        /*print_r($rest->http_code());
-        print_r($rest->http_info());
-        print_r($rest->http_headers());*/
-        echo h($data);
-    }
-    
-    public function actionSms()
-    {
-        $client = new CdCurl();
-        $args = array(
-            'id' => 'cdcchen',
-            'pwd' => 'cdc790406',
-            'to' => '18660157718,18653137700,13853137700',
-            'content' => iconv("UTF-8","GB2312",'测试测试，严重测试00000'),
-            'time' => '',
-        );
-        $data = $client->get('http://service.winic.org/sys_port/gateway/', $args)->rawdata();
+        $region = array(array(0, 0), array(10, 0), array(10, 10), array(0, 10), array(0, 0));
+        $ring = CDShopGis::setShopRegion(1, $region, 1);
+        var_dump($ring);
+        exit;
+        
+        echo '<pre>';
+        $data = CDShopGis::fetchShopRegion(1);
         print_r($data);
+
     }
 }
+
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+
 
 function distanceBetweenPoints($p1, $p2)
 {
@@ -228,3 +222,4 @@ function distanceBetweenPoints($p1, $p2)
     $d = $R * $c;
     return (int)$d;
 }
+

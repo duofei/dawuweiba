@@ -3,8 +3,10 @@ class PrinterController extends Controller
 {
     public function actionList()
     {
+        $c = new CDbCriteria();
+        $c->order = 'id asc';
         $attrs = array('city_id' => $this->city['id']);
-        $printers = Printer::model()->findAllByAttributes($attrs);
+        $printers = Printer::model()->findAllByAttributes($attrs, $c);
         
         $this->render('list', array(
             'printers' => $printers,

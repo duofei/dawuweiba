@@ -59,9 +59,9 @@ class CdcBetaTools
      */
     public static function getClientIp()
     {
-        if ($_SERVER['HTTP_CLIENT_IP']) {
+        if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
 	      $ip = $_SERVER['HTTP_CLIENT_IP'];
-	 	} elseif ($_SERVER['HTTP_X_FORWARDED_FOR']) {
+	 	} elseif (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
 	      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 	 	} else {
 	      $ip = $_SERVER['REMOTE_ADDR'];

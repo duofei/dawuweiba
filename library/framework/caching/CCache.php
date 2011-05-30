@@ -113,7 +113,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 			$uniqueIDs[$id]=$this->generateUniqueKey($id);
 			$results[$id]=false;
 		}
-		$values=$this->getValues($uniqueIDs);
+		$values=$this->getValues($uniqueIDs);var_dump($values);
 		foreach($uniqueIDs as $id=>$uniqueID)
 		{
 			if(!isset($values[$uniqueID]))
