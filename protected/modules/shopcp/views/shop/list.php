@@ -4,6 +4,12 @@
 		<li class="ui-state-default ui-corner-top"><a href="<?php echo url("shopcp/shop/create");?>">创建商铺</a></li>
 	</ul>
 	<div id="index" class="ui-tabs-panel">
+		<div class="ma-t5px ma-b5px">
+		<?php echo CHtml::beginForm(url('shopcp/shop/list'), 'get');?>
+		商铺名称:<input type="text" name='shop_name' value="<?php echo $_GET['shop_name'];?>" class="txt" />
+		<input type="submit" name="搜索" />
+		<?php echo CHtml::endForm();?>
+		</div>
 	<?php if ($shops) :?>
 		<table  class="tabcolor list-tbl ma-b5px" width="100%">
 	    <tr class="title">

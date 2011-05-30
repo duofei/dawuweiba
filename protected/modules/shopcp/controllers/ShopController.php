@@ -13,6 +13,9 @@ class ShopController extends Controller
     	}
     	$criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('yewu_id' => user()->id));
+	    if($_GET['shop_name']) {
+	    	$criteria->addSearchCondition('shop_name', $_GET['shop_name']);
+	    }
 	    $criteria->order = 'create_time desc';
 	    $pages = new CPagination(Shop::model()->count($criteria));
 		$pages->pageSize = 20;

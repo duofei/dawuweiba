@@ -80,7 +80,13 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 		<td width="60"><a href=""><span class="look color  f14px">查看订单</span></a></td>
 	    <td width="60"><?php echo l(h($val->consignee ? $val->consignee : $val->user->username), url('admin/user/info', array('id'=>$val->user->id)));?></td>
 	    <td width="90"><?php echo h($val->mobile)?></td>
-	    <td class="pa-r10px" ><?php echo h($val->address)?></td>
+	    <td class="pa-r10px" >
+	    	<?php if(preg_match("/^([0-9\.]+),([0-9\.]+)$/", $val->address, $match)):?>
+	    	<?php echo l(h($val->address), url('shop/list', array('lat'=>$match[1], 'lon'=>$match[2])), array('target'=>'_blank')); ?>
+	    	<?php else:?>
+	    	<?php echo h($val->address)?>
+	    	<?php endif;?>
+	    </td>
 	    <td width="50">&yen;<?php echo $val->dispatchingAmountPrice;?></td>
 	    <td width="60">&yen;<?php echo $val->amountPrice;?></td>
 	    <td width="50">&yen;<?php echo $val->paidAmountPrice;?></td>
