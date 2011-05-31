@@ -11,6 +11,13 @@
         <td class="ar">待审核订单自动关闭处理：</td>
         <td><?php echo CHtml::textField('Setting[' . param('s_orderApproveCloseTime') . ']', $setting[param('s_orderApproveCloseTime')], array('class'=>'txt'));?></td>
     </tr>
+    
+    <tr>
+        <td class="ar">电话订单人工处理：</td>
+        <td>
+			<?php echo CHtml::radioButtonList('Setting[checkPhoneOrderDeal]', $setting['checkPhoneOrderDeal'], array('0'=>'关闭', '1'=>'开启'), array('separator'=> '&nbsp;'));?>
+		</td>
+    </tr>
 </table>
 <?php
   	$this->widget('zii.widgets.jui.CJuiButton',
@@ -22,5 +29,5 @@
 ?>
 <?php echo CHtml::endForm();?>
 <div class="errorsummary">
-<?php //echo CHtml::errorSummary($miaosha);?>
+
 </div>

@@ -251,17 +251,7 @@ class CartController extends Controller
 	            $order->dispatching_amount = $cart[0]->goods->shop->matchDispatchingAmount;
 	            
 	            /* 如果是打印机订餐订单 */
-	            if($cart[0]->goods->shop->buy_type == Shop::BUYTYPE_PRINTER) {
-	            	if(Setting::getValue(param('s_orderApprove')) == STATE_ENABLED) { // 如果关闭审核，订单直接通过
-		            	if($data['user']->approve_state==User::APPROVE_STATE_VERIFY) {
-		            		$order->verify_state = STATE_ENABLED;
-		            	} else {
-		            		$order->verify_state = STATE_DISABLED;
-		            	}
-	            	} else {
-	            		$order->verify_state = STATE_ENABLED;
-	            	}
-	            }
+	            $order->verify_state = STATE_ENABLED;
 	            
 	            $order->status = Order::STATUS_UNDISPOSED;
 	            $order->is_carry = $_POST['iscarry'];

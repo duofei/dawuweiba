@@ -4,12 +4,15 @@ class SettingController extends Controller
 {
 	public function actionList()
 	{
+		$cityId = $this->city['id'];
 		if(app()->request->isPostRequest && isset($_POST[Setting])) {
 			foreach ($_POST['Setting'] as $k=>$v) {
-				Setting::setValue($k, $v);
+				Setting::setValue($k, $v, $cityId);
 			}
 		}
-		$setting = Setting::model()->findAll();
+		$criteria = new CDbCriteria();
+		$criteria->addColumnCondition(array('city_id'=>$cityId));
+		$setting = Setting::model()->findAll($criteria);
 		$array = array();
 		foreach ($setting as $s) {
 			$array[$s->parames] = $s->values;
