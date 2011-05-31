@@ -189,17 +189,70 @@ class TestController extends Controller
 
     public function actionConvert()
     {
-        $region = array(array(0, 0), array(10, 0), array(10, 10), array(0, 10), array(0, 0));
-        $ring = CDShopGis::setShopRegion(1, $region, 1);
-        var_dump($ring);
+        $point = array(5, 5);
+        $ids = CDShopGis::fetchShopListId($point, 3);
+        print_r($ids);
         exit;
+        
+        /*$region = array(array(0, 0), array(10, 0), array(10, 10), array(0, 10), array(0, 0));
+        $ring = CDShopGis::setShopRegion(3, $region);
+        var_dump($ring);
+        exit;*/
         
         echo '<pre>';
         $data = CDShopGis::fetchShopRegion(1);
         print_r($data);
 
     }
+    
+    public function actionGo()
+    {
+        $point = array(1,2);
+        $r1 = array(array(0,0), array(10,0), array(10, 10), array(0,10));
+        $r2 = array(array(0,0), array(10,0), array(10, 10), array(0,10));
+        $r3 = array(array(0,0), array(10,0), array(10, 10), array(0,10));
+        CDShopGis::insert(7, '家家欢乐餐厅', $point, $r1, $r2, $r3);
+    }
+    
+    /**
+     * 将商家送餐范围存储由mysql转到pgsql
+     */
+/*    public function actionMyToPg()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->select = 'id, shop_name, map_y, map_x, map_region, map_region2, map_region3';
+        $criteria->order = 'id asc';
+        $shops = Shop::model()->findAll($criteria);
+
+        foreach ($shops as $shop) {
+            $shopid = $shop->id;
+            $shop_name = $shop->shop_name;
+            $point = array($shop->map_x, $shop->map_y);
+            $region1 = regionToArray($shop->map_region);
+            $region2 = regionToArray($shop->map_region2);
+            $region3 = regionToArray($shop->map_region3);
+            print_r($region1);
+            
+            CDShopGis::insert($shopid, $shop_name, $point, $region1, $region2, $region3);
+            unset($shopid, $shop_name, $point, $region1, $region2, $region3);
+        }
+        
+    }*/
 }
+
+function regionToArray($region)
+{
+    if (empty($region)) return null;
+    
+    $points = explode('|', $region);
+    array_push($points, $points[0]);
+    foreach ($points as $p) {
+        $data[] = array_reverse(explode(',', $p));
+    }
+    
+    return $data;
+}
+
 
 function microtime_float()
 {
