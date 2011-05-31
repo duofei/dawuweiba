@@ -10,7 +10,7 @@ class CDShopGis
         
         $point = sprintf('ST_MakePoint(%s, %s)', $point[0], $point[1]);
         $cmd = app()->pgdb->createCommand()
-            ->select('id')
+            ->select('id, shop_id')
             ->from('wm_shops');
 
         if ($index === null)
