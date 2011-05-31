@@ -25,7 +25,7 @@ class CDShopGis
             
        if (null === $data) return null;
        
-       foreach ($data as $v) $ids[] = $v['id'];
+       foreach ($data as $v) $ids[] = $v['shop_id'];
        
        return $ids;
     }
@@ -115,9 +115,9 @@ class CDShopGis
                 $data[] = trim($p[0]) . ' ' . trim($p[1]);
             }
     
-            $new_region = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
+            echo $new_region = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));echo '<hr />';
             try {
-                $result = app()->pgdb->createCommand("update wm_shops set region1=$new_region")->query();
+                $result = app()->pgdb->createCommand("update wm_shops set region1=$new_region where shop_id=$shopid")->query();
             } catch (Exception $e) {
                 print_r($region1);
             }
@@ -130,7 +130,7 @@ class CDShopGis
             
             $new_region = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
             try {
-                $result = app()->pgdb->createCommand("update wm_shops set region2=$new_region")->query();
+                $result = app()->pgdb->createCommand("update wm_shops set region2=$new_region where shop_id=$shopid")->query();
             } catch (Exception $e) {
                 print_r($region2);
             }
@@ -143,7 +143,7 @@ class CDShopGis
     
             $new_region = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
             try {
-                $result = app()->pgdb->createCommand("update wm_shops set region3=$new_region")->query();
+                $result = app()->pgdb->createCommand("update wm_shops set region3=$new_region where shop_id=$shopid")->query();
             } catch (Exception $e) {
                 print_r($region2);
             }
