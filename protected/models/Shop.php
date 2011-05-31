@@ -503,6 +503,53 @@ class Shop extends CActiveRecord
 		return true;
 	}
 	
+	protected function afterSave()
+	{
+		parent::afterSave();
+		
+		$coordinate = array();
+		$region1 = null;
+		$region2 = null;
+		$region3 = null;
+		if($this->map_x && $this->map_y) {
+			$coordinate = array($this->map_y, $this->map_x);
+		}
+		if($this->getMapRegion()) {
+			$region1 = $this->reverseRegionXY($this->getMapRegion());
+		}
+		if($this->getMapRegion2()) {
+			$region2 = $this->reverseRegionXY($this->getMapRegion2());
+		}
+		if($this->getMapRegion3()) {
+			$region3 = $this->reverseRegionXY($this->getMapRegion3());
+		}
+		if($this->isNewRecord) {
+			CDShopGis::insert($this->id, $this->shop_name, $coordinate, $region1, $region2, $region3);
+		} else {
+			if($region1) {
+				CDShopGis::setShopRegion($this->id, $region1, 1);
+			}
+			if($region2) {
+				CDShopGis::setShopRegion($this->id, $region2, 2);
+			}
+			if($region3) {
+				CDShopGis::setShopRegion($this->id, $region3, 3);
+			}
+		}
+		return true;
+	}
+	
+	public function reverseRegionXY($array)
+	{
+		if(!$array) return null;
+		$new_array = array();
+		foreach ($array as $v) {
+			$new_array[] = array_reverse($v);
+		}
+		array_push($new_array, $new_array[0]);
+		return $new_array;
+	}
+	
 	/**
 	 * 获取当前模型绝对地址的URL
 	 */
@@ -978,6 +1025,65 @@ class Shop extends CActiveRecord
 		        	}
 	        	}
 	        }
+	    }
+	    $shops = array_merge($shops1, $shops2, $shops3, $shops4);
+	    $data = array('shops'=>$shops, 'sort'=>$sort);
+	    return $data;
+	}
+	public static function getLocationShopListV2($at, $cid = 0, $criteria = null, $cityId = null)
+	{
+	    if (is_int($at)) {
+	        $location = Location::model()->findByPk($at);
+	        $at = array($location->map_x, $location->map_y);
+	        $cityId = $location->city_id;
+	    } elseif ($at instanceof Location) {
+	        $cityId = $at->city_id;
+	        $at = array($at->map_x, $at->map_y);
+	    } elseif (is_array($at)) ;
+	    else
+	        throw new CException('$at参数错误', 0);
+	    
+	    $criteria = $criteria ? $criteria : new CDbCriteria();
+	    $criteria->addColumnCondition(array('state'=>STATE_ENABLED));
+	    if ($cid) {
+	        $criteria->addColumnCondition(array('category_id' => $cid));
+	    }
+	    if (null !== $cityId) {
+	        $criteria->addCondition("district.city_id = $cityId");
+	        $criteria->with[] = 'district';
+	    }
+	    
+	    $shopids = CDShopGis::fetchShopListId(array($at[1], $at[0]));
+	    if($shopids) {
+	    	$criteria->addInCondition('t.id', $shopids);
+	    } else {
+	    	return null;
+	    }
+	    
+	    $sort = new CSort('Shop');
+	    $sort->defaultOrder = 't.business_state asc';
+	    $sort->applyOrder($criteria);
+
+	    $shop = self::model()->findAll($criteria);
+	    $shops1 = array();
+	    $shops2 = array();
+	    $shops3 = array();
+	    $shops4 = array();
+	    foreach ($shop as $v) {
+			if (null === $v->maxMapRegion) continue;
+        	if($v->buy_type == Shop::BUYTYPE_PRINTER) {
+	        	if($v->getDistance($at) > 1000) {
+	            	$shops2[] = $v;
+	        	} else {
+	        		$shops1[] = $v;
+	        	}
+        	} else {
+        		if($v->getDistance($at) > 1000) {
+	            	$shops4[] = $v;
+	        	} else {
+	        		$shops3[] = $v;
+	        	}
+        	}
 	    }
 	    $shops = array_merge($shops1, $shops2, $shops3, $shops4);
 	    $data = array('shops'=>$shops, 'sort'=>$sort);

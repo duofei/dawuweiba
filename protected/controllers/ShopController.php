@@ -7,7 +7,7 @@ class ShopController extends Controller
      * @param integer $atid 地址的ID，如果为空则直接取用户最后访问的地址的ID
      * @param integer $cid 分类ID
      */
-	public function actionList($atid = null, $cid = ShopCategory::CATEGORY_FOOD, $lat = null, $lon = null)
+	public function actionList2($atid = null, $cid = ShopCategory::CATEGORY_FOOD, $lat = null, $lon = null)
 	{
 	    $atid = (int)$atid;
 	    
@@ -97,6 +97,96 @@ class ShopController extends Controller
 		$this->render('list', $data);
 	}
 
+	public function actionList($atid = null, $cid = ShopCategory::CATEGORY_FOOD, $lat = null, $lon = null)
+	{
+	    $atid = (int)$atid;
+	    
+    	$criteria = new CDbCriteria();
+    	$criteria->addCondition('business_state != ' . Shop::BUSINESS_STATE_CLOSE);
+    	$criteria->with = array('tags');
+    	//$criteria->order = 't.id desc'; //排序暂时未定
+    	if (0 == $atid && $lat != null && $lon != null) {
+	        $lat = strip_tags(trim($lat));
+	        $lon = strip_tags(trim($lon));
+	        $data = Shop::getLocationShopListV2(array($lat, $lon), $cid, $criteria);
+	        /*
+    	     * 设置搜索记录
+    	     */
+    	    Location::addSearchHistory(array($lat, $lon));
+    	    /*
+    	     * 设置面包屑导航
+    	     */
+    	    $label = '位置：' . $lat . ':' . $lon;
+    	    $this->breadcrumbs = array(
+    			$label => app()->request->url,
+    	    );
+    	    $this->pageTitle = $label . '外卖';
+	    } else {
+    	    if (0 == $atid) $atid = Location::getLastVisit();
+    	    if (0 == $atid) $this->redirect(app()->homeUrl);
+    	    if (is_array($atid))
+    	        $location = $atid;
+    	    else
+    	        $location = Location::model()->findByPk($atid);
+
+    	    if (null == $location) throw new CHttpException(404);
+    	    
+    	    $data = Shop::getLocationShopListV2($location, $cid, $criteria);
+    	    /*
+    	     * 设置搜索记录
+    	     */
+    	    Location::addSearchHistory($atid);
+    	    /*
+    	     * 设置面包屑导航
+    	     */
+    	    $this->breadcrumbs = array(
+    			$location->name => app()->request->url,
+    	    );
+    	    $this->pageTitle = $location->name . '外卖';
+	    }
+	    
+	    $shopIds = CHtml::listData((array)$data['shops'], 'id', 'id');
+	    /*
+	     * 获取优惠信息
+	     */
+	    $promotions = Promotion::getPromotionFromShopIds($shopIds);
+	    /*
+	     * 获取热卖美食
+	     */
+	    $goods = Goods::getHotGoods($shopIds);
+	    
+	    $filters = ShopCategory::getFilterTags($cid);
+	    
+	    /*
+	     * 生成排序class名称，注意生成的变量需要与排序字段对应，如下面的：
+	     * $taste_avg，$order_nums，$service_avg
+	     */
+	    $order = explode('.', trim(strip_tags($_GET['sort'])));
+	    ${$order[0]} = 'checked' . $order[1];
+	    
+	    $data = array_merge($data, array(
+	        'filters' => $filters,
+		    'promotions' => $promotions,
+		    'goods' => $goods,
+	        'tasteSort' => $taste_avg,
+	        'orderSort' => $order_nums,
+	        'serviceSort' => $service_avg,
+	    	'cid' => $cid
+	    ));
+	    // 如果没有商铺
+	    if(0 == count($data['shops'])) {
+	    	$maxMin = unserialize(app()->cache->get('dituGenerateImage'));
+	    	$data['maxMin'] = $maxMin;
+	    	$data['center'] = array(
+	    		'map_y' => $maxMin['min']['y'] + ($maxMin['max']['y']-$maxMin['min']['y'])/2,
+	    		'map_x' => $maxMin['min']['x'] + ($maxMin['max']['x']-$maxMin['min']['x'])/2,
+	    	);
+	    }
+	    $this->setPageKeyWords($this->pageTitle);
+	    $this->setPageDescription($this->pageTitle);
+		$this->render('list', $data);
+	}
+	
 	public function actionBoot($nick)
 	{
 	    $nick = strip_tags(trim($nick));

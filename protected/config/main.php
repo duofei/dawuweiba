@@ -140,7 +140,10 @@ return array(
 		    'class' => 'CFileCache',
 		    'directoryLevel' => 2,
 		),
-		
+		'fileCache' => array(
+		    'class' => 'CFileCache',
+		    'directoryLevel' => 2,
+		),
 		'redis' => array(
 		    'class' => 'CRedisCache',
 		    'host' => '192.168.1.254',
