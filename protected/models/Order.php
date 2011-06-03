@@ -49,7 +49,7 @@ class Order extends CActiveRecord
     const STATUS_INVAIN = 5;
 
     public static $states = array(
-    	self::STATUS_UNDISPOSED => '未加工',
+    	self::STATUS_UNDISPOSED => '未处理',
         self::STATUS_PROCESS => '加工中',
         self::STATUS_DELIVERING => '配送中',
         self::STATUS_COMPLETE => '已完成',
@@ -58,6 +58,15 @@ class Order extends CActiveRecord
     );
     
     public static $printStates = array(
+    	self::STATUS_UNDISPOSED => '未处理',
+        self::STATUS_PROCESS => '加工中',
+        self::STATUS_DELIVERING => '配送中',
+        self::STATUS_COMPLETE => '已确定',
+        self::STATUS_CANCEL => '已取消',
+        self::STATUS_INVAIN => '无效订单',
+    );
+    
+   	public static $phoneStates = array(
     	self::STATUS_UNDISPOSED => '未处理',
         self::STATUS_PROCESS => '加工中',
         self::STATUS_DELIVERING => '配送中',
@@ -315,6 +324,17 @@ class Order extends CActiveRecord
 				return self::$printStates[$this->status] . '(预计送达时间' . $this->deliver_time . ')';
 			}
 			return self::$printStates[$this->status];
+		} elseif($this->buy_type == Shop::BUYTYPE_TELPHONE) {
+			if($this->consignee && $this->telphone) {
+				if($this->status == self::STATUS_COMPLETE) {
+					return self::$phoneStates[$this->status] . '(预计送达时间' . $this->deliver_time . ')';
+				} elseif($this->status == self::STATUS_CANCEL) {
+					return self::$phoneStates[$this->status] . '(' . $this->cancel_reason . ')';
+				}
+				return self::$phoneStates[$this->status];
+			} else {
+				return $this->buyTypeText;
+			}
 		} else {
 			return self::$states[$this->status];
 		}

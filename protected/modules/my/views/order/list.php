@@ -118,7 +118,8 @@
 	   		<?php elseif($order->buy_type == Shop::BUYTYPE_NETWORK || $order->buy_type == Shop::BUYTYPE_PRINTER):?>
 	   			<?php echo $order->statusText; ?>
 	   		<?php else:?>
-		  		<?php echo $order->buyTypeText; ?>
+	   			<?php echo $order->statusText; ?>
+		  		<?php //echo $order->buyTypeText; ?>
 		  	<?php endif;?>
 		  	</span>
 		  	<!-- <span><?php //echo $order->orderLogs[0] ? $order->orderLogs[0]->shortCreateDateTimeText : $order->shortCreateDateTimeText; ?></span> -->

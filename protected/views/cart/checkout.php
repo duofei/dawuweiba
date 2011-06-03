@@ -2,7 +2,7 @@
 	<?php $this->renderPartial('/cart/checkout_cart', array('cart'=>$cart));?>
 </div>
 <div class="space10pxline"></div>
-<?php if($cart[0]->goods->shop->buy_type == Shop::BUYTYPE_TELPHONE):?>
+<?php if($cart[0]->goods->shop->buy_type == Shop::BUYTYPE_TELPHONE && STATE_DISABLED == Setting::getValue('checkPhoneOrderDeal', $cart[0]->goods->shop->district->city_id)):?>
 <h4 class="f16px">该餐厅(<?php echo $cart[0]->goods->shop->shop_name;?>)为电话订餐餐厅，请自行拨打餐厅电话<span class="f20px cred"><?php echo $cart[0]->goods->shop->telphone;?></span>进行订餐</h4>
 <div class="space10pxline"></div>
 <div class="lh30px f14px">您与餐厅核对金额，如果发现餐厅或网站的错误，请您<?php echo l('告诉我们', url('correction/create'));?>，谢谢！</div>

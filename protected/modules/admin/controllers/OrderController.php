@@ -259,4 +259,71 @@ class OrderController extends Controller
 		$this->redirect($referer);
 	}
 	
+	/**
+	 * 电话处理订单
+	 */
+	public function actionPhoneorder()
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addColumnCondition(array(
+			't.city_id' => $_SESSION['manage_city_id'],
+			't.buy_type'=>Shop::BUYTYPE_TELPHONE,
+		));
+		$criteria->addCondition('t.consignee != ""');
+		$pages = $this->_getPages($criteria);
+		$criteria->order = 't.create_time desc';
+		$orderlist = Order::model()->with('shop')->findAll($criteria);
+		$this->render('phoneorder', array(
+			'orderlist'=>$orderlist,
+			'pages' => $pages
+		));
+	}
+	public function actionPhoneorderdeal($id)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addColumnCondition(array(
+			't.city_id' => $_SESSION['manage_city_id'],
+			't.buy_type'=>Shop::BUYTYPE_TELPHONE,
+		));
+		$id = intval($id);
+		$order = Order::model()->with('shop', 'orderGoods')->findByPk($id, $criteria);
+		$this->render('phoneorderdeal', array(
+			'order' => $order
+		));
+	}
+	public function actionPhoneorderpost()
+	{
+		if(app()->request->isPostRequest && $_POST) {
+			$order_id = intval($_POST['order_id']);
+			$status = intval($_POST['status']);
+			$sendsms = intval($_POST['sendsms']);
+			$deliver_time = $_POST['deliver_time'];
+			$cancel_reason = $_POST['cancel_reason'];
+			$sms_content = strip_tags($_POST['sms_content']);
+			$order = Order::model()->findByPk($order_id);
+			// 订单存在，并且是当前管理员城市下。
+			if($order && $order->shop->district->city_id==$_SESSION['manage_city_id'] && ($status==Order::STATUS_COMPLETE || $status==Order::STATUS_CANCEL)) {
+				if($status == Order::STATUS_CANCEL) {
+					$order->cancel_reason = $cancel_reason;
+				} elseif($status == Order::STATUS_COMPLETE) {
+					$order->deliver_time =$deliver_time;
+				}
+				$order->save();
+				
+				$orderLog = new OrderLog();
+				$orderLog->order_id = $order_id;
+				$orderLog->type_id = $status;
+				if($orderLog->save()) {
+					if($sendsms==STATE_ENABLED && SendSms::filter_mobile($order->telphone)) {
+						$content = iconv('utf-8', 'gb2312', $sms_content);
+						// 发送短信
+						//$d = SendSms::send_sms($order->telphone, $content);
+					}
+				}
+			}
+		}
+		$referer = CdcBetaTools::getReferrer();
+		$this->redirect($referer);
+	}
+
 }
