@@ -1,7 +1,7 @@
 {
 	"name": "我爱外卖网提醒",
 	"title": "我爱外卖网提醒",
-	"version": "0.3",
+	"version": "0.4",
 	"description": "我爱外卖网,客服待处理提醒",
 	"browser_action": {
 		"default_icon": "icon.jpg",
