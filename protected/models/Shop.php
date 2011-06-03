@@ -1053,17 +1053,17 @@ class Shop extends CActiveRecord
 	        $criteria->with[] = 'district';
 	    }
 	    
-	    $shopids = CDShopGis::fetchShopListId(array($at[1], $at[0]));
-	    if($shopids) {
-	    	$criteria->addInCondition('t.id', $shopids);
-	    } else {
-	    	return null;
-	    }
-	    
 	    $sort = new CSort('Shop');
 	    $sort->defaultOrder = 't.business_state asc';
 	    $sort->applyOrder($criteria);
 
+		$shopids = CDShopGis::fetchShopListId(array($at[1], $at[0]));
+	    if($shopids) {
+	    	$criteria->addInCondition('t.id', $shopids);
+	    } else {
+	    	return array('shops'=>null, 'sort'=>$sort);
+	    }
+	    
 	    $shop = self::model()->findAll($criteria);
 	    $shops1 = array();
 	    $shops2 = array();
