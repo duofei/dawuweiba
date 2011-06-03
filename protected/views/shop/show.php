@@ -15,7 +15,11 @@
 		</li>
 		<?php if ($shop->buy_type != Shop::BUYTYPE_TELPHONE):?><li>电话：<?php echo $shop->telphone;?></li><?php endif;?>
 		<li>地址：<?php echo $shop->address;?></li>
+		<?php if(Location::getLastVisit()):?>
 		<?php if($shop->distanceText):?><li>距离您：<span style="color:#40a8ca;"><?php echo $shop->distanceText;?></span></li><?php endif;?>
+		<?php else: ?>
+		距离您：您还没有设置您的位置，<a href="javascript:meishiMapSearch();">设置我的位置</a>。
+		<?php endif;?>
 		<li>状态：<?php echo $shop->isOpeningText;?></li>
 		<li></li>
 	</ul>
