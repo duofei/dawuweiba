@@ -91,7 +91,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 	    <td width="60">&yen;<?php echo $val->amountPrice;?></td>
 	    <td width="50">&yen;<?php echo $val->paidAmountPrice;?></td>
 	    <td width="50">&yen;<?php echo $val->dueAmountPrice;?></td>
-	    <td width="70"><?php echo $val->shop->categoryText?></td>
+	    <td width="70"><?php echo $val->shop->categoryText?>(<?php echo $val->shop->buyTypeText;?>)</td>
 	    <td width="70"><?php echo $val->statusText?></td>
 	  </tr>
  </table>

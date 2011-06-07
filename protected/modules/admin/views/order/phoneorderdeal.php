@@ -7,7 +7,7 @@
 </style>
 <table class="tabcolor list-tbl " width="100%" cellspacing="0">
     <tr class="title lh20px">
-    	<td class="bline"><span class="fb">商铺详情</span> &nbsp;&nbsp;商铺名称：<?php echo $order->shop->shop_name;?></td>
+    	<td class="bline">商铺名称：<?php echo $order->shop->shop_name;?></td>
     	<td class="bline">商铺电话：<?php echo $order->shop->telphone;?></td>
     	<td colspan="2" class="bline">商铺地址：<?php echo $order->shop->address;?></td>
     </tr>
@@ -45,7 +45,7 @@
     	<td>下单时间：<?php echo $order->shortCreateDateTimeText;?></td>
     	<td>下单IP：<?php echo $order->create_ip;?>(<?php echo $order->createIpCityText;?>)</td>
     	<td class="<?php if($order->status==Order::STATUS_UNDISPOSED) echo 'cred'; elseif ($order->status==Order::STATUS_COMPLETE) echo 'cgreen'; else echo 'cgray';?>">订单状态：<?php echo $order->statusText;?></td>
-    	<td>订单备注：<?php echo $order->message;?></td>
+    	<td>要求时间：<?php echo $order->deliver_time;?> &nbsp;&nbsp;订单备注：<?php echo $order->message;?></td>
     </tr>
 </table>
 
@@ -64,6 +64,7 @@
     	<td class="ar">预计送达：</td>
     	<td width="100"><input type="text" class="txt" name="deliver_time" style="width:95%;" /></td>
     	<td class="deliver-time">
+    		<span><?php echo $order->deliver_time;?></span>
     		<?php for($i=15; $i<120; $i=$i+15):?>
     		<span><?php echo date("H:i", time()+$i*60);?></span>
     		<?php endfor;?>
