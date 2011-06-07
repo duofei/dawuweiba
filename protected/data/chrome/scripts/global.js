@@ -2,9 +2,9 @@ var request_interval;
 var music_interval;
 var notification;
 
-var rTime = 20000;		// 请求时间
-var playTime = 60000; 	// 播放声音
-var audioSrc = 'system.wav';
+var rTime = 30000;		// 请求时间
+var playTime = 300000; 	// 播放声音 5分钟
+var audioSrc = 'facaile.mp3';
 
 /* 初始化 */
 function init() {
