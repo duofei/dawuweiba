@@ -30,13 +30,15 @@ class OrderController extends Controller
 		
 		foreach ($orderList as $row) {
 			$orderIsNoRating[$row->id] = false; // 是否未点评
-			if(!$row->shopCreditLogs->id && ($row->status==Order::STATUS_COMPLETE || $row->status==Order::STATUS_DELIVERING)) {
-				$orderIsNoRating[$row->id] = true;
-			} else {
-				foreach($row->orderGoods as $goods) {
-					if(($row->status==Order::STATUS_COMPLETE || $row->status==Order::STATUS_DELIVERING) && !$goods->goodsRateLog->goods_id) {
-						$orderIsNoRating[$row->id] = true;
-						break;
+			if($row->consignee && $row->telphone){ //用户是通过post产生,非查看电话的订单
+				if(!$row->shopCreditLogs->id && ($row->status==Order::STATUS_COMPLETE || $row->status==Order::STATUS_DELIVERING)) {
+					$orderIsNoRating[$row->id] = true;
+				} else {
+					foreach($row->orderGoods as $goods) {
+						if(($row->status==Order::STATUS_COMPLETE || $row->status==Order::STATUS_DELIVERING) && !$goods->goodsRateLog->goods_id) {
+							$orderIsNoRating[$row->id] = true;
+							break;
+						}
 					}
 				}
 			}
@@ -254,9 +256,15 @@ class OrderController extends Controller
 		if(!$goodsratelog->save()){
 			exit;
 		} else {
+			if($ordergoods->order->buy_type==Shop::BUYTYPE_TELPHONE && $ordergoods->order->telphone=='') {
+				// 如果是电话订单，并且不是通过客服联系。 不加积分
+				echo 'exit';
+				exit;
+			}
 			echo $goodsratelog->id;
 			// 增加用户积分
-			UserIntegralLog::addUserIntegralLog(UserIntegralLog::SOURCE_GOODSEVALUATE, intval($ordergoods->goods_amount));
+			$integrals = intval($ordergoods->goods_amount);
+			UserIntegralLog::addUserIntegralLog(UserIntegralLog::SOURCE_GOODSEVALUATE, $integrals);
 		}
 		exit;
 	}
@@ -306,9 +314,12 @@ class OrderController extends Controller
 		$shopcreditlog->evaluate = $evaluate;
 
 		if(!$shopcreditlog->save()) {
-			echo CHtml::errorSummary($goodsratelog);
 			exit;
 		} else {
+			if($order->buy_type==Shop::BUYTYPE_TELPHONE && $order->telphone=='') {
+				// 如果是电话订单，并且不是通过客服联系。 不加积分
+				exit;
+			}
 			// 增加用户积分
 			UserIntegralLog::addUserIntegralLog(UserIntegralLog::SOURCE_SERVEEVALUATE, intval($order->amount));
 		}
