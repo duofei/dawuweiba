@@ -37,7 +37,7 @@ div.right-down-show-select {background-postion: 0 -150px;}
 <div>
 	<div class="fl left">
 		<div class="search">
-		<?php echo CHtml::beginForm('', 'get', array('id'=>'postform'));?>
+		<?php echo CHtml::beginForm(url('ditu/search'), 'get', array('id'=>'postform'));?>
 			<div class="fl select-city fb f14px cursor">济南市</div>
 			<div class="fl search-box"><input type="text" name="kw" value="<?php echo $kw ? $kw : '输入地点，如数码港大厦';?>" id="searchBox" /></div>
 			<div class="fl button fb f14px lh30px ac" onclick="postform()">查&nbsp;询</div>
@@ -96,7 +96,7 @@ div.right-down-show-select {background-postion: 0 -150px;}
 </div>
 <?php if($miaosha):?>
 <div class="none" id="openInfoHtml">
-	<div class='lh20px f12px'>
+	<div style="width:300px; height:90px; line-height:20px; font-size:12px;">
 		<div>如果这里是您的位置，请点击设置位置</div>
 		<div>如果这里不是您的位置，请先移动标注标志位置</div>
 		<div class="ac"><input type='button' value=' 设置为我的位置 ' onclick='gotoShopList()'></div>
@@ -104,8 +104,7 @@ div.right-down-show-select {background-postion: 0 -150px;}
 </div>
 <?php else:?>
 <div class="none" id="openInfoHtml">
-	<div class='lh20px f12px'>
-		<div>如果这里是您的位置，请点击搜索店铺</div>
+	<div style="width:300px; height:50px; line-height:20px; font-size:12px;">
 		<div>如果这里不是您的位置，请先移动标注标志位置</div>
 		<div class="ac"><input type='button' value=' 搜索此位置的店铺 ' onclick='gotoShopList()'></div>
 	</div>
@@ -147,10 +146,11 @@ function initialize() {
 	<?php foreach ((array)$data as $k=>$v):?>
 	address[<?php echo $k;?>] = <?php echo json_encode($v);?>;
 	<?php if($k==0):?>
-	var myLatlng = new google.maps.LatLng(<?php echo $v['map_y']?>, <?php echo $v['map_x']?>);
 	map_x = <?php echo $v['map_x']?>;
 	map_y = <?php echo $v['map_y']?>;
-	map.panTo(myLatlng);
+	var myLatlng = new google.maps.LatLng(map_y, map_x);
+	//map.panTo(myLatlng);
+	map.setCenter(myLatlng);
 	marker.setPosition(myLatlng);
 	infowindow.open(map,marker);
 	select_address = 0;
