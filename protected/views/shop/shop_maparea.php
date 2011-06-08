@@ -11,7 +11,7 @@
 	</div>
 </div>
 <div id="gmaps" style="height:600px; width:98%; margin:0px auto;"></div>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="http://ditu.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 $(function(){
 	initMap();

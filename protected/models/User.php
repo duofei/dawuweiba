@@ -372,13 +372,15 @@ class User extends CActiveRecord
 		$condition->addInCondition('t.status', array(Order::STATUS_COMPLETE, Order::STATUS_DELIVERING));
 		$orderList = Order::model()->with('shopCreditLogs', 'orderGoods', 'orderGoods.goodsRateLog')->findAll($condition);
 		foreach ($orderList as $row) {
-			if(!$row->shopCreditLogs->id) {
-				$noRatingNums++;
-			} else {
-				foreach($row->orderGoods as $goods) {
-					if(!$goods->goodsRateLog->goods_id) {
-						$noRatingNums++;
-						break;
+			if($row->consignee && $row->telphone){ //用户是通过post产生,非查看电话的订单
+				if(!$row->shopCreditLogs->id) {
+					$noRatingNums++;
+				} else {
+					foreach($row->orderGoods as $goods) {
+						if(!$goods->goodsRateLog->goods_id) {
+							$noRatingNums++;
+							break;
+						}
 					}
 				}
 			}

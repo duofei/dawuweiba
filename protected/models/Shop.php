@@ -1053,17 +1053,17 @@ class Shop extends CActiveRecord
 	        $criteria->with[] = 'district';
 	    }
 	    
-	    $shopids = CDShopGis::fetchShopListId(array($at[1], $at[0]));
-	    if($shopids) {
-	    	$criteria->addInCondition('t.id', $shopids);
-	    } else {
-	    	return null;
-	    }
-	    
 	    $sort = new CSort('Shop');
 	    $sort->defaultOrder = 't.business_state asc';
 	    $sort->applyOrder($criteria);
 
+		$shopids = CDShopGis::fetchShopListId(array($at[1], $at[0]));
+	    if($shopids) {
+	    	$criteria->addInCondition('t.id', $shopids);
+	    } else {
+	    	return array('shops'=>null, 'sort'=>$sort);
+	    }
+	    
 	    $shop = self::model()->findAll($criteria);
 	    $shops1 = array();
 	    $shops2 = array();
@@ -1181,17 +1181,17 @@ class Shop extends CActiveRecord
 	public function getIsBcshopIcon()
 	{
 	    if (STATE_ENABLED != $this->is_bcshop) return null;
-	    return CHtml::image(resBu('images/pixel.gif'),
+	    return l(CHtml::image(resBu('images/pixel.gif'),
 	        '该店铺支持白吃点的使用',
 	        array(
 	            'title' => '该店铺支持白吃点的使用',
 	            'class' => 'bg-icon is-bcshop'
 	        )
-	    );
+	    ), url('intro/baichidian'), array('target'=>'_blank'));
 	}
 	
 	/**
-	 * 生成是否支持白吃点的小图标
+	 * 生成是否支持优惠券的小图标
 	 * @param string HTML Code
 	 */
 	public function getIsVoucherIcon()

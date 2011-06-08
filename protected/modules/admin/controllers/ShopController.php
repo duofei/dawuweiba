@@ -456,6 +456,36 @@ class ShopController extends Controller
     		'pages' => $pages
     	));
     }
+    /**
+     * 添加备注
+     */
+    public function actionRemark()
+    {
+    	if(app()->request->isPostRequest && isset($_POST)) {
+    		$shop_id = intval($_POST['shop_id']);
+    		$remark = $_POST['remark'];
+    		if($shop_id && $remark) {
+    			$c = new CDbCriteria();
+			   	$c->addColumnCondition(array('city_id' => $_SESSION['manage_city_id']));
+		    	$d = District::model()->findAll($c);
+		    	$districts = CHtml::listData($d, 'id', 'id');
+		    	
+		    	$criteria = new CDbCriteria();
+			   	$criteria->addInCondition('district_id', $districts);
+    			$shop = Shop::model()->findByPk($shop_id, $criteria);
+    			if($shop) {
+    				if($shop->remark) {
+    					$shop->remark = $shop->remark . "\n" . date("Y-m-d H:i") . ' ' . $remark;
+    				} else {
+    					$shop->remark = date("Y-m-d H:i") . ' ' . $remark;
+    				}
+    				$shop->update();
+    			}
+    		}
+    	}
+    	$referer = CdcBetaTools::getReferrer();
+		$this->redirect($referer);
+    }
     
 	public function accessRules()
 	{

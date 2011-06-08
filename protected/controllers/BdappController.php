@@ -448,7 +448,7 @@ function buildApiUrl($apiurl, $args)
  * @param string $url
  * @return string 返回JSON编码的字符串
  */
-function api_execute($url)
+function api_execute($url, $args = null, $user = null, $pass = null)
 {
     if (empty($url)) return false;
     if (false === filter_var($url, FILTER_VALIDATE_URL)) return false;
@@ -457,6 +457,15 @@ function api_execute($url)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+    
+    if ($user && $pass)
+        curl_setopt($ch, CURLOPT_USERPWD, $user . ':' . $pass);
+
+    if ($args) {
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
+    }
+    
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;

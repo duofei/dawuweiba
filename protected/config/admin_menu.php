@@ -21,6 +21,7 @@ $order = array(
     array('label' => '订单查询', 'url'=>url('admin/order/search')),
     array('label' => '待审订单', 'url'=>url('admin/order/approve')),
     array('label' => '待审取消订单', 'url'=>url('admin/order/customercancelstate')),
+    array('label' => '电话处理订单', 'url'=>url('admin/order/phoneorder')),
     '/',
     array('label' => '未加工订单', 'url'=>url('admin/order/handleno')),
     array('label' => '加工中订单', 'url'=>url('admin/order/handleing')),

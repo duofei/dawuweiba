@@ -44,6 +44,7 @@
 	 	<?php foreach($order->orderGoods as $ordergoods):?>
 	    	<p> <?php echo l($ordergoods->goods_name, url('goods/show', array('goodsid'=>$ordergoods->goods_id)), array('target'=>'_blank'));?><span class="left200px"><?php echo $ordergoods->goods_nums;?> × <?php echo $ordergoods->goodsPrice;?>元 </span> <span class="left280px"><span class="goods-amount"><?php echo $ordergoods->goodsAmount;?></span>元</span></p>
 			<?php
+			if($order->consignee && $order->telphone): // 代表用户是通过提交资料产生的订单
 			if($order->status==Order::STATUS_COMPLETE || $order->status==Order::STATUS_DELIVERING):
 				if($ordergoods->goodsRateLog->goods_id):
 					$this->widget('CStarRating', array(
@@ -75,13 +76,14 @@
 						'blur' => 'js:rateShowNone',
 						'callback' => 'js:rateComment',
 						'htmlOptions' => array(
-							'mark' => $order->buy_type==Shop::BUYTYPE_TELPHONE ? param('markUserGradeGoods') : intval($ordergoods->goodsAmount),
+							'mark' => intval($ordergoods->goodsAmount),
 						),
 					));  ?>
 					<div class="fl lh20px cred" id="mark_rating_<?php echo $ordergoods->id;?>">还未打分</div>
 				    <div class="clear"></div>
 					<div class="ma-b10px" id="content_rating_<?php echo $ordergoods->id;?>"></div>
 	    	<?php
+	    		endif;
 	    		endif;
 	    	endif; ?>
 		<?php endforeach;?>
@@ -118,7 +120,8 @@
 	   		<?php elseif($order->buy_type == Shop::BUYTYPE_NETWORK || $order->buy_type == Shop::BUYTYPE_PRINTER):?>
 	   			<?php echo $order->statusText; ?>
 	   		<?php else:?>
-		  		<?php echo $order->buyTypeText; ?>
+	   			<?php echo $order->statusText; ?>
+		  		<?php //echo $order->buyTypeText; ?>
 		  	<?php endif;?>
 		  	</span>
 		  	<!-- <span><?php //echo $order->orderLogs[0] ? $order->orderLogs[0]->shortCreateDateTimeText : $order->shortCreateDateTimeText; ?></span> -->
@@ -126,12 +129,14 @@
 		  	<?php if($order->status==Order::STATUS_DELIVERING):?>
 		  		配送员(<?php echo $order->deliveryMan->name; ?>,<?php echo $order->deliveryMan->mobile; ?>) <br />
 		  	<?php endif;?>
+		  	<?php if($order->consignee && $order->telphone): // 代表用户是通过提交资料产生的订单 ?>
 	   		<?php if($order->status==Order::STATUS_COMPLETE || $order->status==Order::STATUS_DELIVERING):?>服务：
 		   		<?php if(!$order->shopCreditLogs->id): ?>
 		   			<span id="service_<?php echo $order->id;?>"><input name="radio" type="button" value="好评" onclick="serviceComment(<?php echo $order->id; ?>,1,<?php if($order->buy_type==Shop::BUYTYPE_TELPHONE) echo param('markShopGradeGoods'); else echo intval($order->amount);?>)" />&nbsp;&nbsp;<input name="radio" type="button" value="差评" onclick="serviceComment(<?php echo $order->id; ?>,0,<?php if($order->buy_type==Shop::BUYTYPE_TELPHONE) echo param('markShopGradeGoods'); else echo intval($order->amount);?>)" /></span>
 		   		<?php else: ?>
 		   			<?php echo $order->shopCreditLogs->evaluatesText; ?>
 		   		<?php endif; ?>
+			<?php endif; ?>
 			<?php endif; ?>
 	   		</div><div class="clear"></div>
 	 	</div>

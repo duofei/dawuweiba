@@ -311,3 +311,4 @@ class Cart extends CActiveRecord
 		return null;
 	}
 }
+

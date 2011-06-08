@@ -19,8 +19,12 @@ return array(
     // autoloading model and component classes
 	'import' => array(
 		'application.models.*',
+		'application.components.*',
+		'application.libs.*',
+        'application.components.Portlet.*',
         'application.extensions.*',
-        'application.libs.*',
+        'application.extensions.AppApi.*',
+        'application.extensions.wmapi.*',
 	),
 	
 	// application components
@@ -52,9 +56,21 @@ return array(
 		
 		'db' => array(
 		    'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=192.168.1.254; port=3306; dbname=wm_my52wm',
+			'connectionString' => 'mysql:host=192.168.1.201; port=3306; dbname=wm_my52wm',
 		    'username' => 'my52wm',
 		    'password' => '123',
+		    'charset' => 'utf8',
+		    'persistent' => true,
+		    'tablePrefix' => 'wm_',
+		    //'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
+		    'enableParamLogging' => true,
+		    'enableProfiling' => true,
+		),
+		'pgdb' => array(
+		    'class' => 'CDbConnection',
+			'connectionString' => 'pgsql:host=192.168.1.254; port=5432; dbname=my52wm',
+		    'username' => 'my52wm',
+		    'password' => '',
 		    'charset' => 'utf8',
 		    'persistent' => true,
 		    'tablePrefix' => 'wm_',
@@ -97,23 +113,17 @@ return array(
 		 * 大数据使用的内存方式
 		 */
 		'cache' => array(
-		    'class' => 'CMemCache',
-		    'servers' => array(
-		        array(
-    		        'host' => '192.168.1.254',
-    		        'port' => '22122',
-    		        'persistent' => true,
-		        ),
-		    ),
-		    'useMemcached' => false, //此处上线后要修改为true
+		    'class' => 'CFileCache',
+		    'directoryLevel' => 2,
 		),
-		
-		/*
-		 * 小数据始终使用文件缓存
-		 */
 		'fileCache' => array(
 		    'class' => 'CFileCache',
 		    'directoryLevel' => 2,
+		),
+		'redis' => array(
+		    'class' => 'CRedisCache',
+		    'host' => '192.168.1.254',
+		    'port' => '6379',
 		),
 
 		'urlManager' => array(

@@ -46,6 +46,8 @@ class Api_Order
 		return $array;
 	}
 	
+	
+	
 	/**
 	 * 下一个订单  (需要身份验证)
 	 * @param array $args
@@ -74,6 +76,7 @@ class Api_Order
 		if(!$guestid) {
 			throw new CException('token参数错误', ApiError::ARGS_INVALID);
 		}
+		
 		$cartlist = Cart::getGoodsList($guestid);
 		/* 判断购物车是否为空 */
 	    if(count($cartlist) == 0) {
@@ -85,48 +88,55 @@ class Api_Order
 		if(empty($consignee)) {
 			throw new CException('consignee参数错误', ApiError::ARGS_INVALID);
 		}
+		
 		$address = trim(strip_tags($_POST['address']));
 		if(empty($address)) {
 			throw new CException('address参数错误', ApiError::ARGS_INVALID);
 		}
+		
 		$message = trim(strip_tags($_POST['message']));
-		if($_POST['telphone'] && preg_match("/^(1\d{10})|((0\d{2,3}[-——]?)?\d{7,8})$/", $_POST['telphone'])) {
+		if($_POST['telphone'] && preg_match("/^(1\d{10})|((0\d{2,3}[\-——]?)?\d{7,8})$/", $_POST['telphone'])) {
 			$telphone = trim(strip_tags($_POST['telphone']));
 		} else {
 			throw new CException('telphone参数错误', ApiError::ARGS_INVALID);
 		}
-		if($_POST['mobile'] && preg_match("/^(1\d{10})|((0\d{2,3}[-——]?)?\d{7,8})$/", $_POST['mobile'])) {
+		
+		if($_POST['mobile'] && preg_match("/^(1\d{10})|((0\d{2,3}[\-——]?)?\d{7,8})$/", $_POST['mobile'])) {
 			$mobile = trim(strip_tags($_POST['mobile']));
 		} else {
 			throw new CException('mobile参数错误', ApiError::ARGS_INVALID);
 		}
+		
 		if(empty($telphone) && empty($mobile)) {
 			throw new CException('参数错误(telphone|mobile)必填一项', ApiError::ARGS_INVALID);
 		}
+		
 		$deliver_time = trim(strip_tags($_POST['deliver_time']));
 		if(!$deliver_time) {
 			throw new CException('deliver_time参数错误', ApiError::ARGS_INVALID);
 		}
+		
 		$building_id = intval($_POST['building_id']);
-			$order = new Order('checkout');
-            $order->shop_id = $cartlist[0]->goods->shop_id;
-            $order->consignee = $consignee;
-            $order->address = $address;
-            $order->telphone = $telphone;
-            $order->mobile = $mobile;
-            $order->message = $message;
-            $order->deliver_time = $deliver_time;
-            $order->pay_type = $cartlist[0]->goods->shop->pay_type;
-            $order->buy_type = $cartlist[0]->goods->shop->buy_type;
-            $order->city_id = $cityId;
-           	$order->token = $guestid;
-           	$order->user_id = $user->id;
-           	$order->building_id = $building_id;
+		$order = new Order('checkout');
+        $order->shop_id = $cartlist[0]->goods->shop_id;
+        $order->consignee = $consignee;
+        $order->address = $address;
+        $order->telphone = $telphone;
+        $order->mobile = $mobile;
+        $order->message = $message;
+        $order->deliver_time = $deliver_time;
+        $order->pay_type = $cartlist[0]->goods->shop->pay_type;
+        $order->buy_type = $cartlist[0]->goods->shop->buy_type;
+        $order->city_id = $cityId;
+       	$order->token = $guestid;
+       	$order->user_id = $user->id;
+       	$order->building_id = $building_id;
 
-            if ($order->save()) {
-            	return ApiBase::$success;
-            } else {
-            	return ApiBase::$fail;
-            }
+        if ($order->save()) {
+        	return ApiBase::$success;
+        } else {
+        	return ApiBase::$fail;
+        }
 	}
 }
+
