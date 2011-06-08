@@ -20,6 +20,7 @@ return array(
 	'import' => array(
 		'application.models.*',
         'application.extensions.*',
+        'application.libs.*',
 	),
 	
 	// application components
