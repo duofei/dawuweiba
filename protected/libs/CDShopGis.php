@@ -103,6 +103,7 @@ class CDShopGis
 
     public static function insert($shopid, $name, array $coordinate, $region1, $region2, $region3)
     {
+        echo '<h2>' . $shopid . '</h2>';
         $result = app()->pgdb->createCommand("insert into wm_shops (shop_id, shop_name) values ($shopid, '$name')")->query();
         
         if ($coordinate) {
@@ -115,12 +116,14 @@ class CDShopGis
                 $data[] = trim($p[0]) . ' ' . trim($p[1]);
             }
     
-            echo $new_region = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));echo '<hr />';
+            $region1 = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
             try {
-                $result = app()->pgdb->createCommand("update wm_shops set region1=$new_region where shop_id=$shopid")->query();
+                $result = app()->pgdb->createCommand("update wm_shops set region1=$region1 where shop_id=$shopid")->query();
             } catch (Exception $e) {
-                print_r($region1);
+                echo '<b>region1</b>';
+                print_r($e->getMessage());
             }
+            unset($data);
         }
 
         if ($region2) {
@@ -128,12 +131,14 @@ class CDShopGis
                 $data[] = trim($p[0]) . ' ' . trim($p[1]);
             }
             
-            $new_region = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
+            $region2 = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
             try {
-                $result = app()->pgdb->createCommand("update wm_shops set region2=$new_region where shop_id=$shopid")->query();
+                $result = app()->pgdb->createCommand("update wm_shops set region2=$region2 where shop_id=$shopid")->query();
             } catch (Exception $e) {
-                print_r($region2);
+                echo '<b>region2</b>';
+                print_r($e->getMessage());
             }
+            unset($data);
         }
 
         if ($region3) {
@@ -141,12 +146,14 @@ class CDShopGis
                 $data[] = trim($p[0]) . ' ' . trim($p[1]);
             }
     
-            $new_region = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
+            $region3 = sprintf("ST_PolygonFromText('Polygon((%s))')", @join(', ', $data));
             try {
-                $result = app()->pgdb->createCommand("update wm_shops set region3=$new_region where shop_id=$shopid")->query();
+                $result = app()->pgdb->createCommand("update wm_shops set region3=$region3 where shop_id=$shopid")->query();
             } catch (Exception $e) {
-                print_r($region2);
+                echo '<b>region3</b>';
+                print_r($e->getMessage());
             }
+            unset($data);
         }
     }
 }

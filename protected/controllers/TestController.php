@@ -2,6 +2,9 @@
 
 class TestController extends Controller
 {
+    const API_KEY = '7224d1f9252c829b6b8e67dee1edd7fc';
+    const API_URL = 'http://www.52wm.com/api/';
+    
 	public function actionIndex()
 	{
 	    /*//exit;
@@ -217,8 +220,9 @@ class TestController extends Controller
     /**
      * 将商家送餐范围存储由mysql转到pgsql
      */
-/*    public function actionMyToPg()
+    public function actionMyToPg()
     {
+        return ;
         $criteria = new CDbCriteria();
         $criteria->select = 'id, shop_name, map_y, map_x, map_region, map_region2, map_region3';
         $criteria->order = 'id asc';
@@ -232,12 +236,113 @@ class TestController extends Controller
             $region2 = regionToArray($shop->map_region2);
             $region3 = regionToArray($shop->map_region3);
             print_r($region1);
-            
+            print_r($region2);
+            print_r($region3);
             CDShopGis::insert($shopid, $shop_name, $point, $region1, $region2, $region3);
             unset($shopid, $shop_name, $point, $region1, $region2, $region3);
         }
+    }
+    
+    public function actionApiShop($locid = 0, $lat = 0, $lon = 0, $cityid = 1)
+    {
+        $locid = (int)$locid;
+        $lat = strip_tags(trim($lat));
+        $lon = strip_tags(trim($lon));
+        $cityid = (int)$cityid;
         
-    }*/
+        if (empty($locid) && (empty($lat) || empty($lon)))
+            $this->redirect(aurl('bdapp'));
+        
+        $history = self::getBdLocationHistory();
+        Location::addSearchHistory($locid);
+        
+        if ($locid) {
+            $args = array(
+                'apikey' => self::API_KEY,
+                'method' => 'shop.getListByLocation',
+                'location_id' => $locid,
+                'city_id' => $cityid,
+            );
+        }
+        else {
+            $args = array(
+                'apikey' => self::API_KEY,
+                'method' => 'shop.getListByCoordinate',
+                'lat' => $lat,
+                'lon' => $lon,
+                'city_id' => $cityid,
+            );
+        }
+        
+        
+        $url = buildApiUrl(self::API_URL, $args);
+        $data = json_decode(api_execute($url), true);
+        
+        if (empty($data) || $data['errorCode']) {
+            $this->render('no_shop', array(
+                'history' => $history,
+            ));
+            app()->end();
+        }
+        
+        $pages = new CPagination(count($data));
+        $pages->setPageSize(15);
+        
+    
+        $page = (int)$_GET['page'];
+    	$offset = $page ? ($page-1)*10 : 0;
+    	$data = array_slice($data, $offset, 5, true);
+    	
+    	print_r($data);
+    }
+    
+    private static function getBdLocationHistory()
+    {
+        $html = '';
+	    $history = Location::getSearchHistoryData(3);
+	    foreach ((array)$history as $v) {
+        	$html .= l($v->name, aurl('bdapp/shopSearch', array('locid'=>$v->id)), array('title'=>$v->name)) . '&nbsp;&nbsp;';
+	    }
+	    return $html;
+    }
+    
+    public function actionUrl()
+    {
+        $s = 'http://www.aaa.com/user/陈东啊啊啊-1000';
+        echo urlencode($s);
+    }
+    
+    public function actionTestOrder()
+    {
+        $cityid = 1;
+        $args = array(
+            'apikey' => self::API_KEY,
+            'method' => 'order.checkout',
+            'city_id' => $cityid,
+            'consignee' => '陈东',
+            'address' => '数码港7d-5',
+            'message' => 'xxoo',
+            'telphone' => '13853137700',
+            'mobile' => '13853137700',
+            'deliver_time' => '12:00',
+            'token' => '1fe6235cb283feff32fdf719403410d0',
+        );
+        
+        $url = buildApiUrl(self::API_URL, $args);
+        $data = json_decode(api_execute($url, $args, 'cdcchen', 'cdc790406'), true);
+        print_r($data);
+    }
+    
+    public function actionUserAddr()
+    {
+        $args = array(
+            'apikey' => self::API_KEY,
+            'method' => 'user.getAddress',
+        );
+        $url = buildApiUrl(self::API_URL, $args);
+        $data = json_decode(api_execute($url, array(), 'cdcchen', 'cdc790406'), true);
+        print_r($data);
+    }
 }
 
 function regionToArray($region)
@@ -275,4 +380,48 @@ function distanceBetweenPoints($p1, $p2)
     $d = $R * $c;
     return (int)$d;
 }
+
+
+/**
+ * 创建执行url
+ * @param string $apiurl api地址
+ * @param array $args 需要传递的参数
+ * @return string 格式化之后的url地址
+ */
+function buildApiUrl($apiurl, $args)
+{
+    if (empty($apiurl) || !is_array($args))
+        return null;
+        
+    return $apiurl . '?' . http_build_query($args);
+}
+
+/**
+ * 执行api
+ * @param string $url
+ * @return string 返回JSON编码的字符串
+ */
+function api_execute($url, $args, $user, $pass)
+{
+    if (empty($url)) return false;
+    if (false === filter_var($url, FILTER_VALIDATE_URL)) return false;
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+
+    if ($user && $pass)
+        curl_setopt($ch, CURLOPT_USERPWD, $user . ':' . $pass);
+
+    if ($args) {
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
+    }
+
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
+}
+
 

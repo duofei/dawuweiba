@@ -61,7 +61,7 @@ class Api_Location
 		}
 		return $array;
 	}
-	
+
 	/**
 	 * 获取地址列表数量
 	 * @param array $args
@@ -85,10 +85,11 @@ class Api_Location
 		if(empty($keyword)) {
 			throw new CException('keyword参数错误', ApiError::ARGS_INVALID);
 		}
+		
 		if(intval($cityId) <= 0) {
 			throw new CException('city_id参数错误', ApiError::ARGS_INVALID);
 		}
-		
+
 		$criteria = new CDbCriteria();
 		$criteria->addSearchCondition('name', $keyword);
 		if($type && key_exists($type, Location::$types)) {
@@ -97,8 +98,12 @@ class Api_Location
 		$criteria->addColumnCondition(array('city_id'=>$cityId, 'state'=>STATE_ENABLED));
 		$criteria->order = 'use_nums desc';
     	$count = Location::model()->count($criteria);
-    	
+
 		return $count;
 	}
-	
+
 }
+
+
+
+

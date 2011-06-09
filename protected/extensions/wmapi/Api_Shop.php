@@ -40,7 +40,7 @@ class Api_Shop
     	$criteria->addCondition('business_state != ' . Shop::BUSINESS_STATE_CLOSE);
     	$criteria->with = array('tags');
     	
-		$data = Shop::getLocationShopList(array($lat, $lon), $categoryId, $criteria, $cityId);
+		$data = Shop::getLocationShopListV2(array($lat, $lon), $categoryId, $criteria, $cityId);
 		if(!$data['shops']) {
 			return ApiBase::$noResult;
 		}
@@ -93,7 +93,7 @@ class Api_Shop
     	$criteria->addCondition('business_state != ' . Shop::BUSINESS_STATE_CLOSE);
     	$criteria->with = array('tags');
 
-		$data = Shop::getLocationShopList($locationId, $categoryId, $criteria);
+		$data = Shop::getLocationShopListV2($locationId, $categoryId, $criteria);
 		if(!$data['shops']) {
 			return ApiBase::$noResult;
 		}

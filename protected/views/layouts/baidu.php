@@ -29,13 +29,14 @@ cs()->registerCoreScript('jquery');
 ?>
 <script type="text/javascript">
 $(function(){
-	ResizeIframe();
+	setTimeout("ResizeIframe", 50);
 });
 
 function ResizeIframe()
 {
 	try {
         var h = $('#canvas').height();
+        alert(h);
         if (h > 0) {
             bdjs.clearAutoHeight();
             bdjs.setHeight(h);
