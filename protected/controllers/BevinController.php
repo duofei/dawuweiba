@@ -6,6 +6,7 @@ class BevinController extends Controller
 	public function actionTest()
 	{
 		
+		
 		$redis = new Redis();
 		$redis->connect('192.168.61.30', '6379');
 		
