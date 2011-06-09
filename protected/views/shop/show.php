@@ -95,8 +95,6 @@
 <!-- 菜单 -->
 <div class="fl main">
 	<!-- 电话预订商家开始 -->
-	<?php if($shop->buy_type==Shop::BUYTYPE_TELPHONE):?>
-	
 	<?php $this->beginWidget('WmCornerBox', array(
 	    'htmlOptions' => array('class'=>'corner-gray-title ma-b10px phone-order none'),
 	    'title' => '电话预订',
@@ -110,9 +108,8 @@
         </div>
         <div class="clear"></div>
 	<?php $this->endWidget();?>
-	
-	<?php endif;?>
 	<!-- 电话预订商家结束 -->
+
 	<?php $this->beginWidget('WmCornerBox', array(
         'htmlOptions' => array('class'=>'corner-gray-title shop-menu'),
     ));?>

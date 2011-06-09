@@ -872,11 +872,6 @@ class Shop extends CActiveRecord
     	$lon = $coordinate[1];
     	$html = '';
     	if($this->mapRegion && CdcBetaTools::pointInPolygon($this->mapRegion, $lat, $lon)) {
-    		/* 如果是电话店铺 */
-    		if($this->buy_type==self::BUYTYPE_TELPHONE) {
-    			return $this->transport_condition;
-    		}
-    		
     		if($this->transport_amount > 0) {
     			$html = '最低起送价' . $this->transport_amount . '元';
     			if($this->dispatching_amount > 0) {
@@ -891,11 +886,6 @@ class Shop extends CActiveRecord
     		}
     	}
 		if($this->mapRegion2 && CdcBetaTools::pointInPolygon($this->mapRegion2, $lat, $lon)) {
-			/* 如果是电话店铺 */
-    		if($this->buy_type==self::BUYTYPE_TELPHONE) {
-    			return $this->transport_condition2;
-    		}
-    		
     		if($this->transport_amount2 > 0) {
     			$html = '最低起送价' . $this->transport_amount2 . '元';
     			if($this->dispatching_amount2 > 0) {
@@ -910,10 +900,6 @@ class Shop extends CActiveRecord
     		}
     	}
 		if($this->mapRegion3 && CdcBetaTools::pointInPolygon($this->mapRegion3, $lat, $lon)) {
-			/* 如果是电话店铺 */
-    		if($this->buy_type==self::BUYTYPE_TELPHONE) {
-    			return $this->transport_condition3;
-    		}
     		if($this->transport_amount3 > 0) {
     			$html = '最低起送价' . $this->transport_amount3 . '元';
     			if($this->dispatching_amount3 > 0) {
@@ -1379,16 +1365,27 @@ class Shop extends CActiveRecord
 	    if ($this->business_state != Shop::BUSINESS_STATE_OPEN) return false;
 	    
 	    // 如果打印机状态不正常也显示不在线
-	    if ($this->printer && ($this->printer->state != Printer::STATE_ONLINE)) return false;
+	    //if ($this->printer && ($this->printer->state != Printer::STATE_ONLINE)) return false;
 	    
-	    $date = explode('-', $this->business_time);
-	    // 如果营业时间格式不对，返回营业中
-	    if (2 != count($date)) return true;
+	    // 如果营业时间格式不对，返回不在线
+	    if(!preg_match("/[0-9]{1,2}:[0-9]{1,2}-[0-9]{1,2}:[0-9]{1,2}( [0-9]{1,2}:[0-9]{1,2}-[0-9]{1,2}:[0-9]{1,2})*/", $this->business_time)) {
+	    	return false;
+	    }
 	    
-	    $begin = $date[0];
-	    $end = $date[1];
 	    $time = $_SERVER['REQUEST_TIME'];
-	    return (strtotime($begin) < $time && $time < strtotime($end));
+	    
+	    $date = explode(' ', $this->business_time);
+	    
+	    foreach ($date as $v) {
+		    $dtime = explode('-', $v);
+		    $begin = $dtime[0];
+		    $end = $dtime[1];
+		    if(strtotime($begin) < $time && $time < strtotime($end)) {
+		    	return true;
+		    }
+	    }
+	    
+	    return false;
 	}
 	
     public function getMenuBtnHtml($label = '在线菜单')

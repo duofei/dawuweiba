@@ -31,7 +31,7 @@
 	<?php endif;?>
 </table>
 <p class="ar ma-r20px lh30px"><?php echo l('清空购物车', url('cart/clear'))?></p>
-<?php if($this->cart[0]->goods->shop->buy_type == Shop::BUYTYPE_TELPHONE && STATE_DISABLED == Setting::getValue('checkPhoneOrderDeal', $this->cart[0]->goods->shop->district->city_id)):?>
+<?php if(($this->cart[0]->goods->shop->buy_type == Shop::BUYTYPE_TELPHONE || $this->cart[0]->goods->shop->printer->state != Printer::STATE_ONLINE)  && STATE_DISABLED == Setting::getValue('checkPhoneOrderDeal', $this->cart[0]->goods->shop->district->city_id)):?>
 <div class="m10px f14px">该餐厅需要自行电话订餐，请对照您的购物车拨打餐厅电话进行订餐。</div>
 <h4 class="ma-l10px ma-b10px f14px none" id="shopTelphone">电话： <span class="cred"><?php echo $this->cart[0]->goods->shop->telphone;?></span></h4>
 <div><div class="check-out fr ma-r20px ma-b10px relative">
