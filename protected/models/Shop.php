@@ -1364,7 +1364,8 @@ class Shop extends CActiveRecord
 	{
 	    if ($this->business_state != Shop::BUSINESS_STATE_OPEN) return false;
 	    
-	    // 如果打印机状态不正常也显示不在线
+	    // 如果打印机状态暂停，返回不在线
+	    if ($this->printer && ($this->printer->orderState == Printer::STATE_PRINTER_PAUSE)) return false;
 	    //if ($this->printer && ($this->printer->state != Printer::STATE_ONLINE)) return false;
 	    
 	    // 如果营业时间格式不对，返回不在线

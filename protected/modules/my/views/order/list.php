@@ -2,9 +2,9 @@
     <ul class="nav">
 	  <li class="normal corner-top cgray" id="uncomplete"><a href="<?php echo url('my/order/uncomplete');?>">未完成订单</a></li>
 	  <li class="normal corner-top cgray" id="norating"><a href="<?php echo url('my/order/norating');?>">未点评订单</a></li>
-	  <li class="normal corner-top cgray" id="online"><a href="<?php echo url('my/order/online');?>">网络订单</a></li>
+	  <!-- <li class="normal corner-top cgray" id="online"><a href="<?php echo url('my/order/online');?>">网络订单</a></li> -->
 	  <!-- <li class="normal corner-top cgray" id="groupon"><a href="<?php echo url('my/order/groupon');?>">同楼订餐</a></li> -->
-	  <li class="normal corner-top cgray" id="telphone"><a href="<?php echo url('my/order/telphone');?>">电话订单</a></li>
+	  <!-- <li class="normal corner-top cgray" id="telphone"><a href="<?php echo url('my/order/telphone');?>">电话订单</a></li> -->
 	  <li class="normal corner-top cgray" id="list"><a href="<?php echo url('my/order/list');?>">所有订单</a></li>
 	</ul>
 </div>
