@@ -317,7 +317,7 @@ class OrderController extends Controller
 					if($sendsms==STATE_ENABLED && SendSms::filter_mobile($order->telphone)) {
 						$content = iconv('utf-8', 'gb2312', $sms_content);
 						// 发送短信
-						//$d = SendSms::send_sms($order->telphone, $content);
+						$d = SendSms::send_sms($order->telphone, $content);
 					}
 				}
 			}

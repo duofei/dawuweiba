@@ -91,12 +91,12 @@ $iss = array(
         <td><?php echo CHtml::activeTextField($shop_info, 'transport_time', array('class'=>'txt')); ?></td>
     </tr>
     <!-- 最小配送范围 -->
-    <?php if($shop_info->buy_type == Shop::BUYTYPE_TELPHONE):?>
+    <?php if($shop_info->transport_condition):?>
     <tr class="tline">
         <td class="ar">起送条件：</td>
-        <td><?php echo CHtml::activeTextField($shop_info, 'transport_condition', array('class'=>'txt', 'style'=>'width:400px'))?></td>
+        <td><?php echo $shop_info->transport_condition;?></td>
     </tr>
-    <?php else:?>
+    <?php endif;?>
     <tr>
         <td class="ar">最低起送价：</td>
         <td>
@@ -105,7 +105,6 @@ $iss = array(
         	送餐费：<?php echo CHtml::activeTextField($shop_info, 'dispatching_amount', array('class'=>'txt', 'style'=>'width:100px'))?>
         </td>
     </tr>
-    <?php endif;?>
     <tr>
         <td class="ar">最小配送范围：</td>
         <td>
@@ -114,12 +113,12 @@ $iss = array(
         </td>
 	</tr>
 	<!-- 适中配送范围 -->
-	<?php if($shop_info->buy_type == Shop::BUYTYPE_TELPHONE):?>
+	<?php if($shop_info->transport_condition2):?>
 	<tr class="tcondition_mregion none divbg1">
 		<td class="ar">起送条件：</td>
-        <td><?php echo CHtml::activeTextField($shop_info, 'transport_condition2', array('class'=>'txt', 'style'=>'width:400px'))?></td>
+        <td><?php echo $shop_info->transport_condition2;?></td>
 	</tr>
-	<?php else:?>
+	<?php endif;?>
 	<tr class="tcondition_mregion none divbg1">
         <td class="ar">最低起送价：</td>
         <td>
@@ -128,7 +127,6 @@ $iss = array(
         	送餐费：<?php echo CHtml::activeTextField($shop_info, 'dispatching_amount2', array('class'=>'txt', 'style'=>'width:100px'))?>
         </td>
     </tr>
-    <?php endif;?>
 	<tr class="tcondition_mregion none divbg1">
         <td class="ar">适中配送范围：</td>
         <td>
@@ -137,12 +135,12 @@ $iss = array(
         </td>
 	</tr>
 	<!-- 最大配送范围 -->
-	<?php if($shop_info->buy_type == Shop::BUYTYPE_TELPHONE):?>
+	<?php if($shop_info->transport_condition3):?>
 	<tr class="tcondition_mregion none">
 		<td class="ar">起送条件：</td>
-        <td><?php echo CHtml::activeTextField($shop_info, 'transport_condition3', array('class'=>'txt', 'style'=>'width:400px'))?></td>
+        <td><?php echo $shop_info->transport_condition3;?></td>
 	</tr>
-	<?php else:?>
+	<?php endif;?>
 	<tr class="tcondition_mregion none">
         <td class="ar">最低起送价：</td>
         <td>
@@ -151,7 +149,6 @@ $iss = array(
         	送餐费：<?php echo CHtml::activeTextField($shop_info, 'dispatching_amount3', array('class'=>'txt', 'style'=>'width:100px'))?>
         </td>
     </tr>
-    <?php endif;?>
 	<tr class="tcondition_mregion none">
         <td class="ar">最大配送范围：</td>
         <td>
