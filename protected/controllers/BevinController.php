@@ -7,9 +7,6 @@ class BevinController extends Controller
 	{
 		
 		
-		$redis = new Redis();
-		$redis->connect('192.168.61.30', '6379');
-		
 		exit;
 		//CDShopGis::insert(1, $shop->shop_name, array(117.05580588940427, 36.67782682477077), $shop->getMapRegion(), null,null);
 		$at = array(117.05580588940427, 36.67782682477077);
