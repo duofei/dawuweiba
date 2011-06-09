@@ -1,10 +1,21 @@
 <?php
-//set_time_limit(3600);
+set_time_limit(3600);
 class BevinController extends Controller
 {
 
 	public function actionTest()
 	{
+		
+		$redis = new Redis();
+		$redis->connect('192.168.61.30', '6379');
+		
+		exit;
+		//CDShopGis::insert(1, $shop->shop_name, array(117.05580588940427, 36.67782682477077), $shop->getMapRegion(), null,null);
+		$at = array(117.05580588940427, 36.67782682477077);
+		$shopids = CDShopGis::fetchShopListId(array($at[1], $at[0]));
+		
+		//$data = Shop::getLocationShopListV2($at, 1);
+		var_dump($shopids);
 //		$criteria = new CDbCriteria();
 //		$criteria->addCondition('clear_password !="xxxxxx"');
 //		$criteria->addColumnCondition(array('super_shop'=>STATE_DISABLED, 'super_admin'=>STATE_DISABLED));
@@ -112,5 +123,15 @@ class BevinController extends Controller
 			//Message::sendMessage($uid, $mailtitle, $msgcontent, 0);
 
 		}
+	}
+
+
+	public function actionSendsms()
+	{
+		exit;
+		//$telphone = '18764007220,18764010205,18764033160,18764037651,18764130571,18764133033,18764165316,18764452806,18764459845,18765319800,18765832354,18765898115,18766117678,18766158607,18766162810,18766177205,18766193139,18766198488,18766446010,18769700133,18769708323,18769717208,18769732196,18769732758,18769763010,18805414414,18853106008,18853115211,18854136727,18866806350,18906414075,18906441906,18931128397,18953103809,18953105773,18953152005,18953152006,18953152019,18953152080,18953152081,18953152165,18953152531,18953152597,18953156798,18965542212,18966039396';
+		$content = iconv('UTF-8', 'GBK', '我爱外卖网正式上线，为感谢您的支持，特送您价值10元的白吃点，请登录www.52wm.com领取！7月31日前有效！');
+		$telphone = '13625410237';
+		//SendSms::send_sms($telphone, $content);
 	}
 }
