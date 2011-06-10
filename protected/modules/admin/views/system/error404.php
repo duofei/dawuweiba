@@ -1,0 +1,1 @@
+<h4>当前访问的资源不存在：<?php echo $error['message'];?></h4>

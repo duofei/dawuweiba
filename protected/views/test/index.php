@@ -1,0 +1,3 @@
+<iframe scrolling="no" frameborder="0"
+	src="http://www.connect.renren.com/widget/liveWidget?api_key=49e422d84b694b69ba5e3c5809db4102&url=http%3A%2F%2Fhttp%3A%2F%2Fwww.52wm.com%2Fmiaosha.html&desp=%E5%A4%A7%E5%AE%B6%E6%9D%A5%E8%AE%A8%E8%AE%BA%E4%B8%80%E5%85%83%E5%8D%88%E9%A4%90%E6%AD%A3%E5%9C%A8%E7%81%AB%E7%83%AD%E8%BF%9B%E8%A1%8C%E4%B8%AD%E3%80%82%E3%80%82%E3%80%82http%3A%2F%2Fwww.52wm.com%2Fmiaosha.html"
+	style="width: 970px; height: 500px;"></iframe>

@@ -1,0 +1,46 @@
+<?php
+
+return array(
+	/*
+	'sample1'=>array(
+		'name' => '',
+		'shop_id' => '',
+		'price' => '',
+		'tuan_price' => '',
+		'desc' => '',
+		'favorite_nums' => '',
+		'order_nums' => '',
+		'rate_nums' => '',
+		'rate' => '',
+		'comment_nums' => '',
+		'is_new' => '',
+		'is_tuan' => '',
+		'pic' => '',
+		'state' => '',
+		'create_time' => '',
+		'create_ip' => '',
+		'update_time' => '',
+		'update_ip' => '',
+	),
+	'sample2'=>array(
+		'name' => '',
+		'shop_id' => '',
+		'price' => '',
+		'tuan_price' => '',
+		'desc' => '',
+		'favorite_nums' => '',
+		'order_nums' => '',
+		'rate_nums' => '',
+		'rate' => '',
+		'comment_nums' => '',
+		'is_new' => '',
+		'is_tuan' => '',
+		'pic' => '',
+		'state' => '',
+		'create_time' => '',
+		'create_ip' => '',
+		'update_time' => '',
+		'update_ip' => '',
+	),
+	*/
+);

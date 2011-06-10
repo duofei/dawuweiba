@@ -1,0 +1,1 @@
+<?php echo CHtml::dropDownList('user_id', '', CHtml::listData($user, 'id', 'username'));?>

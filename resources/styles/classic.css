@@ -1,0 +1,83 @@
+@CHARSET "UTF-8";
+
+#header .logo img {vertical-align:text-bottom;}
+#footer li {margin-right:10px;}
+
+.topnav {height:27px; background:#c8181b; padding-top:3px; line-height:27px;}
+.topnav .select {background-position:-82px -162px; color:#c8181b; height:27px; line-height:27px; display:inline-block; width:80px;}
+
+
+.indexnav ul li {margin:0px 10px;}
+.index-main {width:778px;}
+.index-sidebar {width:182px;}
+#search {height:150px; background:url(../images/search-bg.png) no-repeat; padding:0 20px;}
+#search h1 {padding-top:10px;}
+#search .search-form {height:50px; padding-left:10px; background:url(../images/search_input.png) no-repeat;}
+#search div.input-search {margin-top:5px; width:350px;}
+#search input.search-input {border:0; width:340px; font-size:16px; height:30px; line-height:30px; -moz-box-shadow:0 0 0;}
+#search div.search-btn {padding:2px 1px 2px 0;}
+#search input.btn-search {border:none; width:88px; height:36px; background:url(../images/pic.png) no-repeat -4px -111px; cursor:pointer;}
+
+
+.index-main .main-tools {width:245px;}
+.index-main .main-ad {width:523px;}
+.main-tools .shop-summary .content {height:120px;}
+.main-tools .wm-social .content {height:140px;}
+.main-ad .content {height:280px;}
+.main-ad .content img {width:500px; height:270px; margin:5px 10px;}
+.main-tools .social {background-position:-7px -20px; padding-left:25px;}
+.main-tools .shop-nums {background-position:-7px -918px; padding-left:25px;}
+.main-tools .shop-nums2 {background-position:-7px -1142px; padding-left:25px; line-height:30px; margin-top:10px;}
+.joinin .content, .opensite .content, .wm-feature .content {height:130px;}
+.joinin {width:245px;}
+.opensite {width:256px;}
+.wm-feature {width:257px;}
+
+.online-help .content {height:140px;}
+.order-summary {height:140px;}
+.order-summary .fnum {color:#FDC90D; font-size:25px;}
+.index-sidebar-ad .content {height:285px; line-height:19px;}
+
+.useraction {color:#A2B55C;}
+
+.suggest-container li .ks-suggest-key {font-size:14px; line-height:24px; height:24px;}
+
+/* 首页图片轮显 */
+.ks-switchable-nav {position:absolute; bottom:10px; right:20px;	z-index:99;}
+.ks-switchable-nav li {
+	float:left;
+	width:16px;
+	height:	16px;
+	line-height:16px;
+	margin-left:3px;
+	background-color:#FCF2CF;
+	border:	1px	solid #F47500;
+	color:#D94B01;
+	text-align:	center;
+	cursor:	pointer;
+}
+.ks-switchable-nav li.ks-active	{
+	width:18px;
+	height:	18px;
+	line-height:18px;
+	margin-top:	-1px;
+	color:#FFF;
+	background-color:#FFB442;
+	font-weight:bold;
+}
+.ks-switchable-nav li,
+.ks-switchable-trigger-content {
+	position:relative;
+}
+.ks-switchable-trigger-mask	{
+	position:absolute;
+	right:0;
+	width:18px;
+	height:	18px;
+	background-color:#FF9415;
+	visibility:	hidden;
+}
+.ks-active .ks-switchable-trigger-mask {
+	visibility:	visible;
+}
+

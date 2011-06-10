@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>我爱外卖网提醒</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body{width:200px; margin:0px; padding:0px;}
+div{font-size:12px; line-height:24px;}
+div.title{background:#FBFBFB; color:#666666;}
+div span{color:red;}
+</style>
+<script language="JavaScript" src="scripts/jquery-1.5.2.min.js"></script>
+<script language="JavaScript" src="scripts/global.js"></script>
+<script>
+$(function(){
+	$("#waitNum").html(localStorage['waitNum']);
+	
+//	// 待审核订单
+//	$("#o_approve").html(localStorage['o_approve']);
+//	$("#orderApproveDiv").click(function(){
+//		chrome.tabs.create({url: 'http://www.52wm.com/admin/order/approve.html'});
+//	});
+	// 打印机不在线
+	$("#p_unline").html(localStorage['p_unline']);
+	$("#printerUnlineDiv").click(function(){
+		chrome.tabs.create({url: 'http://www.52wm.com/admin/printer/list.html'});
+	});
+	// 未处理订单
+	$("#o_undisposed").html(localStorage['o_undisposed']);
+	$("#orderUndisposedDiv").click(function(){
+		chrome.tabs.create({url: 'http://www.52wm.com/admin/order/today.html'});
+	});
+	// 电话订单
+	$("#o_phoneorder").html(getValue('o_phoneorder'));
+	$("#orderPhoneDiv").click(function(){
+		chrome.tabs.create({url: 'http://www.52wm.com/admin/order/phoneorder.html'});
+	});
+});
+</script>
+</head>
+<body>
+<div class="title">我爱外卖网提醒</div>
+<div>你还有<span id="waitNum">0</span>个未处理项：</div>
+<!-- <div>·<a href="javascript:void(0);" id="orderApproveDiv">待审核订单<span id="o_approve">0</span>条</a></div> -->
+<div>·<a href="javascript:void(0);" id="printerUnlineDiv">打印机有<span id="p_unline">0</span>个掉线</a></div>
+<div>·<a href="javascript:void(0);" id="orderUndisposedDiv">未处理订单<span id="o_undisposed">0</span>条</a></div>
+<div>·<a href="javascript:void(0);" id="orderPhoneDiv">电话订单<span id="o_phoneorder">0</span>条</a></div>
+</body>
+</html>

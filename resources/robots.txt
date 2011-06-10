@@ -1,0 +1,6 @@
+#
+# robots.txt for 52wm.com
+#
+
+User-agent: *
+Disallow: /

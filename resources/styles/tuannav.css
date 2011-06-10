@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+
+
+/* 团购导航 css*/
+.h-100{ height:100%}
+.w720px{ width:718px}
+.w240px{ width:238px}
+.border-red{ border:1px solid #c8181b;}
+.groupbuy-title{border-bottom:1px solid #ee5500; padding:5px 0 0 5px;  background:#f2f2e8; height:30px; }
+.h35px{height:35px;}
+.groupbuy-title1{border-bottom:1px solid #c8181b; background:#f2f2e8; height:34px; }
+.groupbuy-title-h3{height:30px; width:100px; color:#fff; padding-left:14px; background:url(../images/pic.png) no-repeat -130px -950px; }
+.sites_ul li{width:102px; border-bottom:1px dotted #ee5500; height:29px; line-height:29px }
+
+.group-sort{position:absolute; width:80px; margin-left:-565px; height:240px; padding-top:0px; left:50%; background:url(../images/sort.png) no-repeat; z-index:100}
+
+.h44px{ height:44px}
+.lh26px{ line-height:27px}
+.group-sort a, .group-sort a:visited{ color:#333;}
+.group-sort a:hover{ color:#c8181b;}
+
+
+.pa-t7px{ padding-top:7px}
+a.site-link{ background: url(../images/icon.png) no-repeat -10px -1065px; display:block; float:left; width:12px; height:12px; margin:10px 0 0 5px;}
+.border-bottom-dot{ border-bottom:1px dotted #aaa;}
+.bg-red{ background:#c8181b; color:#fff;}
+
+.group-box{ width:220px; height:272px; border:1px solid #e1e1e1; margin-right:10px; position:relative;}
+.group-box-new{ position:absolute; width:34px; height:34px; top:0; left:0; background:url(../images/pic.png) -265px -805px; border:none; z-index:100;}
+.group-img{ width:220px; height:140px; }
+p.group-time{ color:#fff; background:#333; position:absolute; top:125px; left:0; width:218px;} 
+.w130px{ width:130px;}
+.w90px{ width:90px;}
+.w100px{ width:100px}
+
+a.group-buy{ display:block; height:24px; width:80px; background:url(../images/pic.png) no-repeat -123px -1025px;}
+.group-comment{ width:100px; height:22px; background:url(../images/pic.png) no-repeat 0 -958px;}
+.group-dp{width:19px; height:15px; background:url(../images/pic.png) no-repeat -279px -851px; margin-top:5px; }
+.group-sc{width:19px; height:15px; background:url(../images/pic.png) no-repeat -279px -877px;margin-top:5px; }
+
+.ul-title{ height:29px;padding:5px 0 0 5px;  background:#f2f2e8;}
+.li-title{ width:80px; height:29px; background:url(../images/pic.png) no-repeat -125px -1057px;}
+.li-title-select{ height:30px; background:url(../images/pic.png) no-repeat -215px -1057px; color:#c8181b}
+.w556px{ width:556px}
+
+.click-num{ width:38px; height:24px; border:1px solid #aaa; background:#e3e9ea;}
+.w176px{ width:176px;}
+/* 日历 css*/
+.Calendar { font-family:Verdana; font-size:12px; text-align:center; width:226px;padding:5px; line-height:20px; }
+.Calendar a{ border:1px solid #c1c1c1; display:block; width:24px; padding:1px 0; text-decoration:none; color:#666 }
+.Calendar a:visited{ color:#666;}
+.Calendar-title{ font-size:14px; font-weight:bold; color:#c8181b; padding:5px 0; background:#e3e9ea; border:1px solid #aaa} 
+.Calendar table{ width:100%; border:0; } 
+.Calendar table tbody td {padding:1px;} 
+#idCalendarPre{ cursor:pointer; float:left; padding-left:5px; } 
+#idCalendarNext{ cursor:pointer; float:right; padding-right:5px; } 
+#idCalendar td.onToday a { font-weight:bold; color:#c8181b; } 
+/* 团购详情 css*/
+.border-top-dot{ border-top:1px dotted #aaa;}
+.w370px{ width:370px;}
+.today-peak, .today-keep, .today-buyone{ display:block; width:79px; padding-left:35px; height:25px; background:url(../images/pic.png) no-repeat;  }
+.today-peak{ background-position:0px -1016px;}
+.today-keep{ background-position:0px -987px;}
+.today-buyone{ background-position:0px -1047px;}
+.w315px{ width:315px}
+.ma-t15px{ margin-top:15px;}
+.today-buy{ display:block; width:130px; height:34px; background:url(../images/pic.png) no-repeat -122px -987px;}
+.border-dot{ border:1px dotted #aaa;}
+.w180px{ width:180px}
+.border-gray{ border:1px solid #d9d9d9}
+.bg-ff{ background:#ffffe7}
+ol.today-about{ list-style-type:decimal}
+.today-h3{ border-bottom:1px solid #c8181b; background:#f2f2e8;}
+.today-arrow{ background:url(../images/icon.png) no-repeat -12px -440px;}
+.border-bottom-black{ border-bottom:1px solid #aaa;}
+.pa-10-20{ padding:10px 20px;}
+.today-btn{ width:80px; height:24px; background:url(../images/pic.png) no-repeat -213px -1025px; border:none}
+
+
+.w230px{ width:230px}
+.w200px{ width:200px}
+.ma-l40px{ margin-left:40px}
+.w400px{ width:400px}
+.ico-global{ background:url(../images/icon.png) no-repeat -6px -1091px;}
+.ico-china{ background:url(../images/icon.png) no-repeat -6px -1117px;}
+.border-bottom-red{ border-bottom:1px solid #c8181b;}
+.w-50{ width:50%}
+
+.input-h26px{ height:26px; width:300px;}
+.ico-post{ background:url(../images/pic.png) no-repeat 0px -1079px; height:30px; width:60px; border:none}
+.ico-post-four{ background:url(../images/pic.png) no-repeat -1px -1115px; height:30px; width:90px; border:none}
+.seller-tab td{ border-bottom:1px dotted #e1e1e1; padding:5px 0 ; }
+.tr-h30px td{ height:30px;}
+.tr-h50px td{ height:50px;}
+.color-c60{ color:#f69626}
+.a-buy{ background:url(../images/pic.png) no-repeat -270px -902px; padding-left:35px}
+.a-seller{ background:url(../images/pic.png) no-repeat -270px -976px; padding-left:35px}
+.a-bargain{background:url(../images/pic.png) no-repeat -270px -938px; padding-left:35px}
+.ico-w35px{ width:35px; height:30px; padding:0}
+.w510px{ width:510px}
+.bg-f9{ background:#f9f8f3 }
+.ma-l100px{ margin-left:100px}
+.pa-10-40{ padding:10px 20px 10px 30px}
+
+.w235px{ width:235px}
+.ico-question{ background:url(../images/pic.png) no-repeat -230px -315px; margin-right:7px; padding-right:15px}
+.question{ top:240px; right:10px; width:240px; padding:15px; z-index:100}
+.h3-report{height:30px; width:150px; color:#fff; padding-left:14px; background:url(../images/pic.png) no-repeat -123px -1109px; }
+
+.overflow{white-space:nowrap;overflow:hidden;}
+.image-tuan{width:218px; height:139px;}
+.image-show{width:350px; height:220px;}
