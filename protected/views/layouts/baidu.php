@@ -4,7 +4,7 @@
 <?php echo CHtml::metaTag('text/html; charset=' . app()->charset, null, 'Content-Type');?>
 <title>baidu app test</title>
 </head>
-<body>
+<body onload="ResizeIframe();">
 <div class="main540" id="canvas">
     <div style=" width:535px; margin:0 auto;">
         <div class="toolbar">
@@ -28,15 +28,11 @@ cs()->registerCssFile(resBu('baidu/styles/baidu.css?t=2011052501'), 'screen');
 cs()->registerCoreScript('jquery');
 ?>
 <script type="text/javascript">
-$(function(){
-	setTimeout("ResizeIframe", 50);
-});
 
 function ResizeIframe()
 {
 	try {
         var h = $('#canvas').height();
-        alert(h);
         if (h > 0) {
             bdjs.clearAutoHeight();
             bdjs.setHeight(h);

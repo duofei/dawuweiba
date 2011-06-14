@@ -99,7 +99,7 @@ class ApiBase
 			return $userapi->user_id;
 		}
 	}
-	
+
 	/**
 	 * 用户名和密码是否正确
 	 * @return 用户对象
