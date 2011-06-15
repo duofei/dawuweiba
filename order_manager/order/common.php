@@ -242,9 +242,21 @@ function makeGoodsFormat($goods)
  */
 function filterChar($str)
 {
-    $chars = array('#', ';', '*', ',', '囧');
+    // # ; * 是订单格式保留字符
+    $chars = array('#', ';', '*', ',', '囧', '￥', '…');
     $str = str_replace('（', '(', $str);
     $str = str_replace('）', ')', $str);
+    $str = str_replace('－', '-', $str);
+    $str = str_replace('——', '_', $str);
+    $str = str_replace('！', '!', $str);
+    $str = str_replace('｜', '|', $str);
+    $str = str_replace('《', '<<', $str);
+    $str = str_replace('》', '>>', $str);
+    $str = str_replace('？', '?', $str);
+    $str = str_replace('，', ',', $str);
+    $str = str_replace('。', '.', $str);
+    $str = str_replace('“', '"', $str);
+    $str = str_replace('”', '"', $str);
     return str_replace($chars, '', $str);
 }
 
