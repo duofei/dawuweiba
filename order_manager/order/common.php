@@ -25,34 +25,23 @@ $config = array(
     'tablePrefix' => 'wm_',
 );
 
-/*
- * 订单是否审核通过
- */
+
+// 订单是否审核通过
 !defined('IS_VERIFY_STATE') && define('IS_VERIFY_STATE', 1);
 
-/*
- * 订单购买方式为网络打印机方式
- */
+// 订单购买方式为网络打印机方式
 !defined('BUYTYPE_PRINTER') && define('BUYTYPE_PRINTER', 2);
 
-/*
- * 订单字符串中换行替换字符串，要与打印机中设置的一致
- */
+// 订单字符串中换行替换字符串，要与打印机中设置的一致
 !defined('BREAKLINE') && define('BREAKLINE', '%%%%');
 
-/*
- * 分隔线
- */
+// 分隔线
 !defined('SEPLINE') && define('SEPLINE', '-------------------------' . BREAKLINE);
 
-/*
- * 分隔线加换行
- */
+// 分隔线加换行
 !defined('BREAKSEPLINE') && define('BREAKSEPLINE', BREAKLINE . SEPLINE);
 
-/*
- * 已经弃用
- */
+// 已经弃用，原来用来设置是否需要自己组织第二联的内容打印出来，现在已经修改为打印机来控制打印的联数
 //$secodn_page = true;
 
 /*
@@ -116,6 +105,7 @@ function fetchNewOrder($no)
 
 /**
  * 按照格式生成订单字符串，结尾必须以0x0D0x0A结束
+ * 具体订单格式参考《GPRS打印机订单打印说明文档.docx》
  * @param array $order
  * @return string 整个订单字符串，包括二联
  */
@@ -159,6 +149,7 @@ function makeOrderFormat($order)
 
 /**
  * 生成第二联的内容
+ * 此方法现在已经无用
  * @param array $order
  * @return string 二联内容字符串
  */
@@ -188,7 +179,7 @@ function makeSecondPage($order)
 
 /**
  * 输入订单信息
- * 打印机只接受无任何处理的字符串，并且需要 content-length头信息，所以需要使用ob函数来处理下
+ * 打印机只接受无任何处理的text/plain字符串，并且需要 content-length头信息，所以需要使用ob函数来处理下
  * @param string $data
  * @return void
  */
@@ -251,9 +242,21 @@ function makeGoodsFormat($goods)
  */
 function filterChar($str)
 {
-    $chars = array('#', ';', '*', ',', '囧');
+    // # ; * 是订单格式保留字符
+    $chars = array('#', ';', '*', ',', '囧', '￥', '…');
     $str = str_replace('（', '(', $str);
     $str = str_replace('）', ')', $str);
+    $str = str_replace('－', '-', $str);
+    $str = str_replace('——', '_', $str);
+    $str = str_replace('！', '!', $str);
+    $str = str_replace('｜', '|', $str);
+    $str = str_replace('《', '<<', $str);
+    $str = str_replace('》', '>>', $str);
+    $str = str_replace('？', '?', $str);
+    $str = str_replace('，', ',', $str);
+    $str = str_replace('。', '.', $str);
+    $str = str_replace('“', '"', $str);
+    $str = str_replace('”', '"', $str);
     return str_replace($chars, '', $str);
 }
 
