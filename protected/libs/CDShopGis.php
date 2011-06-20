@@ -93,26 +93,20 @@ class CDShopGis
      */
     public static function setShopRegion($shopid, array $region, $index = 1)
     {
-        if (empty($region)) return false;
         
         if (!in_array($index, array(1, 2, 3)))
             throw new Exception('$index is 1|2|3');
-
-        /*
-         * 先取出原来的3个送餐范围
-         */
-        $polygons = self::fetchShopRegion($shopid);
-
-        /*
-         * 把需要更新的替换掉
-         */
-        $column = 'region' . $index;
-        $polygons[$column] = $region;
+		$column = 'region' . $index;
+		
+		if (empty($region)) {
+			$result = app()->pgdb->createCommand("update wm_shops set {$column}=null where shop_id=$shopid")->query();
+			return $result;
+		}
 
         /*
          * 组合成wkt的格式
          */
-        foreach ($polygons[$column] as $k => $p) {
+        foreach ($region as $k => $p) {
             $data[] = $p[0] . ' ' . $p[1];
         }
         

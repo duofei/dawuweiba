@@ -531,9 +531,13 @@ class Shop extends CActiveRecord
 			}
 			if($region2) {
 				CDShopGis::setShopRegion($this->id, $region2, 2);
+			} else {
+				CDShopGis::setShopRegion($this->id, array(), 2);
 			}
 			if($region3) {
 				CDShopGis::setShopRegion($this->id, $region3, 3);
+			} else {
+				CDShopGis::setShopRegion($this->id, array(), 3);
 			}
 		}
 		return true;

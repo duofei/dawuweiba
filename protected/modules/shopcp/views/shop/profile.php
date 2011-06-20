@@ -98,7 +98,7 @@ $iss = array(
     </tr>
     <?php endif;?>
     <tr>
-        <td class="ar">最低起送价：</td>
+        <td class="ar">起送价：</td>
         <td>
         	<?php echo CHtml::activeTextField($shop_info, 'transport_amount', array('class'=>'txt', 'style'=>'width:100px'))?>
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -109,6 +109,7 @@ $iss = array(
         <td class="ar">最小配送范围：</td>
         <td>
         	<a id="showMapRegion" href="javascript:void(0);" style="color:#f69626"><?php echo $shop_info->map_region ? '重新绘制商铺的配送范围' : '点击打开地图绘制商铺的配送范围';?></a>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion" href="javascript:void(0);">清楚配送范围</a>
         	<?php echo CHtml::activeHiddenField($shop_info, 'map_region');?>
         </td>
 	</tr>
@@ -120,7 +121,7 @@ $iss = array(
 	</tr>
 	<?php endif;?>
 	<tr class="tcondition_mregion none divbg1">
-        <td class="ar">最低起送价：</td>
+        <td class="ar">起送价：</td>
         <td>
         	<?php echo CHtml::activeTextField($shop_info, 'transport_amount2', array('class'=>'txt', 'style'=>'width:100px'))?>
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -131,6 +132,7 @@ $iss = array(
         <td class="ar">适中配送范围：</td>
         <td>
         	<a id="showMapRegion2" href="javascript:void(0);" style="color:#f69626"><?php echo $shop_info->map_region2 ? '重新绘制商铺的配送范围' : '点击打开地图绘制商铺的配送范围';?></a>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion2" href="javascript:void(0);">清楚配送范围</a>
         	<?php echo CHtml::activeHiddenField($shop_info, 'map_region2');?>
         </td>
 	</tr>
@@ -142,7 +144,7 @@ $iss = array(
 	</tr>
 	<?php endif;?>
 	<tr class="tcondition_mregion none">
-        <td class="ar">最低起送价：</td>
+        <td class="ar">起送价：</td>
         <td>
         	<?php echo CHtml::activeTextField($shop_info, 'transport_amount3', array('class'=>'txt', 'style'=>'width:100px'))?>
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -153,6 +155,7 @@ $iss = array(
         <td class="ar">最大配送范围：</td>
         <td>
         	<a id="showMapRegion3" href="javascript:void(0);" style="color:#f69626"><?php echo $shop_info->map_region3 ? '重新绘制商铺的配送范围' : '点击打开地图绘制商铺的配送范围';?></a>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion3" href="javascript:void(0);">清楚配送范围</a>
         	<?php echo CHtml::activeHiddenField($shop_info, 'map_region3');?>
         </td>
 	</tr>
@@ -238,6 +241,33 @@ $(function(){
 		$("#ShowMapIframe").attr('src', '<?php echo aurl('ditu/getLatLon', array('callback'=>'setMapXY', 'city_id'=>$shop_info->district->city_id)); ?>' + '?map_x=' + map_x + '&map_y=' + map_y);
 	});
 
+	$("#clearMapRegion").click(function(){
+		if(confirm('确定要清除此范围吗？')) {
+			$('#Shop_map_region').val('');
+			$('#Shop_transport_amount').val('0');
+			$('#Shop_dispatching_amount').val('0');
+			alert('范围已清除，请提交完成！');
+		}
+		return false;
+	});
+	$("#clearMapRegion2").click(function(){
+		if(confirm('确定要清除此范围吗？')) {
+			$('#Shop_map_region2').val('');
+			$('#Shop_transport_amount2').val('0');
+			$('#Shop_dispatching_amount2').val('0');
+			alert('范围已清除，请提交完成！');
+		}
+		return false;
+	});
+	$("#clearMapRegion3").click(function(){
+		if(confirm('确定要清除此范围吗？')) {
+			$('#Shop_map_region3').val('');
+			$('#Shop_transport_amount3').val('0');
+			$('#Shop_dispatching_amount3').val('0');
+			alert('范围已清除，请提交完成！');
+		}
+		return false;
+	});
 	$("#showMapRegion").click(function(){
 		$("#ShowMap").dialog("open");
 		var map_x = $('#Shop_map_x').val();
