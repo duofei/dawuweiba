@@ -349,7 +349,7 @@ class BdappController extends Controller
     
     public function actionGoodsSearch($kw)
     {
-        $cid == ShopCategory::CATEGORY_FOOD;
+        $cid = ShopCategory::CATEGORY_FOOD;
 	    $atid = Location::getLastVisit();
     	$kw = urldecode(strip_tags(trim($kw)));
     	
