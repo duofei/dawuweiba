@@ -808,7 +808,10 @@ class Shop extends CActiveRecord
 	    if ($this->map_region) {
 	        $data = explode(self::SEPARATOR_REGION_POINT, $this->map_region);
 	        foreach ($data as $v) {
-	            $points[] = explode(self::SEPARATOR_REGION_LATLON, $v);
+	      		$explode = explode(self::SEPARATOR_REGION_LATLON, $v);
+	      		$lon = ($explode[0] > 100) ? round($explode[0], 9) : round($explode[0], 10);
+	      		$lat = round($explode[1], 10);
+	            $points[] = array($lon, $lat);
 	        }
 	        return $points;
 	    }
@@ -820,7 +823,10 @@ class Shop extends CActiveRecord
 	    if ($this->map_region2) {
 	        $data = explode(self::SEPARATOR_REGION_POINT, $this->map_region2);
 	        foreach ($data as $v) {
-	            $points[] = explode(self::SEPARATOR_REGION_LATLON, $v);
+	      		$explode = explode(self::SEPARATOR_REGION_LATLON, $v);
+	      		$lon = ($explode[0] > 100) ? round($explode[0], 9) : round($explode[0], 10);
+	      		$lat = round($explode[1], 10);
+	            $points[] = array($lon, $lat);
 	        }
 	        return $points;
 	    }
@@ -832,7 +838,10 @@ class Shop extends CActiveRecord
 	    if ($this->map_region3) {
 	        $data = explode(self::SEPARATOR_REGION_POINT, $this->map_region3);
 	        foreach ($data as $v) {
-	            $points[] = explode(self::SEPARATOR_REGION_LATLON, $v);
+	      		$explode = explode(self::SEPARATOR_REGION_LATLON, $v);
+	      		$lon = ($explode[0] > 100) ? round($explode[0], 9) : round($explode[0], 10);
+	      		$lat = round($explode[1], 10);
+	            $points[] = array($lon, $lat);
 	        }
 	        return $points;
 	    }
@@ -846,20 +855,13 @@ class Shop extends CActiveRecord
 	{
 		$mapRegion = null;
 		if($this->map_region3) {
-			$mapRegion = $this->map_region3;
+			$mapRegion = $this->mapRegion3;
 		} elseif ($this->map_region2) {
-			$mapRegion = $this->map_region2;
+			$mapRegion = $this->mapRegion2;
 		} else {
-			$mapRegion = $this->map_region;
+			$mapRegion = $this->mapRegion;
 		}
-	    if ($mapRegion) {
-	        $data = explode(self::SEPARATOR_REGION_POINT, $mapRegion);
-	        foreach ($data as $v) {
-	            $points[] = explode(self::SEPARATOR_REGION_LATLON, $v);
-	        }
-	        return $points;
-	    }
-	    return null;
+	    return $mapRegion;
 	}
 	
 	/**

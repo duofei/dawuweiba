@@ -75,7 +75,7 @@ return array(
 		
 		'db' => array(
 		    'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=192.168.1.201; port=3306; dbname=wm_my52wm',
+			'connectionString' => 'mysql:host=192.168.1.254; port=3306; dbname=wm_my52wm',
 		    'username' => 'my52wm',
 		    'password' => '123',
 		    'charset' => 'utf8',
