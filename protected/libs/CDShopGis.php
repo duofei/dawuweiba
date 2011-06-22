@@ -27,10 +27,10 @@ class CDShopGis
             ->from('wm_shops');
 
         if ($index === null)
-            $cmd->where("$point && region1 or $point && region2 or $point && region3");
+            $cmd->where("ST_Within($point,region1) or ST_Within($point,region2) or ST_Within($point,region3)");
         else {
             $column = 'region' . (int)$index;
-            $cmd->where($point . ' && ' . $column);
+            $cmd->where("ST_Within($point,$column)");
         }
         
         

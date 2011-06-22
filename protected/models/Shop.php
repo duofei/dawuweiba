@@ -813,9 +813,7 @@ class Shop extends CActiveRecord
 	        $data = explode(self::SEPARATOR_REGION_POINT, $this->map_region);
 	        foreach ($data as $v) {
 	      		$explode = explode(self::SEPARATOR_REGION_LATLON, $v);
-	      		$lon = ($explode[0] > 100) ? round($explode[0], 9) : round($explode[0], 10);
-	      		$lat = round($explode[1], 10);
-	            $points[] = array($lon, $lat);
+	      		$points[] = $explode;
 	        }
 	        return $points;
 	    }
@@ -828,9 +826,7 @@ class Shop extends CActiveRecord
 	        $data = explode(self::SEPARATOR_REGION_POINT, $this->map_region2);
 	        foreach ($data as $v) {
 	      		$explode = explode(self::SEPARATOR_REGION_LATLON, $v);
-	      		$lon = ($explode[0] > 100) ? round($explode[0], 9) : round($explode[0], 10);
-	      		$lat = round($explode[1], 10);
-	            $points[] = array($lon, $lat);
+	      		$points[] = $explode;
 	        }
 	        return $points;
 	    }
@@ -843,9 +839,7 @@ class Shop extends CActiveRecord
 	        $data = explode(self::SEPARATOR_REGION_POINT, $this->map_region3);
 	        foreach ($data as $v) {
 	      		$explode = explode(self::SEPARATOR_REGION_LATLON, $v);
-	      		$lon = ($explode[0] > 100) ? round($explode[0], 9) : round($explode[0], 10);
-	      		$lat = round($explode[1], 10);
-	            $points[] = array($lon, $lat);
+	      		$points[] = $explode;
 	        }
 	        return $points;
 	    }
