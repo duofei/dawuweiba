@@ -2,11 +2,29 @@
 set_time_limit(3600);
 class BevinController extends Controller
 {
-
+	public function init() {
+		$this->defaultAction = 'test';
+	}
+	
 	public function actionTest()
 	{
+		echo $this->beforeRender('/test/bevin');
+		exit;
+		$shop_id = 19;
+		$shop = Shop::model()->findByPk($shop_id);
+		$regions = $shop->getMapRegion3();
 		
+		$result = CDShopGis::fetchShopRegion($shop_id);
+		$regions2 = array();
+		foreach ($result['region3'] as $v) {
+			$regions2[] = array($v[1], $v[0]);
+		}
 		
+		$this->layout = 'black';
+		$this->render('/test/bevin',array(
+			'regions' => json_encode($regions),
+			'regions2' => json_encode($regions2)
+		));
 		exit;
 		//CDShopGis::insert(1, $shop->shop_name, array(117.05580588940427, 36.67782682477077), $shop->getMapRegion(), null,null);
 		$at = array(117.05580588940427, 36.67782682477077);

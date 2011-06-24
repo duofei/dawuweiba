@@ -109,7 +109,7 @@ $iss = array(
         <td class="ar">最小配送范围：</td>
         <td>
         	<a id="showMapRegion" href="javascript:void(0);" style="color:#f69626"><?php echo $shop_info->map_region ? '重新绘制商铺的配送范围' : '点击打开地图绘制商铺的配送范围';?></a>
-        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion" href="javascript:void(0);">清楚配送范围</a>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion" href="javascript:void(0);">清除配送范围</a>
         	<?php echo CHtml::activeHiddenField($shop_info, 'map_region');?>
         </td>
 	</tr>
@@ -132,7 +132,7 @@ $iss = array(
         <td class="ar">适中配送范围：</td>
         <td>
         	<a id="showMapRegion2" href="javascript:void(0);" style="color:#f69626"><?php echo $shop_info->map_region2 ? '重新绘制商铺的配送范围' : '点击打开地图绘制商铺的配送范围';?></a>
-        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion2" href="javascript:void(0);">清楚配送范围</a>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion2" href="javascript:void(0);">清除配送范围</a>
         	<?php echo CHtml::activeHiddenField($shop_info, 'map_region2');?>
         </td>
 	</tr>
@@ -155,7 +155,7 @@ $iss = array(
         <td class="ar">最大配送范围：</td>
         <td>
         	<a id="showMapRegion3" href="javascript:void(0);" style="color:#f69626"><?php echo $shop_info->map_region3 ? '重新绘制商铺的配送范围' : '点击打开地图绘制商铺的配送范围';?></a>
-        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion3" href="javascript:void(0);">清楚配送范围</a>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<a id="clearMapRegion3" href="javascript:void(0);">清除配送范围</a>
         	<?php echo CHtml::activeHiddenField($shop_info, 'map_region3');?>
         </td>
 	</tr>

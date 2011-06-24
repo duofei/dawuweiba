@@ -487,6 +487,22 @@ class ShopController extends Controller
 		$this->redirect($referer);
     }
     
+    public function actionRemarklist()
+    {
+    	$criteria = new CDbCriteria();
+    	$criteria->addCondition("remark!=''");
+    	
+    	$pages = new CPagination(Shop::model()->count($criteria));
+		$pages->pageSize = 13;
+		$pages->applyLimit($criteria);
+		
+    	$shops = Shop::model()->findAll($criteria);
+    	$this->render('remarklist', array(
+    		'shops' => $shops,
+    		'pages' => $pages
+    	));
+    }
+    
 	public function accessRules()
 	{
 	    return array(

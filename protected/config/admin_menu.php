@@ -6,6 +6,7 @@ $shop = array(
     array('label' => '最近加盟', 'url'=>url('admin/shop/today')),
     array('label' => '商铺查询', 'url'=>url('admin/shop/search')),
     array('label' => '全部商铺', 'url'=>url('admin/shop/all')),
+    array('label' => '商铺备注记录', 'url'=>url('admin/shop/remarklist')),
     array('label' => '商铺评论', 'url'=>url('admin/shop/shopcomment')),
     array('label' => '商品评论', 'url'=>url('admin/shop/goodsratelog')),
     array('label' => '商铺统计', 'url'=>url('admin/shop/statistics')),

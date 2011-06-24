@@ -18,11 +18,18 @@
   <div class="order-look <?php if ($key==0){ echo 'border-black ma-b10px';}?>">
   <table class="list-tbl bline <?php if ($key==0){ echo 'line divbg1 order-title'; }?>" width="100%" cellspacing="0">
 	  <tr>
-	    <td width="200"><?php echo $val->orderSn?>-<span class="cgray"><?php echo $val->shop->shop_name;?></span></td>
+	    <td width="200">
+	    	<?php echo $val->orderSn?>-
+	    	<span class="cgray"><?php echo $val->shop->shop_name;?></span>
+	    	<span><a href="<?php echo url('admin/shop/setSession', array('id'=>$val->shop_id));?>" target="_blank">管理</a></span>
+	    	<?php if($val->buy_type==Shop::BUYTYPE_PRINTER):?>
+	    	<br />打印机状态：<?php echo $val->shop->printer->getOrderStateHtml();?>
+	    	<?php endif;?>
+	    </td>
 		<td width="60"><a href=""><span class="look color f14px">查看订单</span></a></td>
 		<td width="60"><?php echo l(h($val->consignee ? $val->consignee : $val->user->username), url('admin/user/info', array('id'=>$val->user->id)));?></td>
 	    <td width="90"><?php echo h($val->telphone)?><br /><?php echo h($val->mobile);?></td>
-	    <td class="pa-r10px" >
+	    <td class="pa-r10px">
 	    	<?php if(preg_match("/^([0-9\.]+),([0-9\.]+)$/", $val->address, $match)):?>
 	    	<?php echo l(h($val->address), url('shop/list', array('lat'=>$match[1], 'lon'=>$match[2])), array('target'=>'_blank')); ?>
 	    	<?php else:?>
