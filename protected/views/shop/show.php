@@ -59,7 +59,7 @@
 		    </span>
 		</li>
 	</ul>
-	<?php if ($shop->buy_type == Shop::BUYTYPE_TELPHONE):?><p class="f16px cred fb ma-t10px">该店铺当前只能进行电话预订，选择美食后可以查看店铺电话号码！</p><?php endif;?>
+	<?php if (($shop->buy_type == Shop::BUYTYPE_TELPHONE || $shop->printer->state != Printer::STATE_ONLINE) && STATE_DISABLED == Setting::getValue('checkPhoneOrderDeal', $shop->district->city_id)):?><p class="f16px cred fb ma-t10px">该店铺当前只能进行电话预订，选择美食后可以查看店铺电话号码！</p><?php endif;?>
     <?php $this->endWidget();?>
     
 	<?php if($groupon):?>

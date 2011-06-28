@@ -96,7 +96,12 @@ class TuannavController extends Controller
 			} else {
 				AdminLog::saveManageLog('编辑团购(' . $tuannav->title . ')信息');
 			}
-			$this->redirect(url('admin/tuannav/list'));
+			$referer = $_POST['referer'];
+			if($referer) {
+				$this->redirect($referer);
+			} else {
+				$this->redirect(url('admin/tuannav/list'));
+			}
 		}
 		$id = (int)$id;
 		if($id) {

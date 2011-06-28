@@ -55,6 +55,7 @@
     	<td><span><?php echo CHtml::activeRadioButtonList($tuannav, 'state', Tuannav::$states, array('separator'=>'</span> &nbsp; <span>')); ?></span></td>
     </tr>
 </table>
+<input type="hidden" name="referer" value="<?php echo CdcBetaTools::getReferrer();?>" />
 <input type="hidden" value="<?php echo $tuannav->id;?>" name="id">
     <?php
         $this->widget('zii.widgets.jui.CJuiButton',
