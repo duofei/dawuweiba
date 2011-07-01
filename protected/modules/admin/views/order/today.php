@@ -23,7 +23,7 @@
 	    	<span class="cgray"><?php echo $val->shop->shop_name;?></span>
 	    	<span><a href="<?php echo url('admin/shop/setSession', array('id'=>$val->shop_id));?>" target="_blank">管理</a></span>
 	    	<?php if($val->buy_type==Shop::BUYTYPE_PRINTER):?>
-	    	<br />打印机状态：<?php echo $val->shop->printer->getOrderStateHtml();?>
+	    	<br />打印机状态：<?php echo $val->shop->printer->getOrderStateHtml();?> <?php echo $val->shop->printer->getStateHtml();?>
 	    	<?php endif;?>
 	    </td>
 		<td width="60"><a href=""><span class="look color f14px">查看订单</span></a></td>

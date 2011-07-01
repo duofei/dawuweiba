@@ -170,6 +170,9 @@ class OrderController extends Controller
 		    if ($order_get['category_id'] != '') {
 		    	$condition->addColumnCondition(array('shop.category_id' => $order_get['category_id']));
 		    }
+		    if ($order_get['buy_type'] != '') {
+		    	$condition->addColumnCondition(array('t.buy_type' => $order_get['buy_type']));
+		    }
 			if ($order_get['shop_name'] != '') {
 		    	$condition->addSearchCondition('shop.shop_name', $order_get['shop_name']);
 		    }

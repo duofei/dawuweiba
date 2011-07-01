@@ -30,6 +30,7 @@ class ChromeappController extends Controller
 		$criteria = new CDbCriteria();
 		$criteria->addColumnCondition(array('city_id' => $cityId, 'buy_type'=>Shop::BUYTYPE_PRINTER, 'status'=>Order::STATUS_UNDISPOSED));
 		$criteria->addCondition("create_time < " . time()-180);
+		$criteria->addCondition('t.shop_id != 20');
 		$data['o_undisposed'] = Order::model()->count($criteria);
 		
 		/* 客服处理电话订单提醒 */
@@ -37,6 +38,7 @@ class ChromeappController extends Controller
 		$criteria = new CDbCriteria();
 		$criteria->addColumnCondition(array('city_id' => $cityId, 'buy_type'=>Shop::BUYTYPE_TELPHONE, 'status'=>Order::STATUS_UNDISPOSED));
 		$criteria->addCondition('t.consignee != ""');
+		$criteria->addCondition('t.shop_id != 20');
 		$data['o_phoneorder'] = Order::model()->count($criteria);
 		
 		echo json_encode($data);

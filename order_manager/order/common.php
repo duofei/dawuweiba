@@ -243,7 +243,7 @@ function makeGoodsFormat($goods)
 function filterChar($str)
 {
     // # ; * 是订单格式保留字符
-    $chars = array('#', ';', '*', ',', '囧', '￥', '…');
+    $chars = array('#', ';', '*', ',', '囧', '￥', '…', "\n", "\r");
     $str = str_replace('（', '(', $str);
     $str = str_replace('）', ')', $str);
     $str = str_replace('－', '-', $str);

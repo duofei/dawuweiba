@@ -46,7 +46,9 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
     </tr>
     <tr>
     	<td width="120" class="ar">店铺分类：</td>
-        <td colspan="3"><?php echo CHtml::radioButtonList('Order[category_id]', $order_get['category_id'], ShopCategory::$categorys, array('separator'=>''))?></td>
+        <td><?php echo CHtml::radioButtonList('Order[category_id]', $order_get['category_id'], ShopCategory::$categorys, array('separator'=>''))?></td>
+		<td width="120" class="ar">订单类型：</td>
+        <td><?php echo CHtml::radioButtonList('Order[buy_type]', $order_get['buy_type'], Shop::$buytype, array('separator'=>''))?></td>
     </tr>
 </table>
 <?php $this->widget('zii.widgets.jui.CJuiButton',
