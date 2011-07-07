@@ -41,8 +41,7 @@ li.separation-line {height:1px; font-size:0px; background:#DFDFDF; clear:both; o
 /*login */
 #admin-login {width:600px; margin:120px auto 0px auto;}
 #admin-login table {width:100%;}
-#admin-login .info {width:310px;}
-#admin-login .info {background:url(../images/bg_login.gif) no-repeat right center; padding-right:30px; height:150px;}
+#admin-login .info {width:310px; padding-right:30px; height:150px;}
 #admin-login .info h1 {height:40px; text-indent:-9999px; background:url(../images/login_title.gif) no-repeat;}
 #admin-login .info p {line-height:20px; height:70px;}
 #admin-login .theform p {margin:5px 0px;}
